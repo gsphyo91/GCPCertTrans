@@ -69,7 +69,68 @@ GCP에서 어플리케이션과 서비스를 배포하고 관리하는 것은 �
 
 **Chapter 18 : 모니터링, 로딩, 비용 예측** 마지막 챕터에서는 Stackdriver 알림, 로그, 분산 추적, 어플리케이션 디버깅을 논한다. GCP 서비스에 해당하는 것들은 더 효과적이고, 기능적이고, 신뢰적인 서비스로 설계되었다. 이 챕터는 GCP에서 리소스의 비용을 예측하기위해 도움이 되는 비용 계산의 리뷰로 마무리한다.
 
+[맨 위로](#Contents) 
 
+## 시험 과목
+
+Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라를 생성하고, 배포하고, 관리하는 사람을 위해 설계되었다. Associate Cloud Engineer는 Cloud Console, Cloud Shell, Cloud SDK와 동작하기 적합하다. 또한 GCP의 한 부분으로 제공되는 제품과 적합한 사용사례를 이해한다.
+이 시험은 아래 내용에 대해서 당신의 지식을 테스트한다.
+* 하나이상의 GCP 서비스를 사용하여 클라우드 솔루션을 기획하는 것
+* 조직을 위한 클라우드 환경을 생성하는 것
+* 어플리케이션과 인프라를 배포하는 것
+* 클라우드 솔루션의 이용가능성을 보증하기위해 모니터링과 로깅을 사용하는 것
+* ID 관리, 접근 제어, 다른 보안 감지를 세팅하는 것
+
+### 과목 map
+
+아래는 [https://cloud.google.com/certification/guides/cloud-engineer](https://cloud.google.com/certification/guides/cloud-engineer) 에서 구글이 정의한 과목이 명시한다.
+
+**Section 1 : 클라우드 솔루션 환경 세팅**
+**1.1 클라우드 프로젝트와 계정 세팅**
+* 프로젝트 생성
+* 프로젝트 내에서 사전 정의된 IAM(Identity and Access Management)룰을 사용자에게 할당하는 것
+* G suite ID에 유저를 연결하는 것
+* 프로젝트 내에서 API를 활성화하는 것
+* 하나 이상의 Stackdriver 계정을 프로비저닝 하는 것
+**1.2 과금 설정 관리**
+* 하나이상의 과금 계정을 생성하는 것
+* 빌링 계정을 프로젝트에 연결하는 것
+* 과금 예산과 알림을 설정하는 것
+* 일/월 단위 비용을 측청하기위한 과금 내보내기 설정하는 것
+**1.3 command-line interface(CLI), 특히 Cloud SDK를 설치하고 설정**
+
+**Section 2 : 클라우드 솔루션을 기획하고 설정**
+**2.1 비용 계산기를 사용하여 GCP 제품 사용을 기획하고 측정하는 것**
+**2.2 컴퓨트 자원을 기획하고 설정하는 것**
+* 주어진 워크로드를 위해 적합한 compute를 선택하는 것(ex. Compute Engine, Kubernetes Engine, App Engine)
+* 미리 선점된 VM과 커스텀 머신을 사용하는 것
+**2.3 데이터 스토리지 옵션을 기획하고 설정**
+* 제품 선택(ex. Cloud SQL, BigQuery, Cloud Spanner, Cloud Bigtable)
+* 스토리지 옵션 선택(ex. Reginal, Multiregional, Nearline, Coldline)
+**2.4 네트워크 리소스를 기획하고 설정**
+* 로드밸런싱 옵션을 구별하는 것
+* 이용가능성을 위해 네트워크에서 리소스 위치를 지정하는 것
+* Cloud DNS 설정하는 것
+
+**Section 3 : 클라우스 솔루션을 배포하고 구현**
+**3.1 Compute Engine 리소스를 배포하고 구현하는 것**
+* Cloud Console과 Cloud SDK(gcloud)를 사용하여 compute instance를 실행하는 것(ex. assign disk, availability policy, SSH keys)
+* 인스턴스 템플릿을 사용하여 오토스케일 관리 인스턴스 그룹을 생성하는 것
+* 인스턴스를 위한 커스텀 SSH 키를 생성하고 업로드하는 것
+* Stackdriver 모니터링과 로깅을 위한 VM을 설정하는 것
+* compute 할당량 평가와 증설 요청
+* 모니터링과 로깅을 위한 Stackdriver 에이전트를 설치하는 것
+**3.2 Kubernetes Engine 리소스를 배포하고 구현**
+* Kubernetes Enging 클러스터 배포하기
+* pod를 사용하여 Kubernetes Engine에 container 어플리케이션을 배포하는 것
+* Kubernetes Engine 어플리케이션 모니터링과 로깅 설정하는 것
+**3.3 App Engine과 Cloud Functions 리소스를 배포하고 구현**
+* App Engine에 어플리케이션 배포하는 것(ex. scaling configuration, versions, traffic splitting)
+* Google Cloud 이벤트를 받는 Cloud Functions 배포하는 것(ex. Cloud Pub/Sub 이벤트, Cloud Storage object 변경 알림 이벤트)
+**3.4 데이터 솔루션을 배포하고 구현**
+* 데이터 시스템 제품 초기화(ex. Cloud SQL, Cloud Datastore, BigQuery, Cloud Spanner, Cloud Pub/Sub, Cloud Bigtable, Cloud Dataproc, Cloud Storage)
+* 데이터 로딩(ex. command-line upload, API transfer, import/export, Cloud Storage에서 데이터 로드, Cloud Pub/Sub에서 데이터 스트리밍)
+**3.5 네트워킹 리소스를 배포하고 구현**
 
 
 [맨 위로](#Contents) 
