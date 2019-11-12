@@ -131,6 +131,19 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * 데이터 시스템 제품 초기화(ex. Cloud SQL, Cloud Datastore, BigQuery, Cloud Spanner, Cloud Pub/Sub, Cloud Bigtable, Cloud Dataproc, Cloud Storage)
 * 데이터 로딩(ex. command-line upload, API transfer, import/export, Cloud Storage에서 데이터 로드, Cloud Pub/Sub에서 데이터 스트리밍)
 **3.5 네트워킹 리소스를 배포하고 구현**
+* 서브넷과 함께 VPC 생성(ex. custom-mode VPC, shared VPC)
+* 커스텀 네트워크 설정과 함께 Compute Engine 인스턴스 실행(ex. internal-only IP address, Google private access, static external, private IP address, network tags)
+* VPC를 위한 ingress, egress 방화벽 정책 생성(ex. IP subnet, tags, service accounts)
+* Cloud VPN을 사용하여 Google VPC와 외부 네트워크간 VPN 생성
+* 어플리케이션으로 들어오는 네트워크 트래픽을 분산하기위한 로드밸런서 생성(ex. global HTTP(S) load balancer, global SSL proxy load balancer, global TCP proxy load balancer, regional network load balancer, regional internal load balancer)
+**3.6 Cloud Launcher를 사용하여 솔루션 배포**
+* Cloud Launcher 카탈로그를 탐색하고 솔루션 정보를 확인
+* Cloud Launcher 마켓플레이스 솔루션 배포
+**3.7 Deployment Manager를 사용하여 어플리케이션 배포**
+* 어플리케이션의 배포를 자동화하는 Deployment Manager 템플릿 배포
+* GCP 리소스를 할당하고 어플리케이션을 자동적으로 설정하는 Deployment Manager 템플릿 배포
 
+**Section 4 : 클라우드 솔루션의 성동적인 운영 보증**
+**4.1 Compute Engine 리소스 관리**
 
 [맨 위로](#Contents) 
