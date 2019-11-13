@@ -83,8 +83,7 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 
 ### 과목 map
 
-아래는 [https://cloud.google.com/certification/guides/cloud-engineer](https://cloud.google.com/certification/guides/cloud-engineer) 
-<a href="https://cloud.google.com/certification/guides/cloud-engineer">https://cloud.google.com/certification/guides/cloud-engineer</a>에서 구글이 정의한 과목이 명시한다.
+아래는 [https://cloud.google.com/certification/guides/cloud-engineer](https://cloud.google.com/certification/guides/cloud-engineer) 에서 구글이 정의한 과목이 명시한다.
 
 **Section 1 : 클라우드 솔루션 환경 세팅**
 
