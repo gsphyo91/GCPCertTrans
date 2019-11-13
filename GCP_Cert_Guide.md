@@ -92,11 +92,13 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * G suite ID에 유저를 연결하는 것
 * 프로젝트 내에서 API를 활성화하는 것
 * 하나 이상의 Stackdriver 계정을 프로비저닝 하는 것
+  
 **1.2 과금 설정 관리**
 * 하나이상의 과금 계정을 생성하는 것
 * 빌링 계정을 프로젝트에 연결하는 것
 * 과금 예산과 알림을 설정하는 것
 * 일/월 단위 비용을 측청하기위한 과금 내보내기 설정하는 것
+  
 **1.3 command-line interface(CLI), 특히 Cloud SDK를 설치하고 설정**
 
 **Section 2 : 클라우드 솔루션을 기획하고 설정**
@@ -104,9 +106,11 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 **2.2 컴퓨트 자원을 기획하고 설정하는 것**
 * 주어진 워크로드를 위해 적합한 compute를 선택하는 것(ex. Compute Engine, Kubernetes Engine, App Engine)
 * 미리 선점된 VM과 커스텀 머신을 사용하는 것
+  
 **2.3 데이터 스토리지 옵션을 기획하고 설정**
 * 제품 선택(ex. Cloud SQL, BigQuery, Cloud Spanner, Cloud Bigtable)
 * 스토리지 옵션 선택(ex. Reginal, Multiregional, Nearline, Coldline)
+  
 **2.4 네트워크 리소스를 기획하고 설정**
 * 로드밸런싱 옵션을 구별하는 것
 * 이용가능성을 위해 네트워크에서 리소스 위치를 지정하는 것
@@ -120,30 +124,107 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * Stackdriver 모니터링과 로깅을 위한 VM을 설정하는 것
 * compute 할당량 평가와 증설 요청
 * 모니터링과 로깅을 위한 Stackdriver 에이전트를 설치하는 것
+
 **3.2 Kubernetes Engine 리소스를 배포하고 구현**
 * Kubernetes Enging 클러스터 배포하기
 * pod를 사용하여 Kubernetes Engine에 container 어플리케이션을 배포하는 것
 * Kubernetes Engine 어플리케이션 모니터링과 로깅 설정하는 것
+  
 **3.3 App Engine과 Cloud Functions 리소스를 배포하고 구현**
 * App Engine에 어플리케이션 배포하는 것(ex. scaling configuration, versions, traffic splitting)
 * Google Cloud 이벤트를 받는 Cloud Functions 배포하는 것(ex. Cloud Pub/Sub 이벤트, Cloud Storage object 변경 알림 이벤트)
+  
 **3.4 데이터 솔루션을 배포하고 구현**
 * 데이터 시스템 제품 초기화(ex. Cloud SQL, Cloud Datastore, BigQuery, Cloud Spanner, Cloud Pub/Sub, Cloud Bigtable, Cloud Dataproc, Cloud Storage)
 * 데이터 로딩(ex. command-line upload, API transfer, import/export, Cloud Storage에서 데이터 로드, Cloud Pub/Sub에서 데이터 스트리밍)
+  
 **3.5 네트워킹 리소스를 배포하고 구현**
 * 서브넷과 함께 VPC 생성(ex. custom-mode VPC, shared VPC)
 * 커스텀 네트워크 설정과 함께 Compute Engine 인스턴스 실행(ex. internal-only IP address, Google private access, static external, private IP address, network tags)
 * VPC를 위한 ingress, egress 방화벽 정책 생성(ex. IP subnet, tags, service accounts)
 * Cloud VPN을 사용하여 Google VPC와 외부 네트워크간 VPN 생성
 * 어플리케이션으로 들어오는 네트워크 트래픽을 분산하기위한 로드밸런서 생성(ex. global HTTP(S) load balancer, global SSL proxy load balancer, global TCP proxy load balancer, regional network load balancer, regional internal load balancer)
+  
 **3.6 Cloud Launcher를 사용하여 솔루션 배포**
 * Cloud Launcher 카탈로그를 탐색하고 솔루션 정보를 확인
 * Cloud Launcher 마켓플레이스 솔루션 배포
+  
 **3.7 Deployment Manager를 사용하여 어플리케이션 배포**
 * 어플리케이션의 배포를 자동화하는 Deployment Manager 템플릿 배포
 * GCP 리소스를 할당하고 어플리케이션을 자동적으로 설정하는 Deployment Manager 템플릿 배포
 
 **Section 4 : 클라우드 솔루션의 성동적인 운영 보증**
 **4.1 Compute Engine 리소스 관리**
+* 싱글 VM 인스턴스 관리(ex. start, stop, edit configuration, or delete an instance)
+* 인스턴스 SSH/RDP
+* 새로운 인스턴스에 GPU 추가, CUDA 라이브러리 설치
+* 현재 동작하고있는 VM 인벤토리 조회(instance IDs, 상세정보)
+* 스냅샷 작업(ex. VM의 스냅샷 생성, 조회, 삭제)
+* 이미지 작업(ex. VM 이미지 생성, 조회, 삭제)
+* 인스턴스 그룹 작업(ex. 오토스케일링 파라미터 세팅, 인스턴스 템플릿 할당, 인스턴스 템플릿 생성, 인스턴스 그룹 제거)
+* 관리 인터페이스 작업(ex. Cloud Console, Cloud Shell, Cloud SDK)
+  
+**4.2 Kubernetes Engine 리소스 관리**
+* 현재 동작하고 있는 클러스터 인벤토리 조회(nodes, pods, services)
+* 컨테이너 이미지 저장소 탐색, 컨테이너 이미지 상세정보 조회
+* nodes 작업(ex. 추가, 수정, 제거)
+* pods 작업(ex. 추가, 수정, 제거)
+* services 작업(ex. 추가, 수정, 제거)
+* 관리 인터페이스 작업(ex. Cloud Console, Cloud Shell, Cloud SDK)
+
+**4.3 App Engine 리소스 관리**
+* 어플리케이션 트래픽 분산 파라미터 조정
+* 오토스케일하는 인스턴스를 위한 파라미터 세팅
+* 관리 인터페이스 작업(ex. Cloud Cosole, Cloud Shell, Cloud SDK)
+
+**4.4 데이터 솔루션 관리**
+* 데이터 인스턴스로부터 데이터를 조회하기위한 쿼리 실행(ex. Cloud SQL, BigQuery, Cloud Spanner, Cloud Bigtable, Cloud Dataproc)
+* BigQuery 쿼리의 비용 측정
+* 데이터 인스턴스 백업 및 원복(ex. Cloud SQL, Cloud Datastore, Cloud Dataproc)
+* Cloud Dataproc이나 BigQuery에서 작업 상태 확인
+* Cloud Storage 버킷간 오브젝트 이동
+* 스토리지 클래스간 Cloud Storage 버킷 변환
+* Cloud Storage 버킷을 위한 오브젝트 lifecyle 관리 정책 세팅
+* 관리 인터페이스 작업(ex. Cloud Console, Cloud Shell, Cloud SDK)
+
+**4.5 네트워킹 리소스 관리**
+* 존재하는 VPC에 서브넷 추가
+* 많은 IP 주소를 갖기 위한 CIDR 단위 서브넷 확장
+* 정적 외부/내부 IP주소 확보
+* 관리 인터페이스 작업(ex. Cloud Console, Cloud Shel, Cloud SDK)
+
+**4.6 모니터링과 로깅**
+* 리소스 메트릭스 기반의 Stackdriver 알림 생성
+* Stackdriver 커스텀 메트릭스 생성
+* 외부 시스템으로 로그를 내보내기위한 로그 싱크 설정(ex. on-premise 혹은 BigQuery)
+* Stackdriver에서 로그 조회, 필터
+* Stackdriver에서 특정 로그 메시지 상세정보 조회
+* 어플리케이션 이슈를 연구하기위한 클라우드 진단 사용(ex. Cloud Trace 데이터 조회, 시간별 어플리케이션 포인트를 조회하기 위한 Cloud Debug 사용)
+* GCP 상태 조회
+* 관리 인터페이스 작업(ex. Cloud Console, Cloud Shell, Cloud SDK)
+
+**Section 5: 접근 및 보안 설정**
+**5.1 Identity와 접근 관리**
+* 계정 IAM 할당 조회
+* 계정이나 Google 그룹에 IAM 정책 할당
+* 커스텀 IAM 정책 정의
+
+**5.2 service account 관리**
+* 한정된 범위로 서비스 계정 관리
+* VM 인스턴스에 서비스 계정 할당
+* 다른 프로젝트에서 서비스 계정 접근 권한 부여
+
+**5.3 프로젝트와 관리 서비스를 위한 감시로그 조회**
+클라우드 컴퓨팅 컴포넌트
+* Compute 리소스
+* 스토리지
+* 네트워킹
+* 특별한 서비스
+
+Cloud Computing과 Data Center Computing의 차이
+* 리소스 소유 대신 임대
+* 사용량에 따라 비용 지불
+* 탄력적인 리소스 할당
+* 특별한 서비스
 
 [맨 위로](#Contents) 
