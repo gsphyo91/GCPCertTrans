@@ -86,6 +86,7 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 아래는 [https://cloud.google.com/certification/guides/cloud-engineer](https://cloud.google.com/certification/guides/cloud-engineer) 에서 구글이 정의한 과목이 명시한다.
 
 **Section 1 : 클라우드 솔루션 환경 세팅**
+
 **1.1 클라우드 프로젝트와 계정 세팅**
 * 프로젝트 생성
 * 프로젝트 내에서 사전 정의된 IAM(Identity and Access Management)룰을 사용자에게 할당하는 것
@@ -102,7 +103,9 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 **1.3 command-line interface(CLI), 특히 Cloud SDK를 설치하고 설정**
 
 **Section 2 : 클라우드 솔루션을 기획하고 설정**
+
 **2.1 비용 계산기를 사용하여 GCP 제품 사용을 기획하고 측정하는 것**
+
 **2.2 컴퓨트 자원을 기획하고 설정하는 것**
 * 주어진 워크로드를 위해 적합한 compute를 선택하는 것(ex. Compute Engine, Kubernetes Engine, App Engine)
 * 미리 선점된 VM과 커스텀 머신을 사용하는 것
@@ -117,6 +120,7 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * Cloud DNS 설정하는 것
 
 **Section 3 : 클라우스 솔루션을 배포하고 구현**
+
 **3.1 Compute Engine 리소스를 배포하고 구현하는 것**
 * Cloud Console과 Cloud SDK(gcloud)를 사용하여 compute instance를 실행하는 것(ex. assign disk, availability policy, SSH keys)
 * 인스턴스 템플릿을 사용하여 오토스케일 관리 인스턴스 그룹을 생성하는 것
@@ -154,6 +158,7 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * GCP 리소스를 할당하고 어플리케이션을 자동적으로 설정하는 Deployment Manager 템플릿 배포
 
 **Section 4 : 클라우드 솔루션의 성동적인 운영 보증**
+
 **4.1 Compute Engine 리소스 관리**
 * 싱글 VM 인스턴스 관리(ex. start, stop, edit configuration, or delete an instance)
 * 인스턴스 SSH/RDP
@@ -204,6 +209,7 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * 관리 인터페이스 작업(ex. Cloud Console, Cloud Shell, Cloud SDK)
 
 **Section 5: 접근 및 보안 설정**
+
 **5.1 Identity와 접근 관리**
 * 계정 IAM 할당 조회
 * 계정이나 Google 그룹에 IAM 정책 할당
