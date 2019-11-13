@@ -215,13 +215,13 @@ Associate Cloud Engineer 인증은 GCP에 기업 어플리케이션과 인프라
 * 다른 프로젝트에서 서비스 계정 접근 권한 부여
 
 **5.3 프로젝트와 관리 서비스를 위한 감시로그 조회**
-클라우드 컴퓨팅 컴포넌트
+**클라우드 컴퓨팅 컴포넌트**
 * Compute 리소스
 * 스토리지
 * 네트워킹
 * 특별한 서비스
 
-Cloud Computing과 Data Center Computing의 차이
+**Cloud Computing과 Data Center Computing의 차이**
 * 리소스 소유 대신 임대
 * 사용량에 따라 비용 지불
 * 탄력적인 리소스 할당
