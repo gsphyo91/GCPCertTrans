@@ -465,7 +465,7 @@ VM은 물리적인 서버의 추상화이다. 이는 기본적으로 물리적�
 
 하이퍼바이저는 리눅스나 윈도우 서버같은 운영체제 위에서 동작한다. 하이퍼바이저는 다른 *게스트 운영체제*라고 불리는 다양한 운영체제를 실행하는 동시에 각 운영체제의 활동을 다른 게스트 운영체제로부터 독립시킬 수 있다. 실행 중인 게스트 운영체제의 각 인스턴스는 VM 인스턴스이다. 그림 2.1은 물리적인 서버에서 실행하는 VM 인스턴스의 눈리적인 구성를 보여준다.
 
-![2.1_logical_organication_of_VM_instances](./img/2.1_logical_organication_of_VM_instances.png)
+![2.1_logical_organication_of_VM_instances](./img/2.1_logical_organization_of_VM_instances.png)
 
 FIGURE 2.1 하이퍼바이즈 내에서 동작하는 VM 인스턴스
 
