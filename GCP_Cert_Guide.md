@@ -675,6 +675,104 @@ CDNs는 많은 양의 정적 컨텐츠워 글로벌 고객의 분야를 위해�
 
 #### Cloud Interconnect
 
+Cloud Interconnect는 기존 네트워크를 구글 네트워크에 연결하기 위한 GCP 서비스 집합이다. Cloud Interconnect는 interconnects와 peering, 2가지 유형의 연결을 제공한다.
 
+네트워크에 직접 접근하는 Interconnect는 VPC에 있는 디바이스에 연결기위해 Private Internet 표준(RFC1918)의 주소 할당을 사용한다. 직접적인 네트워크 연결은 온프레미스나 데이터센터와 북미, 남미, 유럽, 아시아, 호주에 위치한 구글의 시설 중 하나와 연결을 유지한다. 그 대신, 한 조직이 구글 시설과 직접적인 interconnect를 할 수 없다면, Partner Interconnect를 사용할 수 있다. 이 서비스는 업체의 데이터 센터와 구글 시설간 연결을 제공하는 써드파티 네트워크 제공업체에 의존한다.
+
+직접적이거나 peer interconnect의 대역폭을 필요하지 않는 조직을 위해서 구글은 공인 인터넷을 사용하여 데이터센터와 구글 시설간 트래픽을 전송할 수 있는 VPN 서비스를 제공한다.
+
+#### Cloud DNS
+
+Cloud DNS는 GCP에서 제공되는 도메인 이름 서비스이다. Cloud DNS는 74.120.28.18과 같은 IP 주소를 example.com과 같은 도메인 이름으로 매핑하기 위한 고가용성, 저지연 서비스이다.
+
+Cloud DNS는 자동적으로 확장되도록 설계되어서 사용자는 기본적인 인프라의 확장에 대한 걱정 없이 수 천, 수 만개의 주소를 보유할 수 있다. Cloud DNS는 또한 VM의 커스텀 이름을 생성할 수 있는 private zone을 제공한다.
+
+### Identity Management
+
+GCP의 Cloud Identity and Access Maangement(IAM) 서비스는 사용자가 클라우드 리소스에 세부적인 접근 제어를 정의할 수 있다. IAM은 사용자(users), 역할(roles), 관리자 권한(privileges)의 개념을 사용한다.
+
+ID는 서비스의 사용자에 대한 추상화이다. ID가 로그인이나 다른 메커니즘을 통해 인증된 후에, 인증된 사용자는 리소스에 접근하고, ID에 부여된 권한을 기반으로 동작을 수행할 수 있다. 예를 들어, 사용자는 Cloud Storage에 버킷을 생성하거나 Compute Engine에 동작하고있는 VM을 삭제하는 권한을 갖을 수 있다.
+
+사용자는 종종 유사한 권한(Permission)의 집합을 필요로 한다. VM을 생성하는 능력을 갖는 누군가는 VM을 수정하거나 삭제할 수 있기를 원할 것이다. 관련된 권한 그룹은 역할로 묶을 수 이따. 역할(roles)은 ID에 할당된 권한의 집합이다.
+
+구글 Associate Cloud Engineer 인증에서 ID, 역할, 사용 권한, 조직과 프로젝트를 전반적으로 관리하는 방법에 대해서 친숙해져야 한다.
+
+구글 클라우드 Console에서 IAM과 어드민 메뉴 아래에 identity management tools를 확인할 수 있다. 챕터 17은 ID, 역할에 대한 상세정보와 이런 관리를 위한 좋은 사례를 제공한다.
+
+### Development Tools
+
+GCP는 인프라에 대한 쉬운 접근과 데이터 관리 서비스뿐만 아니라 이를 지원하는 도구때문에 개발자와 소프트웨어 엔지니어에게 좋은 선택이다. 
+
+Cloud SDK는 VM, 디스크 스토리지, 네트워크 방화벽, GCP에 배포될지도 모르는 다른 가상화 리소스를 포함하여 GCP 리소스를 관리하기 위한 커맨드라인 인터페이스이다. Cli 이외에도 Cloud SDK는 JAVA, Python, Node.JS, Ruby, GO, .NET, PHP를 위한 클라이언트 라이브러리를 갖는다.
+
+GCP는 또한 Container Registry, Cloud Build, Cloud Source Repositories로 컨테이너화 어플리케이션 배포를 지원한다.
+
+구글은 유명한 개발도구로 작업하기 쉽게 플러그인을 개발했다. 
+* IntelliJ를 위한 Cloud Tool
+* PowerShell을 위한 Cloud Tool
+* Visual Studio를 위한 Cloud Tool
+* Eclipse를 위한 Cloud Tool
+* App Engine Gradle 플러그인
+* App Engine Maven 플러그인
+
+물론, GCP는 어플리케이션이 개발에서 상용으로 배포되고, 배포된 후에 어플리케이션을 모니터링하고 유지하는데 도움을 주는 추가적인 관리 도구를 제공한다.
+
+## GCP의 추가적인 컴포넌트
+
+관리 도구는 어플리케이션의 신뢰성, 가용성, 확장성을 보장하기위한 책임을 갖는 DevOps 전문가를 위해 설계되었다.
+
+### 관리 도구
+
+관리 도구 카테고리에서 가장 중요한 도구의 몇 가지이다.
+
+**Stackdriver**는 어플리케이션과 인프라로부터 메트릭스, 로그, 이벤트 데이터를 수집하고, 데이터를 통합해서 DevOps 엔지니어가 모니터링하고, 평가하고, 운영적인 문제를 진단할 수 있는 서비스이다.
+
+**Monitoring**은 GCP와 AWS 리소스, Nginx, Cassandra, Elasticsearch과 같이 유명한 오픈소스 시스템을 포함한 어플리케이션 계측으로부터 성능 데이터를 수집하여 Stackdriver의 기능을 확장한다.
+
+**Logging**은 사용자가 GCP와 AWS 로그의 로그 데이터를 저장하고, 분석하고, 알람을 받을 수 있는 서비스이다.
+
+**Error Reporting**은 중앙 집중식 인터페이스에 표시하기위한 어플리케이션 충돌 정보를 집계한다.
+
+**Trace**는 어플리케이션에 지연 데이터를 캡처하여 성능 문제 지역을 식별하는데 도움을 주는 분산 추적 서비스이다.
+
+**Debugger**는 개발자가 실행 중인 코드, 명령어 입력의 상태를 점검하고, 콜 스택 변수를 확인할 수 있다.
+
+**Profiler**은 어플리케이션의 호출 계층의 전반적인 CPU와 메모리 활용 정보를 수집하는데 사용된다. Profiler는 어플리케이션 성능에 미치는 영향을 최소화하는 통계적인 샘플링을 사용한다.
+
+관리 도구의 조합은 운영 시스템의 효과적인 모니터링과 분석하여 상용에서 동작하는 어플리케이션에 대한 인사이트를 제공한다.
+
+### 특별한 서비스
+
+IaaS와 Paas 제공 이외에도, GCP는 APIs, 데이터 분석, 머신러닝을 위한 특별한 서비스를 갖고있다.
+
+#### Apigee API 플랫폼
+
+Apigee API 플랫폼은 본인의 어플리케이션에 접근하는 API를 GCP 사용자들에게 제공하기위한 관리 서비스이다. Apigee 플랫폼은 개발자가 API를 배포하고, 모니터링하고, 보안하는 것을 허용한다. 또한 Open API Specification 기반으로 API 프록시를 생성한다.
+
+API의 로드를 예측하기 어렵고, 때때로 사용량이 급증할 수 있다. 그 시간에 Apigee API 플랫폼은 사용자가 정의할 수 있는 정책을 기반으로 라우팅과 비율 제한을 제공한다.
+
+API는 OAuth 2.0이나 SAML을 사용하여 인증될 수 있다. 데이터는 Apigee API 플랫폼에서 전송 중과 전송 중이지 않을 때 모두 암호화된다.
+
+#### 데이터 분석
+
+GCP는 배치와 스트리밍 모드의 빅데이터를 분석하기 위해 설계된 다양한 서비스를 갖고 있다. 서비스들에서 가장 중요한 도구들 중 몇가지는 아래와 같다.
+* BigQuery, 데이터 웨어하우스를 위한 페타바이트 급 데이터베이스 분석 서비스
+* Cloud Dataflow, 배치와 스트림 처리 파이프라인을 정의하기 위한 프레임워크
+* Cloud Dataproc, 관리형 Hadoop과 Spark 서비스
+* Cloud Dataprep, 분석가가 분석을 위한 데이터를 탐색하고 준비할 수 있는 서비스
+
+종종, 데이터분석과 데이터 웨어하우스 프로젝트는 이런한 서비스를 함께 사용한다.
+
+#### AI와 머신러닝
+
+구글은 AI와 머신러닝의 리더이다. 그래서 GCP가 AI 서비스를 포함하는게 놀랍지 않다. 이 영역에 포함된 특별한 서비스는 아래와 같다.
+* Cloud AutoML, 머신 러닝 경험 없는 개발자가 머신 러닝 모델을 개발할 수 있는 도구
+* Cloud Machine Learning Engine, 확장 가능한 머신러닝 시스템을 상용에 구축하고 배포하기위한 플랫폼
+* Cloud Natural Language Processing, 사람의 언어를 분석하고, 텍스트로부터 정보를 추출하기 위한 도구
+* Cloud Vision, 메타데이터, 텍스트를 추출, 컨텐츠를 필터링을 사용하여 이미지에 표시하기 위한 이미지 분석 플랫폼
+
+## 시험 필수 요소
+
+**Compute Engine, Kubernetes Engine, App Engine, Cloud Functions간 차이를 이해한다.**
 
 [맨 위로](#Contents) 
