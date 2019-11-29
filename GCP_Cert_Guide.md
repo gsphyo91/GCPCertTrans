@@ -875,6 +875,82 @@ G Suite 조직/Cloud Identity 계정의 멤버가 과금 계정이나 프로젝�
 
 ### Organization Policies
 
+GCP는 Organization Policy Service를 제공한다. 이 서비스는 조직의 리소스에 대한 접근을 제어한다. Organization Policy Service는 IAM 서비스를 보완한다. IAM은 사용자나 역할들이 클라우드에서 지정된 동작을 수행할 수 있도록 사용 권한을 할당할 수 있다. Organization Policy Service는 리소스를 사용할 수 있는 방법에 대한 제한을 지정할 수 있다. 차이점을 생각하는 한 가지 방법으로 IAM은 누가 할 수 있는지를 지정하고, Organization Policy Service는 무엇을 할 수 있는지를 지정한다.
+
+orginization policies는 리소스의 제약이라는 관점에서 정의된다.
+
+#### 리소스 제약(Constraints)
+
+Constraints는 서비스의 제한이다. GCP는 List constraint과 Boolean constraint을 갖는다.
+
+List constraint는 리소스에 허용되거나 허용되지 않는 값의 리스트이다. list constraint의 몇 가지 유형은 아래와 같다.
+* 특정 값의 모음을 허용
+* 특정 값의 모음을 거부
+* 한 값과 그 값의 모든 child 값을 거부
+* 허용된 모든 값을 허용
+* 모든 값을 거부
+
+Boolean constraint는 true와 false를 평가하고, constraint가 적용될지 아닐지를 결정한다. 예를 들어, VM에 시리얼 포트로 접근하는 것을 거부하고 싶다면, *constraints/compute.disableSerialPortAccess*를 TRUE로 설정할 수 있다.
+
+#### Policy Evaluation
+
+Organizations는 클라우드에서 데이터와 리소스를 보호하기 위한 고정적인 정책을 갖을 수 있다. 예를 들어, organization에서 누가 service API를 사용하도록 설정하거나 service account를 생성하는지를 지시하는 규칙이 있을 수 있다. 정보보호 부서는 모든 VM이 시리얼 포트 접근을 사용하지않도록 설정할수도 있다. 각각의 VM에 대한 제어를 구현할 수 있지만, 효과적이지 않고, 실수하기 쉽다. 더 좋은 방법은 무엇을 할 수 있는지에 대한 제약을 정책으로 정의하고, 그 정책을 리소스 계층에서 object에 연결하는 것이다.
+
+예를 들어, 정보보호 부서가 모든 VM에 시리얼포트 접근을 거부하기를 원하기 때문에, 시리얼 포트 접근을 제약하는 정책을 지정한 다음, 이 정책을 organization에 연결한다. organization 아래에 있는 모든 folder와 project는 해당 정책을 상속받을 것이다. 정책은 상속되고, 계층의 하위 object에 의해서 사용되지 않거나 재정의될 수 없기 때문에, 모든 조직 리소스에 정책을 적용하는 효과적인 방법이다.
+
+정책들은 IAM & admin 형식에 있는 Organization Policies를 통해 관리된다. 그림3.4는 정책 모음의 예를 보여준다.
+
+다양한 정책은 folder나 project에 유효할 수 있다. 예를 들어, organization은 시리얼 포트 접근에 대한 정책을 갖고 있고, project를 포함하는 folder는 누가 service account를 생성할 수 있는지 제한하는 정핵을 갖고 있다면, project는 두 가지 정책을 상속받을 것이고, project에서 리소스로 할 수 있는 일을 제약할 것이다.
+
+![3.4_IAM_admin_console](./img/3.4_IAM_admin_console.png)
+
+**그림 3.4** Organizational policies는 IAM & admin console에서 관리된다.
+
+### Project 관리
+
+새로운 클라우드 계획을 시작할 때 수행할 첫 번째 업무 중 하나는 프로젝트를 세팅하는 것이다. 이 것은 구글 클라우드 Console에서 할 수 있다. GCP에 계정을 생성했다면 가정하면, [https://console.cloud.google.com](https://console.cloud.google.com)에서 Google Cloud Console을 찾고, 로그인한다. 그림 3.5와 같은 홈페이지가 보일 것이다.
+
+![3.5_home_page_console](./img/3.5_home_page_console.png)
+
+**그림 3.5** console 홈페이지
+
+왼쪽 위에 메뉴에서 IAM & admin을 선택하고, Manage Resoucce를 선택한다.(그림 3.6, 3.7)
+
+![3.6_navigation_menu](./img/3.6_navigation_menu.png)
+
+**그림 3.6** 네비게이션 메뉴
+
+![3.7_select_namage_resources](./img/3.7_select_namage_resources.png)
+
+**그림 3.7** Manage Resource 선택
+
+페이지에서 Create Project를 선택하여 Create Project 화면이 표시된다. 프로젝트의 이름을 입력하고, 화면에서 organization을 선택할 수 있다.(그림 3.8, 3.9)
+
+![3.8_create_project](./img/3.8_create_project.png)
+
+**그림 3.8** Creat Project 클릭
+
+![3.9_create_project_dialog](./img/3.9_create_project_dialog.png)
+
+**그림 3.9** Create Project 화면
+
+프로젝트를 생성할 때, 프로젝트의 남은 할당량은 표시된다. 추가적인 프로젝트가 필요하면 할당량 증가를 요청하는 Manage Quotas 링크를 클릭한다.
+
+## Roles과 Identities
+
+리소스 관리 이외에도, 클라우드 엔지니어로서 리소스에 대한 접근을 관리해야 할 것이다. 이 것은 role과 identities의 사용으로 가능하다.
+
+### GCP에서 Roles
+
+*role*은 사용 권한의 집합이다. Roles는 사용자에게 역할을 바인딩하여 사용자에게 부여된다. identities에 대해서 이야기하면, GCP에서 사용자나 서비스 계정을 나타내는데 사용하는 기록을 의미한다. 예를 들어, 앨리스 클라우드에서 어플리케이션을 개발하는 소프트웨어 엔지니어니고, alice@example.com과 같은 이름의 identity를 갖고 있다. Roles은 앨리스가 GCP에서 리소스를 생성, 수정, 삭제, 사용할 수 있게 GCP 내에서 alice@example.com에 할당된다.
+
+GCP에서 role의 3가지 유형이다.
+* Primitive roles
+* Predefined roles
+* Custom roles
+
+Primitive roles는 Owner, Editor, Viewer를 포함한다. 이는 대부분의 리소스에 적용될 수 있는 기본적인 권한이다. 가능하면 predefined roles 대신에 primitive roles를 사용하는게 좋은 예시이다. Primitive roles는 사용자에 의해서 항상 필요하지 않을 수 있는 넓은 범위의 사용 권한을 부여한다. predefined roles를 사용하면, 사용자에게 기능을 수행하는데 필요한 사용 권한을 부여할 수 있다. 필요한 권한만 할당하고, 더 이상 할당하지 않는 관행을 *principle of least privilege(최소 권한 원칙)*이라고 알려져 있다.
+
 
 
 [맨 위로](#Contents) 
