@@ -949,7 +949,105 @@ GCP에서 role의 3가지 유형이다.
 * Predefined roles
 * Custom roles
 
-Primitive roles는 Owner, Editor, Viewer를 포함한다. 이는 대부분의 리소스에 적용될 수 있는 기본적인 권한이다. 가능하면 predefined roles 대신에 primitive roles를 사용하는게 좋은 예시이다. Primitive roles는 사용자에 의해서 항상 필요하지 않을 수 있는 넓은 범위의 사용 권한을 부여한다. predefined roles를 사용하면, 사용자에게 기능을 수행하는데 필요한 사용 권한을 부여할 수 있다. 필요한 권한만 할당하고, 더 이상 할당하지 않는 관행을 *principle of least privilege(최소 권한 원칙)*이라고 알려져 있다.
+Primitive roles는 Owner, Editor, Viewer를 포함한다. 이는 대부분의 리소스에 적용될 수 있는 기본적인 권한이다. 가능하면 predefined roles 대신에 primitive roles를 사용하는게 좋은 예시이다. Primitive roles는 사용자에 의해서 항상 필요하지 않을 수 있는 넓은 범위의 사용 권한을 부여한다. predefined roles를 사용하면, 사용자에게 기능을 수행하는데 필요한 사용 권한을 부여할 수 있다. 필요한 권한만 할당하고, 더 이상 할당하지 않는 관행을 *principle of least privilege(최소 권한 원칙)*이라고 알려져 있다. 이 것은 정보 보호에서 기본적인 예시 중 하나이다.
+
+Predefined roles는 GCP 리소스에 세밀한 접근을 제공하고, GCP 제품에 한정된다. (그림 3.10) 예를 들어, App Engine roles는 아래 내용을 포함한다.
+* *appengine.appAdmin*, 모든 어플리케이션 세팅의 읽고, 쓰고, 수정하는 기능을 identity에 부여한다.
+* *appengine.ServiceAdmin*, 어플리케이션 세팅에 대한 read-only 접근 권한과 모듈 수준과 버전 수준 세팅에 대한 쓰기 수준의 접근 권한을 부여
+* *appengine.appView*, 어플리케이션에 대한 read-only 접근 권한을 부여
+
+![3.10_sample_list_of_roles](./img/3.10_sample_list_of_roles.png)
+
+**그림 3.10** GCP roles의 샘플 리스트
+
+Custom roles은 클라우드 관리자가 자신의 role을 생성하고 관리할 수 있다. Custom roles는 IAM에 정의된 사용권한을 사용하여 구성된다. custom role에서 대부분의 사용권한을 사용할 수 있지만, *iam.ServiceAccounts.getAccessToken*과 같은 일부는 custom roles에서 이용할 수 없다.
+
+IAM 콘솔에서 그림 3.11과 같이 사용권한 인터페이스를 표시할 프로젝트를 선택할 수 있다.
+
+![3.11_IAM_permissions](./img/3.11_IAM_permissions.png)
+
+**그림 3.11** IAM Permissions
+
+여기에서 Add 옵션을 선택하면 username과 role를 입력하는 화면이 표시된다.
+
+![3.12_adding_a_user](./img/3.12_adding_a_user.png)
+
+**그림 3.12** 사용자 추가
+
+## Service Account
+
+identities는 보통 사용자 개별적으로 할당된다. 때때로 어플케이션이나 VM이 사용자를 대신하여 수행하거나 사용자에게 권한이 없는 동작을 수행하는 것은 도움이 된다.
+
+예를 들어, 데이터베이스 접근이 필요한 어플리케이션을 갖을 수도 있지만, 어플리케이션의 사용자가 직접 데이터베이스를 접근하는 것을 원하지 않는다. 그 대신에, 데이터베이스에 대한 모든 사용자의 요청은 어플리케이션을 통해야 한다. service account는 데이터베이스에 접근하도록 생성될 수 있다. 그 service account는 어플리케이션에 할당될 수 있어서 어플리케이션은 사용자에게 데이터베이스 접근 권한을 부여하지 않아도 사용자를 대신하여 쿼리를 실행할 수 있다.
+
+Service account는 때로는 리소스로 다루고, 때로는 identities로 취급한다는 점에서 다소 특이하다. service account에 role을 지정할 때, identity로 취급한다. 사용자에게 service account에 대한 접근 권한을 줄 때, 리소스로 취급한다.
+
+service account에는 사용자가 관리하는 servic account와 구글이 관리하는 service account가 있다. 사용자는 프로젝트당 service account를 100개까지 생성할 수 있다. Compute Engine API를 이용하는 프로젝트를 생헝할 때, Compute Engine service account는 자동적으로 생성된다. 유사하게, 프로젝트에 App Engine 어플리케이션이 있다면, GCP는 자동적으로 App Engine service account를 생성할 것이다. Compute Engine과 App Engine service account는 모두 생성된 프로젝트에서 editor role을 부여받는다. 또한 프로젝트에 custom service account를 생성할 수 있다.
+
+구글은 관리하는 service account를 생성할 수 있다. 이 account는 다양한 GCP 서비스와 사용된다.
+
+Service account는 프로젝트 수준에서 account 그룹이나 service account 개별적인 수준으로 관리될 수 있다. 예를 들어, 특정 프로젝트 사용자에게 *iam.serviceAccountUser*를 부여한다면, 사용자는 프로젝트의 모든 service account를 관리할 수 있다. 특정 service account만 관리하도록 사용자를 제한하기를 선호한다면, 특정 service account에 *iam.serviceAccountUser* 권한을 부여할 수 있다.
+
+service account는 리소스가 생성될 때 자동적으로 생성된다. 예를 들어, service account는 VM이 생성될 때 VM에 생성될 것이다. 어플리케이션 중 하나에 service account를 생성하고 싶은 상황이 있을지도 모른다. 이 경우에는 IAM & admin 콘솔에서 Service Account를 선택한다. 그림 3.13에서 보여지는 것처럼 위쪽에 Create Service Account를 클릭한다.
+
+![3.13_service_accounts_listing](./img/3.13_service_accounts_listing.png)
+
+**그림 3.13** IAM & admin 콘솔에서 Service account 리스트
+
+service account를 생성하는 데 필요한 정보를 입력하는 양식을 가져온다.
+
+## Billing(과금)
+
+VM, object storage, 특별한 서비스와 같은 리소스를 사용하는 것은 일반적으로 비용이 발생한다. GCP Billing API는 리소스 사용에 대해 어떻게 비용을 지불하는지 관리하는 방봅을 제공한다.
+
+### Billing Accounts
+
+Billing account는 리소스 사용에 대한 비용을 지불하는 방법에 대한 정보를 저장한다. billing account는 하나 이상의 프로젝트와 연관된다. 모든 프로젝트는 무료 서비스만 사용하지 않는다면 billing account를 반드시 가져야 한다.
+
+Billing account는 리소스 계층과 비슷한 구조를 갖는다. 작은 기업에서 작업하는 경우, 단일 billing account만 갖을 수도 있다. 이 경우에는 모든 리소스 비용이 하나의 account로 과금된다. 이 챕터 초반에 있었던 회계, 마케팅, 법무, 소프트웨어 개발 부서 예시와 비슷한 회사인 경우, 다양한 billing account를 갖기를 원할 수도 있다. 각 부서별로 하나의 billing account를 갖지만, 그럴 필요는 없을 것이다. 회계, 마케팅, 법무 모두 회사의 예산에서 동일한 부분으로부터 클라우드 서비스에 대한 비용을 지불한다면, 하나의 billing account를 갖을 수 있다. 소프트웨어 개발 서비스가 회사 예산의 다른 부분으로부터 비용이 지불된다면, 다른 billing account를 사용할 수 있다.
+
+구글 클라우드 콘솔의 메인에서 기존의 billing account를 나열한 Billing console을 찾을 수 있다. (그림 3.14)
+
+![3.14_main_billing_form](./img/3.14_main_billing_form.png)
+
+**그림 3.14** 기존 billing account를 나열하는 Billing 메인 형식
+
+여기에서 그림 3.15에서 보여지는 것처럼 새로운 billing account를 생성할 수 있다.
+
+![3.15_new_billing_account](./img/3.15_new_billing_account.png)
+
+**그림 3.15** 새로운 billing account를 생성하는 양식
+
+Billing overview 페이지에서 billing account와 연결된 프로젝트를 확인하고 수정할 수 있다.
+
+billing account에는 2가지 유형이 있다: self-serve와 invoiced. Self-serve account는 신용카드나 은행 계좌로부터 직접 인출하여 지불한다. 비용은 자동적으로 부과된다. 다른 유형은 invoiced billing account로 사용자에게 영수증이나 인보이스를 전송한다. account의 유형은 기업이나 다른 대형 고객에 의해 공통적으로 사용된다.
+
+몇몇 roles는 billing과 연관된다. 시험을 위해서 아래 내용을 아는 것은 중요하다.
+* Billing Account Creator, 새로운 self-service billing account를 생성할 수 있다.
+* Billing Account Administrator, billing account를 관리하지만, 생성할 순 없다.
+* Billing Account User, 사용자가 프로젝트를 billing account에 연결할 수 있다.
+* Billing Account Viewer, 사용자가 billing account 비용과 트랜잭션을 확인할 수 있다.
+
+Billing Account Creator를 담당하는 사용자는 거의 없고, 이 사람은 조직에서 재무 역할을 담당할 가능성이 높다. 클라우드 어드민은 account를 관리하는 Billing Account Administrator를 맡을 수도 있다. 프로젝트를 생성할 수 있는 모든 사용자는 Billing Account User를 맡는다. 그래서 새로운 프로젝트는 관련된 billing account와 연결될 수 있다. Billing Account Viewer는 billing account 정보를 읽어야 하지만, 변경할 수 없는 감사 담당자 같은 일부 사람들에게 유용하다.
+
+### Billing Budget and Alerts
+
+GCP Billing 서비스는 예산을 정의하고 과금 알림을 설정하는 옵션을 포함한다. 콘솔의 메인 메뉴에서 Billing을 선택하고, Budget & alerts를 선택해서 예산 양식을 확인할 수 있다. (그림 3.16)
+
+![3.16_budget_form](./img/3.16_budget_form.png)
+
+**그림 3.16** 예산 양식은 특정한 달에 예산의 일정 퍼센트를 지불한 경우 공지가 보내질 수 있다.
+
+예산 양식에서 예산의 이름과 모니터링하는 billing account를 지정할 수 있다. 예산은 프로젝트가 아닌 billing account와 연관된다는 점을 기억해야 한다. 하나 이상의 프로젝트는 billing account와 연결될 수 있다. 그래서 지정한 예산과 알림은 billing account와 연결된 모든 프로젝트에서 쓰여질 것으로 예측되는 금액을 기준으로 해야한다.
+
+특정 금액을 지정하거나 이전 달에 쓰여진 예산 금액으로 지정할 수 있다.
+
+예산에서 3가지 퍼센트를 설정할 수 있다. 기본적으로 3개의 퍼센트로 50%, 90%, 100%를 설정한다. 이는 상황에 잘 맞게 퍼센트를 변경할 수 있다. 3가지 이상 알림을 받고 싶다면, Set Budget Alerts 영역에서 추가적인 알림 임계값을 추가하는 Add Item을 클릭한다.
+
+예산의 설정한 퍼센트가 쓰여졌을 때, billing 관리자와 사용자는 이메일로 알림을 받을 것이다. 프로그램방식으로 알림을 받고 싶다면, Manage Notification 영역에서 체크박스를 선택하면 Pub/Sub 토픽이 전송된다.
+
+### Exporting Billing Data
+
 
 
 
