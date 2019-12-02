@@ -1048,6 +1048,255 @@ GCP Billing 서비스는 예산을 정의하고 과금 알림을 설정하는 �
 
 ### Exporting Billing Data
 
+추후 분석이나 근거를 위해서 과금 데이터를 추출할 수 있다. 과금 데이터는 BigQuery 데이터베이스나 Cloud Storage 파일로 추출될 수 있다. 
+
+BigQuery로 과금 데이터를 추출하기 위해, 콘솔에서 Billing 영역을 찾고, 해당 메뉴에서 Billing export를 선택한다. 나타나는 화면의 형식에서 추출하기 원하는 billing account를 선택하고, BigQuery Export나 File Export 중에서 하나를 선택한다. (그림 3.17)
+
+![3.17_billing_export_form](./img/3.17_billing_export_form.png)
+
+**그림 3.17** Billing 추출 양식
+
+BigQuery에서 Edit Setting을 선택한다. 포함하길 원하는 프로젝트를 선택한다. 데이터를 저장하기 위해서 BigQuery 데이터 셋을 생성할 필요가 있다. Go To BigQuery를 클릭해서 BigQuery 양식을 연다. 추출된 데이터를 저장하는데 사용되는 Billing export 데이터 셋을 생성한다. (그림 3.18) BigQuery를 사용한 추가 정보는 챕터 12에서 확인한다.
+
+![3.18_exporting_BigQuery](./img/3.18_exporting_BigQuery.png)
+
+**그림 3.18** BigQuery로 추출
+
+그 대신, Cloud Storage에 저장되는 파일로 billing 데이터를 추출할 수 있다. Billing Export 양식에서 그림 3.29에서 보이는 것처럼 File Export 탭을 선택한다.
+
+![3.19_exporting_billing_data](./img/3.19_exporting_billing_data.png)
+
+**그림 3.19** 파일로 billing 데이터 추출
+
+파일로 추출할 때, 버킨이름과 리포트의 prefix를 지정할 필요가 있다. CSV나 JSON 파일 포맷 중 하나를 선택하는 옵션이 있따. 가능한 파일 포맷 옵션에 대해서 궁금할 수 있지만, 2가지 옵션을 기억해라.
+
+## Enaling API
+
+GCP는 프로그램방식으로 접근이 가능한 서비스인 API를 사용한다. 예를 들어, VM이나 Cloud Storage 버킷을생성하는 양식을 사용할 때, 뒤에서 VM이나 버킷을 생성하는 API함수가 실행된다. 모든 GCP 서비스는 관련된 API를 갖고 있다. 그러나, 대부분 프로젝트에서 디폴트로 사용하지 않는다.
+
+API 서비스를 사용하기 위해서 콘솔의 메인 메뉴에서 APIs & Services를 선택한다. 그림 3.20에서 보이는 것 처럼 대쉬보드를 볼 수 있다.
+
+![3.20_example_API_services_dashboard](./img/3.20_example_API_services_dashboard.png)
+
+**그림 3.20** API 서비스 대쉬보드의 예
+
+Enable API and Service 링크를 클릭하면, 그림 3.21처럼 사용할 수 있는 서비스의 리스트를 확인할 수 있다.
+
+![3.21_API_enabled](./img/3.21_API_enabled.png)
+
+**그림 3.21** API를 사용할 수 있는 서비스
+
+이 양식은 필요하다고 생각하는 API를 사용하는 편리한 방법이다. 사용할 수 없는 API가 요구되는 동작을 시도 한다면, API를 사용할 지 여부를 결정하는 메시지가 표시될 수 있다.
+
+또한, 그림 3.20에서 API의 목록과 상태를 기억해라. 사용가능한 API는 Disable 옵션을 갖고 있고, disable the API를 틀릭할 수 있다. 리스트에서 API의 이름을 클릭하여 API 사용에 대한 상세 정보를 확인할 수 있다. (그림 3.22)
+
+![3.22_details_API_usage](./img/3.22_details_API_usage.png)
+
+**그림 3.22** API 사용에 대한 상세 정보
+
+## Provisionning Stackdriver Workspace
+
+oraganization과 project를 설정할 때, identities 생성, roles 지정, billing account 설정과 같이 이 챕터에서 나열한 업무를 하는데 시간을 쓸 것이다. 해야 할 다른 것은 Stackdriver Workspaces를 생성하는 것이다. (이전에는 이 것을 Stackdriver account로 불렀다. 그래서 때때로 이 용어를 볼 수도 있다.)
+
+Stackdriver는 어플리케이션과 리소스의 모니터링, 로깅, 추적, 디버깅을 위한 서비스 셋이다. (그림 3.23)Stackdriver에 저장되는 모니터링과 로깅 데이터를 저장하기 위해서 workspace를 생성해야 한다. 콘솔 메인 메뉴에서 Stackdriver를 선택하여 진행할 수 있다.
+
+![3.23_stackdriver_dashboard](./img/3.23_stackdriver_dashboard.png)
+
+**그림 3.23** Stackdriver 대쉬보드
+
+대쉬보드 위쪽에는 연재 프로젝트의 이름이 보여진다. 관리자 옵션 리스트를 확인하기 위해 프로젝트 이름 옆에 화살표를 클릭한다. (그림 3.24)
+
+![3.24_managing_stackdriver_workspaces](./img/3.24_managing_stackdriver_workspaces.png)
+
+**그림 3.24** Stackdriver workspace 관리를 위한 관리 기능
+
+Create Workspace를 클릭하면, 그림 3.25와 같은 양식이 나타난다. GCP 프로젝트 상자를 클릭한 다음 Create Workspace를 클릭할 때 나타나는 리스트로부터 프로젝트를 선택한다. workspace를 생성되고, 프로젝트와 연결된다. 프로젝트의 모니터링, 로깅, 다른 Stackdriver 서비스를 바로 사용할 수 있다.
+
+챕터 18에서 Stackdriver에 대한 더 자세한 정보를 확인할 수 있다.
+
+![3.25_create_workspace_dialog](./img/3.25_create_workspace_dialog.png)
+
+**그림 3.25** Create Workspace 
+
+# 시험 필수 요소
+
+**GCP 리소스 계층을 이해한다.** 모든 리소스는 리소스 계층 내에 구성된다. 하나의 organization과 다양한 folder와 project를 사용하여 리소스 계층을 정의할 수 있다. Folder는 부서를 그룹화하는데 유용하고, 다른 그룹은 그들의 프로젝트를 분리하여 관리한다. Project는 VM과 Cloud storage 버킷과 같은 리소스를 포함한다. Project는 무료 서비스보다 많이 사용하려면 관련된 billing account가 반드시 있어야 한다.
+
+**organization 정책을 이해한다.** Organization 정책은 리소스 계층에서 리소스를 제한한다. 정책에는 리소스로 할 수 있거나 할 수 없는 것을 정의하는 규칙인 제약조건(constraint)을 포함한다. 예를 들어, 제약조건은 프로젝트에서 모든 VM에 시리얼 포트로 접근을 막는다고 설정할 수 있다. 또한, 정책 평가 과정과 상속된 정책을 재정의하는 방법을 이해한다.
+
+**Service account와 사용하는 방법을 이해한다.** Service Account는 특정 사용자와 관련되지 않지만 VM같은 리소스와 할당할 수 있는 ID이다. service account가 할당된 리소스는 service account가 수행 권한을 갖는 동작을 수행할 수 있다. Service account와 생성하는 방법을 이해한다.
+
+**GCP Billing을 이해한다.** GCP Billing은 무료 서비스를 넘어서 서비스와 리소스를 사용할 수 있어야 한다. Billing은 프로젝트에 신용카드나 인보이스 같은 과금 방법으로 연결된다. 프로젝트에서 리소스와 관련된 모든 비용은 프로젝트의 billing account로 청구된다. Billing account는 하나 이상의 프로젝트와 연결될 수 있다. Billing API를 통해서 billing을 관리한다.
+
+**API를 사용하는 방법과 Stackdriver Workspace를 생성하는 방법을 안다.** 편리한 양식을 사용하면 필요한 API를 사용할 수 있다. 또한 API의 목록과 상태를 확인할 수 있다. Stackdriver는 어플리케이션과 리소스 모니터링, 로깅, 추적, 디버깅을 위한 서비스 셋이다. Stackdriver에 모니터링과 로그 데이터를 저장하기 위해 workspace를 생성해야 한다.
+
+# Chapter 4 Google Cloud의 Computing 소개
+
+**이 챕터는 구글 Associate Cloud Engineer 인증 시험 과목 중, 아래 내용을 다룬다.**
+* 2.2 compute 리소스 계획과 설정
+  
+이 챕터에서는 GCP에서 사용할 수 있는 각 compute 옵션과 사용시기에 대해 배울 것이다. 또한 전반적인 컴퓨팅 비용을 줄이도록 도와주는 preemptible 가상머신에 대해서 논의할 것이다.
+
+## Compute Engine
+
+Compute Engine은 GCP에서 동작하는 VM을 제공하는 서비스이다. 일반적으로 동작 중인 VM을 *인스턴스*라고 언급한다. Compute Engineㅇ르 사용할 때, 하나 이상의 인스턴스를 생성하고 관리한다.
+
+### 가상 머신 이미지
+
+인스턴스는 OS, 라이브러리, 다른 코드를 포함한 이미지를 실행한다. 구글에 의해서 제공되는 퍼블릭 이미지를 실행하도록 선택할 수 있다. (그림 4.1) 리눅스와 윈도우 이미지 모두 사용할 수 있다. 구글에서 제공되는 이미지 이외에도, 오플소스 프로젝트나 3rd 파티 벤더에서 제공하는 다른 퍼블릭 이미지도 존재한다.
+
+![4.1_compute_engine_OS_image](./img/4.1_compute_engine_OS_image.png)
+
+**그림 4.1** Compute Engine에서 사용할 수 있는 OS 이미지 일부분
+
+퍼블릭 이미지는 CentOS, Container Optimized OS from Google, Debian, Red Hat Enterprise Linux, SUSE Enterprise Linux Server, Ubuntu, Windows Server와 같은 넓은 범위의 OS를 포함한다.
+
+필요로하는 퍼블릭 이미지가 없다면, boot disk로부터 커스텀 이미지를 생성하거나 다른 이미지로 시작할 수 있다. 콘솔에서 VM을 생성하기 위해 Compute Engine을 찾은 다음 VM Instance를 찾는다. 그림 4.2와 비슷한 화면을 볼 수 있다.
+
+![4.2_creating_VM](./img/4.2_creating_VM.png)
+
+**그림 4.2** Compute Engine에서 VM 생성
+
+위 화면에서, VM을 생성하는 Create Instance를 클릭한다. 필요한 것과 가까운 이미지를 선택하고, VM을 생성한다. 그 다음 라이브러리나 다른 소프트웨어 패키지를 설치하는 것과 같이 이미지에 필요한 변경 사항을 수행한다. VM이 생성되고, 변경사항이 적용되었다면, Google Cloud Console의 Compute Engine 메뉴에서 Snapshot을 선택한다. (그림 4.3)
+
+![4.3_creating_snapshot](./img/4.3_creating_snapshot.png)
+
+**그림 4.3** snapshot 생성하기의 첫 번째 단계
+
+Create Snapshot를 클릭한다. 보이는 양식에서 스냅샷의 이름, 설명, 그리고 가장 중요하게 스냅샷을 위한 원본인 디스크를 지정할 수 있다. 그림 4.4에서, *myvm*이라고 되어있는 VM의 boot disk가 선택되었다. 옵션을 선택한 후에, 스냅샷을 저장하는 Create 버튼을 클릭한다. 이 이미지는 다른 VM의 이미지로 사용될 수 있다.
+
+![4.4_creating_a_snapshot](./img/4.4_creating_a_snapshot.png)
+
+**그림 4.4** Compute Engine에서 스냅샷 생성하기
+
+커스텀 이미지는 실행하는 VM의 각 인스턴스에 OS를 설정하고, 추가 소프트웨어를 설치해야하는 경우에 특히 유용하다. 각 인스턴스에 소프트웨어를 여러번 설정하고, 설치하는 것 대신에, 한번만 설정하고 설치한 다음 인스턴스의 boot disk에서 있는 커스텀 이미지로 생성할 수 있다. 다른 인스턴스를 기동할 때 커스텀 이미지를 지정하여서 추가적인 단계 없이 설정과 소프트웨어를 사용할 수 있을 것이다.
+
+로컬 환경이나 데이터 센터에서 커스텀 이미지를 갖는 경우가 있을 수 있다. 구글에서 제공하는 가상 디스크 import 도구를 사용하여 이미지를 불러올 수 있다. 이 도구는 *gcloud* 커맨드라인 도구 중 하나이고, 다음 챕터에서 더 자세한 정보를 설명한다.
+
+커스텀 이미지는 GCP와 반드시 호환되어야 한다. 작성 시, Compute Engine에서 실행되는 커스텀 이미지를 빌드하기 위해 다음과 같은 기본 운영체제를 사용할 수 있다.
+
+* Linux OS
+  * CentOS 6
+  * CentOS 7
+  * Debian 8
+  * Debian 9
+  * Red Hat Enterprise Linux 6
+  * Red Hat Enterprise Linux 7
+  * Ubuntu 14.04 LTS
+  * Ubuntu 15.04 LTS
+* Windows OS
+  * Windows Server 2008 R2
+  * Windows Server 2012 R2
+  * Windows Server 2012 R2 Core
+  * Windows Server 2016
+  * Windows Server 2016 Core
+
+### 프로젝트에 포함된 가상머신
+
+인스턴스를 생성할 때, 인스턴스를 포함하는 프로젝트를 지정한다. 기억하겠지만, 프로젝트는 GCP 리소스 계층의 일부이다. 프로젝트는 계정에서 가장 하위 계층이다. 프로젝트는 공통 정책으로 관련 리소스를 관리할 수 있다. 
+
+Google Cloud Console을 열 때, 그림 4.5에서 보여지는 것처럼 맨 위에 프로젝트 이름이나 Select a Project 문구중 하나가 표시될 것이다.
+
+![4.5_current_project_name](./img/4.5_current_project_name.png)
+
+**그림 4.5** 현재 프로젝트 이름이나 선택 옵션 중 하나가 Google Cloud Console에서 보여진다.
+
+Select a Project를 선택할 때, 그림 4.6처럼 양식이 나타난다. 거기에서 VM을 포함하여 리소스를 저장할 프로젝트를 선택할 수 있다.
+
+![4.6_choosing_project_name](./img/4.6_choosing_project_name.png)
+
+**그림 4.6** 계정의 기존 프로젝트 중에서 프로젝트를 선택
+
+### Zone 및 Region에서 가상머신 실행
+
+프로젝트를 갖는 것 이외에도, VM 인스턴스틑 할당된 zone을 갖는다. Zone은 리소스 같은 데이터 센터이지만, 하나 이상의 밀접하게 연결된 데이터센터로 구성될 수 있다. Zone은 region 내에 위치한다. *region*은 asia-east1, europe-west2, us-east4와 같이 지리적 위치이다. region 내 zone은 저지연, 높은 대역폭의 네트워크 연결로 구성된다.
+
+VM을 생성할 때 region과 zone을 지정한다. 그림 4.7에서 볼 수 있는 것처럼, Create VM 양식은 region과 zone을 선택할 수 있는 drop-down 리스트 양식을 포함한다.
+
+![4.7_selecting_region_zone](./img/4.7_selecting_region_zone.png)
+
+**그림 4.7** Create VM 양식에서 region과 zone 선택하기
+
+VM이 실행되는 장소를 선택할 때 고려할 몇 가지 요소는 아래와 같다.
+* 비용, region 간 다를 수 있다.
+* Data Locality regulation(데이터 지역적 규제), EU시민에 대한 데이터는 EU에 있어야 한다.
+* High availability, 다양한 인스턴스가 실행 중이라면, 다른 zone과 가능하면 다른 region에 실행되길 원할 수도 있다. zone이나 regions중 하나에 접근할 수 없게 되면, 다른 zone과 region에 있는 인스턴스는 서비스를 제공할 수 있다.
+* Latency, 전 세계의 다른 영역에서 사용자를 갖는 경우 중요하다. 인스턴스와 데이터가 지리적으로 어플리케이션 사용자와 가깝게 유지되는 것은 latency를 줄이는데 도움을 줄 수 있다.
+* Need for specific hardware platform, region마다 다를 수 있다. 예를 들어, europe-west1에 쓸 당시에는 Intel Xeon E5와 Sandy Bridge 플랫폼으로 알려졌지만, Europe-west2는 그렇지 않다.
+
+### 사용자들은 VM을 생성하는 권한이 필요
+
+프로젝트에서 Compute Engine 리소스를 생성하기 위해서 사용자는 프로젝트나 특정 리소스의 팀 멤버여야 하고, 특정 업무를 수행하는 적절한 권한을 가져야 한다. 사용자는 아래와 같이 프로젝트와 연관될 수 있다.
+* Individual User
+* A Google group
+* A G Suite domain
+* A service account
+
+사용자나 사용자 그룹이 프로젝트에 추가되면, 사용자나 사용자 그룹에 role를 부여하여 사용 권한을 할당할 수 있다. 이 프로세스는 챕터 17에 자세하게 설명한다. Predefined role은 사용자가 일련의 업무를 수행하는데 필요한 권한을 그룹화하기 때문에 특히 유용하다. 아래는 predefined role의 예시이다.
+
+**Compute Engine Admin** Compute Engine 인스턴스 전체를 제어하는 역할을 갖는 사용자
+
+**Compute Engine Network Admin** 대부분의 네트워킹 리소스를 생성, 수정, 삭제하고, 방화벽 규칙과 SSL 인증으로 read-only 접근을 제공하는 역할을 갖는 사용자. 이 role은 인스턴으를 생성하거나 대체하는 권한을 사용자에게 부여하지 않는다.
+
+**Compute Engine Security Admin** SSL 인증과 방화벽 규칙을 생성, 수정, 삭제할 수 있는 역할을 갖는 사용자
+
+**Compute Engine Viewer** Compute Engine 리소스를 확인할 수 있지만, 리소스의 데이터를 읽을 수 없는 역할의 사용자
+
+권한이 프로젝트 단위로 사용자에게 부여될 때, 이 사용 권한은 프로젝트 내의 모든 리소스에 적용된다. 예를 들어, 사용자가 프로젝트 레벨에서 Compute Engine Admin role을 부여 받았다면, 프로젝트에서 모든 Compute Engine 인스턴스들을 관리할 수 있다. 그림 4.8은 사용자와 role의 리스트를 보여주는 예시이다.
+
+![4.8_example_listing_of_user](./img/4.8_example_listing_of_user.png)
+
+**그림 4.8** 사용자와 role 리스트의 예시
+
+사용 권한을 부여하는 대체 방법은 리소스에 직접적으로 IAM 정책을 추가한느 것이다. 이 방법에서, 권한은 프로젝트 내의 모든 리소스 대신에 특정 리소스에 맞출 수 있다. 예를 들어, 사용자 Alice는 하나의 인스턴스에 Compute Engine Admin role을 갖고, Bob은 다른 인스턴스에 같은 role을 지정할 수 있다. Alice와 Bob은 각자의 VM 인스턴스를 관리할 수 있지만, 다른 인스턴스를 관리할 수 없다.
+
+### Preemptible VM
+
+고가용성이 필요한 워크로드가 있는 경우 고려해야한다. Preemptible VM은 금융 모델링, 렌더링, 빅데이터, CI, 웹 크롤링을 수행하는 어플리케이션과 같은 워크로드 유형에 적합하게 짧게 기동되는 컴퓨트 인스턴스이다. 이런 VM은 일반적인 compute 인스턴스와 동일한 설정으로 제공하고, 24시간까지 유지된다. 어플리케이션이 장애 예방 기능(fault-tolerant)가 있고, 가능한 인스턴스 중단(경고 30초)을 견딜 수 있다면, Peemptible VM 인스턴스를 사용하는 것은 Google Compute Engine 비용을 크게 줄일 수 있다.
+
+몇몇 빅데이터 분석 작업은 Hadoop과 Spark같은 소프트웨어를 실행하는 서버의 클러스터에서 동작한다. 플랫폼은 실패를 회복할 수 이쎅 설계되었다. 노드가 작업 중간에 중단되면, 플랫폼은 실패를 감지하고, 서버의 다른 노드로 워크로드를 이동시킨다. 신뢰있는 VM과 Preemptible VM의 조합으로 제대로 서비스를 제공하는 분석 작업이 있을 수 있다. 신뢰할 수 있는 VM의 몇 퍼센트는 제한 시간 내의 처리된 작업을 얻을 수 있지만, 적은 비용(Preemptible VM)을 추가하면, 더 빠르고 적은 비용으로 작업을 끝낼 수 있다.
+
+#### Preemptible VM의 제한
+
+Preemptible VM을 사용하는 곳을 결정할 때, GCP의 기존 VM 인스턴스와 비교하여 제한사항과 차이점에 유의해야 한다. Preemptible VM은 아래와 같은 특성이 있다.
+* 언제든지 종료될 수 있다. 시작한지 10분 이내레 종료된다면, 비용이 발생하지 않는다.
+* 24시간 내에 종료된다.
+* 항상 이용하지 못할 수 있다. 이용 가능한지는 zone와 region에 따라 다르다.
+* 일반적인 VM에 이관할 수 없다.
+* 자동적으로 재시작하도록 설정할 수 없다.
+* Service Level Agreement(SLA)를 보장하지 않는다.
+
+### 커스텀 머신 유형
+
+Compute Engine은 기본 유형, high-memory machine, high-CPU machines, shared core type, memory-optimized machines으로 그룹화된 25가지 이상의 predefined 머신 유형을 갖고 있다. 이러한 predefined 머신 유형은 가상 CPU(vCPUs)의 수와 메모리의 양이 다르다. 아래는 예시이다.
+* n1-standard-1은 1개의 vCPU와 3.75GB의 메모리
+* n1-standard-32는 32개의 vCPU와 120GB의 메모리
+* n1-highmem-32는 32개의 vCPU와 208GB의 메모리
+* n1-highcpu-32는 32개의 vCPU와 28.8GB의 메모리
+
+VM의 predefined 옵션은 많은 예시의 요구를 충족하지만, 미리 정의되지 않은 설정에서 더 비용 효과적이고 더 빠르게 워크로드가 실행되는 경우가 있을 수 있다. 이 경우 커스텀 머신 유형을 사용할 수 있다.
+
+커스텀 이미지를 생성하기 위해 콘솔에서 Create VM 옵션을 선택한다. Machine Type 영역에서 Customize 링크를 클릭한다. 그림 4.9처럼 Machine Type 영역에 확장된다. 거기에서 원하는 CPU의 수와 메모리의 양을 슬라이더로 증가시키거나 감소시킬 수 있다.
+
+![4.9_customizing_vm](./img/4.9_customizing_vm.png)
+
+**그림 4.9** CPU 수와 메모리 양을 조정하여 VM을 커스터마이징
+
+커스텀 머신 유형은 1에서 64사이의 vCPU와 vCPU당 6.5GB 메모리까지 가질 수 있다. 커스텀 설정의 가격은 할당된 vCPU 수와 메모리를 기반으로 한다.
+
+### Compute Engine 가상 머신의 사용 사례
+
+Compute Engine은 VM 인스턴스 위에서 최대의 제어가 필요할 때 좋은 옵션이다. Compute Engine으로 할 수 있는 것은 아래와 같다.
+* 인스턴스에서 실행할 특정 이미지를 선택
+* 소프트웨어 패키지나 커스텀 라이브러리를 설치
+* 인스턴스에 대한 사용 권한을 가진 사용자가가 세부적으로 제어
+* 인스턴스를 위해 SSL 인증과 방화벽 정책에서 제어
+
+GCP의 다른 computing 서비스와 상대적으로, 구글 Compute Engine은 최소한의 관리만 제공한다. 구글은 공인 이미지와 VM 설정 세트를 제공한다. 하지만, 관리자로서 사용할 이미지, CPU 수, 할당할 메모리 양, 영구 저장소 설정 방법, 네트워크 설정 방법에 대해서 선택해야 한다.
+
+일반적으로, GCP에서 리소스에 대한 더 많은 제어할 수록, 리소스를 구성하고 관리해야하는 책임이 더 커진다.
+
+## App Engine
 
 
 
