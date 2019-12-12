@@ -348,3 +348,51 @@ Datastore에서 데이터를 가져오고 쿼리하는 추가 상세 정보는 �
 
 #### Cloud Firestore 기능
 
+Cloud Firestore는 document 데이터 모델을 사용하는 관리형 NoSQL 데이터베이스이다. Datastore와 유사하다. 실제로, Datastore 데이터베이스는 최신 Cloud Firestore 스토리지 시스템을 사용할 수 있다. Cloud Firestore의 한 가지 장점은 모바일 앱처럼 분리된 어플리케이션 간 데이터를 저장하고, 동기화하고, 쿼리하기 위해 설계되었다. 앱은 데이터가 백엔드에서 변경되었을 때 실시간에 가깝게 자동으로 업데이트될 수 있다. Cloud Firestore는 트랜잭션을 지원하고 multiregional replication을 제공한다.
+
+#### Cloud Firestore 설정
+
+Cloud Firestore는 인스턴스를 설정할 필요가 없는 관리형 데이터베이스 서비스이다. 그러나 데이터 스토리지 시스템을 선택해야 한다. 옵션은 Datastore를 사용하는 것, Datastore 모드로 Firestore를 사용하는 것(Datastore 스토리지 시스템을 사용한다.), 또는 native 모드에서 Firestore를 사용하는 것을 포함한다. 신규 Firestore 사용자는 native 모드의 Firestore를 사용해야 한다. (그림 11.18)
+
+![11.18](./img/ch11/11.18.png)
+
+**그림 11.18** Firestore는 Datastore의 백엔드 스토리지 시스템이나 신규 native 모드 스토리지 시스템을 사용하도록 설정할 수 있다.
+
+스토리지 시스템을 선택한 후, 데이터베이스의 위치를 선택할 수 있다. (그림 11.19)
+
+![11.19](./img/ch11/11.19.png)
+
+**그림 11.19** Firestore 데이터베이스의 위치를 선택
+
+Firestore는 거의 몇분이 안돼서 데이터베이스를 생성한다. 데이터베이스가 ready 상태일 때, 그림 11.20같은 화면을 확인할 수 있다.
+
+챕터 12에서는 Firestore에서 데이터를 가져오고 쿼리하는 것을 살펴볼 것이다.
+
+#### Bigtable 설정
+
+Bigtable은 또다른 NoSQL 데이터베이스이지만 Datastore와 다르다. Bigtable은 wide-column 데이터베이스이고, document 데이터베이스가 아니다. 이름에서 알 수 있듯이, Wide-column 데이터베이스는 대량의 컬럼을 갖을 수 있는 테이블을 저장한다. 모든 행이 모든 열을 사용해야 하는 것은 아니어서 Datastore와 같은 방식으로 데이터를 구성하는 고정된 스키마가 필요하지 않다.
+
+Bigtable은 페타바이트급의 데이터베이스로 설계되었다. IoT 데이터를 저장하는 것과 같이 운영 데이터베이스와 데이터 사이언스 어플리케이션같은 분석 프로세싱은 Bigtable을 효과적으로 사용할 수 있다. 데이터베이스는 일관성, 밀리초 이하의 latency를 제공하도록 설계되었다. Bigtable은 클러스터에서 실행되고, 수평적으로 확장된다.
+
+Bigtable은 데이터 양이 많고, 데이터 수집 속도가 빠른 어플리케이션을 위해 설계되었다. 시간 단위, IoT, 금융 어플리케이션은 이 카테고리 안에 있다.
+
+![11.20](./img/ch11/11.20.png)
+
+**그림 11.20** Firestore 데이터베이스가 사용되기 위한 ready 상태
+
+#### Bigtable 설정
+
+Cloud Console에서, Bigtable을 열고, Create Instance를 클릭한다. 그림 11.21과 같은 양식을 확인할 수 있다.
+
+이 양식에서 인스턴스 이름과 ID를 제공해야 한다. 다음으로, 운영이나 개발 모드 중에서 선택해야 한다. 운영 클러스터는 최소 3개의 노드를 갖고, high availability를 제공한다. 개발 모드는 replication이나 high availability 없이 저비용 인스턴스를 사용한다. 또한 데이터베이스에 사용되는 persistent disk를 위해 SSD나 HDD 중 하나를 선택해야 한다.
+
+Bigtable은 다수의 클러스터를 지원한다. 각 클러스터를 위해 클러스터 ID, region과 zone 위치, 클러스터의 노드 수를 지정해야 한다. 클러스터는 가용성 향상을 위해서 복사될 수 있다.
+
+챕터 12에서는 Bigtable에서 데이터를 가져오고 쿼리하는 방법을 설명한다.
+
+![11.21](./img/ch11/11.21.png)
+
+**그림 11.21** Bigtable을 위한 설정 양식
+
+**실 사용 사례**  
+**Multiple 데이터베이스의 필요**
