@@ -108,3 +108,80 @@ Cloud Storage는 object storage의 4가지 등급을 제공한다: multi-regiona
 
 Multiregional 버킷은 컨텐츠에 접근 가능한 시간을 보장하기 위해 컨텐츠를 다수의 region에 저장되어야할 때 사용된다. 또한, zone 수준의 장애 시, 중복성을 제공한다. 그러나, 이 장점은 비용이 더 높다. 글을 작성하는 시점에, multiregional 스토리지는 미국에서 $0.26/GB/month가 발생한다. 반면에, regional 스토리지는 $0.20/GB/month가 발생한다. (Associate Cloud Enginner 시험에서 특정 비용에 대해서 물어보지 않을 것이다. 하지만 요구사항에 충족하는 저비용 솔류션을 식별하기 위해서 상대적인 비용을 알아야 한다.)
 
+regional과 multiregional 스토리지는 자주 사용되는 데이터를 위해 사용된다. 한달에 한 번 이상 사용자가 파일을 자주 다운로드하고 접근하는 어플리케이션이라면, regional이나 multiregional을 선택하는게 가장 비용에 효과적이다. 사용자의 위치를 기반으로 regional과 multiregional을 선택한다. 사용자가 글로벌로 분산되고 동기화된 데이터에 접근해야한다면, multiregional은 더 나은 성능과 가용성을 제공한다.
+
+데이터를 적극적으로 사용하지 않으면 어떻게 될까? 예를 들어, 규정에 따라서 7년동안 저장해야할 파일이 있지만, 접근이 예상되지 않는 경우, 보관 스토리지를 원할 수 있다. 유사하게, 장애 복구에만 필요한 파일을 저장하는 경우, 연간 1회 미만으로 자주 접근하지 않도록 설계된 스토리지 클래스를 원할 수 있다. 이러한 종류의 사례를 위해서 구글은 nearline과 clodline 스토리지 등급을 설계했다.
+
+**Notice**
+
+> 용어에 대한 참고사항: 구글은 때때로 georedundant라는 용어를 사용한다. Georedundant 데이터는 최소 100마일 이상 떨어진 2개 이상의 위치에 저장된다. 데이터가 multiregional인 경우, georedundant 이다.
+
+#### Nearline and Coldline 스토리지
+
+자주 접근하지 않는 데이터를 위해, nearline과 coldline 스토리지 클래스는 좋은 옵션이다. Nearline 스토리지는 한달에 한번 미만으로 파일 접근이 예상되는 경우를 위해 설계되었다. Coldline 스토리지는 1년에 한번이나 그보다 더 적게 접근이 예상되는 파일을 위해 설게되고, 가격이 책정되었다.
+
+Nearline 스토리지는 multiregional 위치에서 월평균 99.95% 가용성을 제공하고, regional 위치에서 99.9%의 가용성을 제공한다. nearline을 위한 SLA는 multiregional 위치에서 99.9%이고, regional 위치에서 99.0%이다. 낮은 SLA는 $0.10/GB/month으로 비용이 크게 절감된다. 비용을 절약하기 위해 regional과 multiregional을 nearline으로 이동하기 전에, 구글은 nearline과 coldline 스토리지에 데이터 조회 요금을 추가해야 한다. nearline 스토리지의 조회 비용은 $0.01/GB이다. 또한, nearline 스토리지를 위해 최소 30일의 저장 기간이 있다.
+
+Coldline 스토리지는 multiregional 위치에서 월 평균 99.95% 가용성과 regional 위치에서 99.9% 가용성을 갖는다. SLA는 multiregional 위치에서 99.9%이고 regional 위치에는 99.0%이다. Coldline은 $0.07/GB/month로 기가바이트당 가장 적은 비용이다. 기억해야할 것으로, 이 것은 오직 스토리지 비용이다. nearline 스토리지처럼, coldline 스토리지도 액세스 비용이 부과된다. 구글은 coldline 스토리지를 1년에 한 번 미만으로 접근한다고 예상하고, 최소 90일 이상 스토리지를 보유한다. coldline 스토리지의 조회 비용은 $0.05/GB이다.
+
+현재 비용보다 상대적인 비용 관계를 이해하는 것이 더 중요하다. 비용을 변할 수 있다. 하지만 다른 등급의 스토리지과 상대적으로 각 등급의 비용은 동일하게 유지될 가능성이 높다. 다양한 스토리지 유형을 위한 기능, 비용, 사례의 요익은 표 11.1을 확인하면 된다.
+
+**그림 11.1** 스토리지 서비스 - 기능 요약
+
+| :: | Regional | Multiregional | Nearline | Coldline |
+|---|---|---|---|---|
+| Features | 다수의 zone에 복사된 Object Storage | 다수의 region에 복사된 Object Storage | 한 달에 한번미만 접근하는 Object Storage | 1년에 한 번 미만 접근하는 Object Storage |
+| Storage 비용 | $0.20/GB/month | $0.26/GB/month | $0.10/GB/month | $0.07/GB/month |
+| 액세스 비용 | | | $0.01/GB | $0.05/GB |
+| 사용 사례 | 어플리케이션간 공유되는 Object Storage | 공유된 Object를 글로벌 액세스 | 데이터 레이크, 백업의 오래된 데이터 | 문서 보유, 규정 준수 |
+|---|---|---|---|---|
+
+### Versioning과 Object Lifecycle 관리
+
+Cloud Storage에서 버킷은 Object가 변경될 때 object의 버전을 유지하는데 설정될 수 있다. 버전 관리가 버킷에 활성화되었을 때, object의 복사본은 object가 덮어쓰여지거나 삭제될 때마다 보관된다. object의 최신 버전은 live 버전으로 알려졌다. 버전관리는 object의 변경 이력을 유지해야 하거나 object를 실수로 삭제되는 위험을 완화할 때 유용하다.
+
+또한 Cloud Storage는 자동적으로 object의 스토리지 등급을 변경하거나 특정 기간 뒤에 object를 삭제하는 lifecycle 관리 정책을 제공한다. 때때로 configuration이라고 불리는 lifecycle 정책은 규칙의 집합이다. 규칙은 condition과 action을 포함한다. condition이 true면, action은 실행된다. Lifecycle 관리 정책은 버킷에 적용되고, 버킷의 모든 object에 영향을 미친다.
+
+Conditions는 종종 연대(age)를 기반으로 한다. object가 특정 age에 도달하면, 삭제되거나 더 적은 비용의 스토리지 등급으로 이동될 수 있다. age 이외에도, condiftion은 버전의 수, 버전이 live인지 아닌지, object가 특정 날짜 이전에 생성됐는지, object가 특정 스토리지 등급에 있는지를 확인할 수 있다. 
+
+object를 삭제하거나 object의 스토리지 등급을 변경할 수 있다. 버전이 있는 object과 없는 object 모두 삭제될 수 있다. 파일의 live 버전이 삭제되면, 실제로 삭제되지 않고 object가 보관된다. object의 보관된 버전이 삭제되면, object는 영구적으로 삭제된다.
+
+또한, lifecycle 관리를 사용하여 object의 스토리지 등급을 변경할 수 있다. 할당할 수 있는 등급에는 제한조건이 있다. Multiregional과 regional 스토리지 object는 nearline이나 coldline으로 변경될 수 있다. Nearline은 오직 coldline으로만 변경될 수 있다.
+
+#### Cloud Storage 설정
+
+콘솔을 사용하여 Cloud Storage의 버킷을 생성할 수 있다. 메인 메뉴에서 Storage를 열고, Create Bucket을 선택한다. 그림 11.3과 유사한 양식이 표시될 것이다.
+
+![11.3](./img/ch11/11.3.png)
+
+**그림 11.3** 콘솔에서 스토리지 버킷 생성하는 양식. 고급 옵션이 표시된다.
+
+버킷을 생성할 때, 버킷 이름, 스토리지 등급을 포함한 몇몇 기본 정보를 제공해야 한다. 선택적으로 label 추가와 암호화를 위한 Google-managed keys나 customer-managed keys 중 하나를 선택할 수 있다. 파일 변경하거나 특정 시간 전에 파일을 삭제하는 것을 막는 정책을 설정할 수 있다.
+
+버킷이 생성되면 lifecycle 정책을 정의한다. 콘솔에서 Storage 메뉴로부터 Browse 옵션을 선택하면 그림 11.4 같은 화면이 표시된다.
+
+![11.4](./img/ch11/11.4.png)
+
+**그림 11.4** 버킷의 리스트는 lifecycle 정책을 정의하거나 수정하는 링크를 포함한다.
+
+lifecycle 열은 lifecycle 설정이 활성화됐는지 가리킨다. lifecycle을 생성하거나 수정할 버킷을 선택하고 Lifecycle 열에서 None이나 Enabled를 클릭한다. 그림 11.5와 같은 양식이 표시된다.
+
+![11.5](./img/ch11/11.5.png)
+
+**그림 11.5** lifecycle 정책을 생성할 때, 규칙을 정의하는 Add Rule option을 클릭한다.
+
+규칙을 추가할 때, object condition과 action을 지정해야 한다. Condition 옵션은 Age, Creation Data, Storage Class, Newer Versions, Live State가 있다. Live State는 object에 버전을 적용하고, live 또는 archived 버전의 object에 적용되는 condition을 설정할 수 있다. action은 nearline이나 coldline중 하나에 스토리지 등급으로 설정할 수 있다.
+
+정책의 예시를 살펴보자. 콘솔에서 Cloud Storage의 Browser 섹션에서 버킷의 리스트와 현재 lifecycle 정책을 확인할 수 있다.
+
+![11.6](./img/ch11/11.6.png)
+
+**그림 11.6** Cloud Storage Browser에서 버킷의 리스트
+
+버킷의 정책 상태를 클릭하면 lifecycle 규칙을 생성할 수 있다.
+
+![11.7](./img/ch11/11.7.png)
+
+**그림 11.7** 버킷에 lifecycle 정책을 추가하는 양식
+
+그림 11.8처럼 
