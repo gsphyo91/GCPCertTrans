@@ -184,4 +184,168 @@ lifecycle 열은 lifecycle 설정이 활성화됐는지 가리킨다. lifecycle�
 
 **그림 11.7** 버킷에 lifecycle 정책을 추가하는 양식
 
-그림 11.8처럼 
+Add Object Lifecycle Rule 양식은 그림 11.8처럼 표시된다. 이 양식에서, AGe, Storage Class와 같은 object condition을 지정할 수 있고, Set To Nearline과 같은 action을 지정할 수 있다.
+
+![11.8](./img/ch11/11.8.png)
+
+**그림 11.8** 버킷에 object lifecycle 규칙을 추가
+
+### Storage 솔루션을 기획할 때 Storage Type
+
+storage 솔루션을 기획할 때, 고려할 요소는 데이터에 접근하는데 요구되는 시간이다.
+
+Memorystore같은 캐시는 가장 빠른 접근 시간을 제공하지만, 사용할 수 있는 메모리 양이 제한된다. 캐시는 휘발성이다. 서버가 중지되면, 캐시의 컨텐츠는 손실된다. 캐시의 컨텐츠가 마지막으로 저장된 특정 시점으로 복구될 수 있도록 정기적으로 캐시의 내용을 persistent 스토리지에 저장해야 한다.
+
+Persistent 스토리지는 VM에 연결된 디스크같이 block 스토리지 디바이스로 사용된다. GCP는 SSD와 HDD 드라이브를 제공한다. SSD는 더 빠른 성능을 제공하지만, 비싸다. HDD는 파일 시스템에 저장되어야하는 대량의 데이터를 저장할 때 사용되지만, 데이터의 사용자는 가장 빠른 접근이 필요하지 않다.
+
+Object storage는 장기간동안 대량의 데이터를 저장하는데 사용된다. Cloud Storage는 regional과 multiregional 스토리지 등급이 있고, lifecycle 관리와 버전관리를 지원한다.
+
+기본적인 스토리지 시스템을 선택하는 것 이외에도, 데이터가 어떻게 저장되고 접근되는지 고려해야 한다. 이를 위해서 사용가능한 데이터 모델과 이를 사용하는 시기에 대해서 이해해야 한다.
+
+## 스토리지 데이터 모델
+
+GCP에서 사용할 수 있는 데이터 모델에는 3가지 카테고리가 있다: object, relational, NoSQL. 게다가, 4번째 카테로리로 Cloud Firestore와 Firebase처럼 모바일에 최적화된 제품을 다루지만, 이러한 데이터 저장소는 NoSQL 모델을 사용한다. 모바일을 지원하는 기능은 설명을 보증하는데 충분히 중요하다.
+
+### Object: Cloud Storage
+
+object storage 데이터 모델은 최소 단위의 object로 파일을 취급한다. 데이터의 블록을 읽거나 object의 일부분을 덮어쓰는데 object storage 명령을 사용할 수 없다. object를 업데이트해야 한다면, object를 서버에 복사하고, 변경을 적용하고, object storage 시스템에 업데이트된 버전을 다시 복사해야 한다.
+
+Object storage는 대용량 데이터를 저장해야 하고, object가 object 저장소에 있을 때 object 내의 데이터에 세분화된 접근이 필요하지 않을 때 사용된다. 이 데이터 모델은 저장되어야하지만, 더이상 적극적으로 분석되지 않는 데이터를 보관하고 머신러닝 학습 데이터, 오래된 IoT 데이터레 적합하다.
+
+### Relational: Cloud SQL, Cloud Spanner, BigQuery
+
+Relational 데이터베이스는 수 십년동안 기업을 위한 주요 데이터 저장소이다. Relational 데이터베이스는 빈번한 쿼리와 데이터 업데이트를 지원한다. 사용자에게 데이터의 일관된 조회가 중요할 때 사용된다. 예를 들어, 두 명의 사용자가 동시에 relational 테이블에서 데이터를 읽는 경우, 같은 데이터를 확인할 것이다. 이는 몇몇 NoSQL과 같이 데이터의 replicas간 불일치가 있을 수 있는 데이터베이스의 경우 항상 그런 것은 아니다.
+
+Cloud SQL과 Cloud Spanner와 같은 Relational 데이터베이스는 데이터베이스 트랜잭션을 지원한다. 트랜잭션은 전체적으로 성공이나 실패를 보장하는 일련의 작업이다. 일부 작업은 실행되고 다른 작업은 실행되지 않을 가능성이 있다. 예를 들어, 사용자가 제품을 구매할 때, 사용할 수 있는 제품 수는 인벤토리 테이블에서 감소된다. 그리고 레코드는 사용자가 구매한 제품 테이블에 추가된다. 트랜잭션의 경우, 데이터베이스가 인벤토리를 업데이트한 후, customer-purchased prodects 테이블에 업데이트하기 전에 실패한 경우, 데이터베이스는 데이터베이스를 재시작할 때 부분적으로 실행된 트랜잭션을 롤백할 것이다.
+
+Cloud SQL과 Cloud Spanner는 데이터가 구조화되고, 관계형 데이터베이스로 모델링 되었을 때 사용된다. Cloud SQL은 MySQL과 PostgreSQL 데이터베이스를 제공하는 관리형 데이터베이스 서비스이다. 즉, Cloud SQL은 클러스터에 추가적인 서버를 추가하는 수평적 확장이 필요하징 않을 때, 데이터베이스를 사용한다. 즉, Cloud SQL 데이터베이스는 실행 중인 서버에 더 많은 메모리와 CPU를 갖도록 수직적으로 확장된다. Cloud Spanner는 극단적으로 대규모의 관계형 데이터를 갖거나 모든 서버에 일관성과 무결성을 보장하도록 글로벌로 분리해야하는 데이터를 갖을 때 사용된다. 
+
+큰 기업은 글로벌 공급망과 금융 서비스 어플리케이션 같은 어플리케이션을 위해 Cloud Spanner를 종종 사용한다. 반면, Cloud SQL은 웹 어플리케이션, business intelligence, e-커머스 어플리케이션을 위해 종종 사용된다.
+
+BigQuery는 데이터 웨어하우스와 분석 어플리케이션을 위해 설계된 서비스이다. BigQuery는 페타바이트급 데이터를 저장하도록 설계되었다. BigQuery는 대량의 행과 열 데이터로 작업하고, e-커머스나 웹 어플리케이션에 상호작용을 지원하는 트랜잭션 지향 어플리케이션에 적합하지 않다.
+
+#### Cloud SQL 설정
+
+콘솔 메인 메뉴에서 Cloud SQL을 열고 Create Instance를 선택해 Cloud SQL 인스턴스를 생성할 수 있다. 그림 11.9처럼 MySQL이나 PostgreSQL 인스턴스 중 하나를 선택할 수 있다.
+
+![11.9](./img/ch11/11.9.png)
+
+**그림 11.9** Cloud SQL은 MySQL과 PostgreSQL 인스턴스를 제공한다.
+
+PostgreSQL을 선택하면 설정 양식이 표시된다. MySQL을 선택하면 MySQL 인스턴스의 First Generation이나 Second Generation 중 하나를 선택해야 한다. (그림 11.10) MySQL의 오래된 버전을 사용해야하지 않는다면, Second Generation 인스턴스가 추천된다. MySQL 2nd generation은 더 좋은 용량과 선택적으로 high availability 설정, MySQL 5.7 지원, 많은 경우 더 낮은 비용을 제공한다.
+
+![11.10](./img/ch11/11.10.png)
+
+**그림 11.10** MySQL 인스턴스는 1st와 2nd generation을 사용할 수 있다.
+
+MySQL 인스턴스를 설정하기 위해, 이름, root 패스워드, region, zone을 지정해야 한다. 설정 옵션이 다음을 포함한다.
+* MySQL 버전
+* Connectivity, 공인이나 사설 IP 주소를 사용할지 지정할 수 있다.
+* Machine Type, 기본 값은 1 vCPU, 3.75GB 메모리를 갖는 db-n1-standard-1이다.
+* Automatic backups
+* Failover replicas
+* Database flags. MySQL을 지정하고, read-only flag와 쿼리 캐시 사이즈를 설정하는 기능을 포함한다.
+* Setting a maintenance time window
+* Labels
+
+그림 11.11은 MySQL 2nd generation을 위한 설정 양식을 보여주고, 그림 11.12는 PostgreSQL 설정 양식을 보여준다.
+
+![11.11](./img/ch11/11.11.png)
+
+**그림 11.11** MySQL 2nd generation 인스턴스를 위한 설정 양식
+
+![11.12](./img/ch11/11.12.png)
+
+**그림 11.12** PostgreSQL 인스턴스를 위한 설정 양식
+
+#### Cloud Spanner 설정
+
+트랜잭션을 지원하는 글로벌, 일관된 데이터베이스를 생성해야 한다면, Cloud Spanner를 고려해야 한다. Spanner의 고급 특성을 고려할 때, Spanner의 설정은 놀랍게도 간단하다. 콘솔에서 Cloud Spanner를 열고 Create Instance를 선택하면 그림 11.13같은 양식이 표시된다.
+
+![11.13](./img/ch11/11.13.png)
+
+**그림 11.13** Cloud Console에서의 Cloud Spanner 설정 양식
+
+인스턴스 이름, ID, 노드의 수를 제공해야 한다.
+
+또한, 노드와 데이터가 위치할 장소를 결정할 regional이나 multiregional 설정 중 하나를 선택해야 한다. 이것은 비용과 replication 스토리지 위치를 결정한다. regional을 선택하면 us-west1, asis-east1, europe-north1과 같이 사용할 수 있는 region의 리스트 중에서 선택한다.
+
+Cloud Spanner는 Cloud SQL이나 다른 데이터베이스 옵션보다 상당히 많이 비싸다는 것을 알아야 한다. us-central1에 위치한 단일 regional 노드는 시간당 $0.90이다. 반면에, nam3(북미)에 있는 단일 multiregional node는 시간당 $3이다. nam-eur-asia1(북미, 유렵, 아시아)의 단일 multiregional 노드는 시간당 $9이다.
+
+#### BigQuery 설정
+
+BigQuery는 스토리지와 쿼리, 통계, 머신러닝 분석 툴을 제공하는 관리형 분석 서비스이다. BigQuery는 인스턴스를 설정할 필요가 없다. 대신, 콘솔 메뉴에서 BigQuery를 열면 그림 11.14와 같은 양식을 확인할 수 있다.
+
+![11.14](./img/ch11/11.14.png)
+
+**그림 11.14** 데이터를 생성하고 쿼리하기 위한 BigQuery 사용자 인터페이스
+
+BigQuery를 사용하기 위한 첫번째 업무는 데이터를 보유할 데이터 셋을 생성하는 것이다. Create Dataset을 클릭하면 그림 11.15처럼 양식을 확인할 수 있다.
+
+![11.15](./img/ch11/11.15.png)
+
+**그림 11.15** BigQuery에서 dataset을 생성하는 양식
+
+data set을 생성할 때, 이름을 지정해야 하고, 저장할 region을 선택해야 한다. 모든 regions이 BigQuery를 지원하지 않는다. 현재 US, Europe, Asia 전체적으로 9개의 지역에서 선택해야 한다.
+
+챕터 12에서는 BigQuery와 GCP 데이터베이스에서 데이터를 가져오고 쿼리하는 방법을 논의한다.
+
+### NoSQL: Datastore, Cloud Firestore, Bigtable
+
+NoSQL 데이터베이스는 관계형 모델을 사용하지 않고, 고정된 구조나 스키마를 요구하지 않는다. 데이터베이스 스키마는 어떤 종류의 속성이 저장될 수 있는지 정의한다. 고정된 스키마가 요구되지 않으면, 개발자는 다양한 레코드에 다양한 속성을 저장할 수 있다. GCP는 3가지 NoSQL 옵션을 갖고 있다.
+* Cloud Datastore
+* Cloud Firestore
+* Cloud Bigtable
+
+#### Datastore 기능
+
+Datastore는 문서 데이터베이스이다. 스프레드시트나 텍스트 파일같음 문서를 저장하는데 사용된다는 의미는 아니다. 하지만, 데이터베이스의 데이터는 document라고 불리는 구조로 구성된다. Documents는 key-value 쌍의 집합으로 만들어진다. 아래는 간단한 예시이다.
+
+~~~json
+{
+    book : "ACE Exam Guide",
+    Chapter: 11,
+    length: 20,
+    topic: "storage"
+}
+~~~
+
+이 예시는 이 책에서 챕터의 특성을 설명한다. 이 예시에서는 4개의 key 또는 properties가 있다: book, chapter, length, storage. 이 key-value 쌍의 집합은 Datastore에서 엔티티라고 부른다. 엔티티는 공통적인 properties를 갖지만, Datastore는 schemaless 데이터베이스여서 모든 엔티티가 동일한 properties를 요구하지 않는다. 다음은 예시이다.
+
+~~~json
+{
+    book: "ACE Exam Guide",
+    Chapter: 11,
+    topic: "computing",
+    number_of_figures: 8
+}
+~~~
+
+Datastore는 관리형 데이터베이스이다. 그래서 서비스의 사용자는 서버를 관리하거나 데이터베이스 소프트웨어를 설치할 필요가 없다. Datastore는 자동적으로 데이터를 파티셔닝하고, 수요에 따라서 스케일을 업하거나 다운한다.
+
+Datastore는 비분석적, 비관계형 스토리지 요구를 위해 사용된다. 다양한 특정이나 properties를 갖는 많은 제품 유형을 갖는 제품 카탈로그에 좋은 옵션이다. 또한, 어플리케이션에 연관된 사용자 프로필을 저장하는데 좋은 선택이다.
+
+Datastore는 트랜잭션과 쿼리 성능을 증진시키는 인덱스를 지원하는 것 같이 관계형 데이터베이스와 공통적으로 몇몇 기능을 갖고 있다. 주요 차이점은 Datastore는 고정된 스키마나 구조를 요구하지 않고, 테이블 조인이나 sum과 count같은 computing aggregates같은 관계형 동작을 지원하지 않는다.
+
+#### Datastore 설정
+
+BigQuery처럼 Datastore는 노드 설정을 지정하지 않는 관리형 데이터베이스 서비스이다. 대신, 콘솔에서 데이터베이스에 엔티티를 추가할 수 있다. 그림 11.16은 Cloud Console에서 Datastore를 열었을 때 나타나는 초기 야식을 보여준다.
+
+![11.16](./img/ch11/11.16.png)
+
+**그림 11.16** 데이터를 생성하고 쿼리할 수 있는 Datastore의 사용자 인터페이스
+
+Create Entity를 선택하면 양식이 표시되고 document 데이터 구조의 데이터를 추가할 수 있다.
+
+![11.17](./img/ch11/11.17.png)
+
+**그림 11.17** Datastore에 엔티티 추가
+
+엔티티를 추가할 때, 관계형 데이터베이스에서 스키마 그룹 테이블같이 엔티티를 그룹화하는 방법인 namespace를 지정한다. 관계형 데이터베이스에서 테이블과 유사항 kind를 지정해야 한다. 각 인스턴스는 자동으로 생성된 숫자 key나 custom-defined key가 될 수 있는 Key가 필요하다.
+
+다음, names, types, values를 갖는 하나 이상의 properties를 추가한다. Types은 strine, data 및 time, Boolean, array같은 다른 구조화 타입을 포함한다.
+
+Datastore에서 데이터를 가져오고 쿼리하는 추가 상세 정보는 챕터 12에 있다.
+
+#### Cloud Firestore 기능
+
