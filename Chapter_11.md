@@ -134,7 +134,6 @@ Coldline 스토리지는 multiregional 위치에서 월 평균 99.95% 가용성�
 | Storage 비용 | $0.20/GB/month | $0.26/GB/month | $0.10/GB/month | $0.07/GB/month |
 | 액세스 비용 | | | $0.01/GB | $0.05/GB |
 | 사용 사례 | 어플리케이션간 공유되는 Object Storage | 공유된 Object를 글로벌 액세스 | 데이터 레이크, 백업의 오래된 데이터 | 문서 보유, 규정 준수 |
-|---|---|---|---|---|
 
 ### Versioning과 Object Lifecycle 관리
 
