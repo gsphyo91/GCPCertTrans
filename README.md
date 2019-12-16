@@ -2,6 +2,7 @@
 
 ## 목차
 
+[책 소개](Main.md)  
 [Chapter 1 Overview of Google Cloud Platform](Chapter_1.md)  
 [Chapter 2 Google Cloud Computing Services](Chapter_2.md)  
 [Chapter 3 Projects, Service Accounts, and Billing](Chapter_3.md)  
