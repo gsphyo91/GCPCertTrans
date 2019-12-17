@@ -86,7 +86,7 @@ gcloud compute networks subnet create ace-exam-vpc-subnet1 --network=ace-exam-vp
 >> 192.168.0.0  
 >
 > CIDR 표기법은 슬래쉬(/)와 네트워크 마스트에 할당할 IP주소의 비트 수를 나타내는 숫자를 추가하여 주소 블록 내에 있는 주소와 그렇지 않은 주소를 결정한다.  
-> 예를 들어, 192.186.0.0/16은 IP주소의 32비트 중 16비트가 네트워크를 지정하는 데 사용되고, 16비트는 호스트 주소를 지정하는데 사용된다는 것을 의미한다. 16비트로 2^16^ 혹은 65,536 주소를 생성할 수 있다.  
+> 예를 들어, 192.186.0.0/16은 IP주소의 32비트 중 16비트가 네트워크를 지정하는 데 사용되고, 16비트는 호스트 주소를 지정하는데 사용된다는 것을 의미한다. 16비트로 2^16 혹은 65,536 주소를 생성할 수 있다.  
 > CIDR 블록 172.16.0.0/12는 12비트는 네트워크를 지정하는데 사용되고, 20비트는 호스트 어드레스를 지정하는데 사용된다. 20비트로 1,048,576 주소까지 생성할 수 있다. 일반적으로, 슬래쉬 뒤 숫자가 낮을 수록 더 많은 주소를 사용할 수 있다. [www.subnet-calculator.com/cidr.php](www.subnet-calculator.com/cidr.php)에 하나와 같이 CIDR 계산기를 사용하여 CIDR 블록 옵션을 실험해볼 수 있다.
 
 ### gcloud를 사용하여 공유 VPC 생성
@@ -177,7 +177,7 @@ Management, Security, Disk, Networking, Sole Tenency를 클릭하면 추가 양�
 
 **그림 14.7** 네트워킹 설정 양식
 
-![14.8](./img/ch/14/14.8.png)
+![14.8](./img/ch14/14.8.png)
 
 **그림 14.8** 커스텀 네트워크 인터페이스를 추가하는 양식
 
@@ -302,3 +302,68 @@ Create VPN Connection을 클릭하면 그림 14.15와 같은 양식이 표시된
 **그림 14.16** static IP주소 생성
 
 Tunnels 섹션에서, VPN의 다른 네트워크 엔드포인트를 설정한다. 자체 네트워크의 VPN 게이트웨이의 이름, 설명, IP주소를 지정한다. 사용할 Internet Key Exchange(IKE)의 버전을 지정할 수 있다. Generate를 생성하면, 브라우저에서 생성할 수 있는 secret 문자열인 공유 secret을 지정해야 한다. VPN 엔드포인트를 구성할 때 이 공유 secret가 필요하다.
+
+Routing Options 섹션에서, Dynamic, Route-Based, Policy-Based Routing을 선택할 수 있다.
+
+Dynamic 라우팅은 네트워크에서 경로를 학습하는 BGP 프로토콜을 사용한다. cloud router를 선택하거나 생성해야 한다. 생성되어있지 않다면, Cloud Router 파라미터의 드롭다운 메뉴에서 Create Cloud Router를 선택할 수 있다. 그림 14.17과 같은 양식이 표시될 것이다.
+
+![14.17](./img/ch14/14.17.png)
+
+**그림 14.17** cloud router 생성
+
+이 양식에서 이름과 설명을 입력한다. 또한 BGP 프로토콜에서 사용되는 private Autonomous System Number(ASN)을 지정해야 한다. ASN은 64512-65534이거나 4000000000–4294967294 범위의 숫자이다. 각 cloud router는 유니크한 ASN이 필요하다.
+
+route-based 라우팅을 선택하면, 원격 네트워크의 IP 범위를 입력해야 한다. policy-based 라우팅을 선택하면, 원격 IP 범위, VPN을 사용하는 로컬 서브네트워크, 로컬 IP 범위를 입력해야 한다.
+
+### gcloud를 사용하여 VPN 생성
+
+커맨드라인에서 VPN을 생성하기 위해 다음 명령을 사용할 수 있다.
+* `gcloud compute target-vpn-gateways`
+* `gcloud compute forwarding-rule`
+* `gcloud compute vpn-tunnels`
+
+`gcloud compute target-vpn-gateways` 명령의 포맷은 다음과 같다.
+
+```bash
+gcloud compute vpn-tunnels create NAME --peer-address=PEER_ADDRESS --shared-secret=SHARED_SECRET --target-vpn-gateway=TARGET_VPN_GATEWAY
+```
+
+NAME은 tunnel의 이름이다. PEER_ADDRESS는 원격 tunnel 엔드포인트의 IP~v~4 주소이다. SHARED_SECRET은 secret 문자열이다. TARGET_VPN_GATEWAY는 타겟 VPN 게이트웨이 IP에 대한 참조이다.
+
+`gcloud compute forwarding-rule`의 포맷은 다음과 같다.
+
+```bash
+gcloud compute forwarding-rules create NAME --TARGET_SPECIFICATION=VPN_GATEWAY
+```
+
+NAME은 forwarding rule의 이름이다. TARGET_SPECIFICATION은 `target-instance`, `target-http-proxy`, `target-vpn-gateway`를 포함한 타겟 타입 중 하나이다. 추가 상세 정보는 [https://cloud.google.com/sdk/gcloud/reference/compute/forwarding-rules/create](https://cloud.google.com/sdk/gcloud/reference/compute/forwarding-rules/create)의 문서를 확인한다.
+
+`gcloud compute vpn-tunnels`의 포맷은 다음과 같다.
+
+```bash
+gcloud compute vpn-tunnels create NAME --peer-address=PEER_ADDRESS --shared-secret=SHARED_SECRET --target-vpn-gateway=TARGET_VPN_GATEWAY
+```
+
+NAME은 VPN tunnel의 이름이다. PEER_ADDRESS는 원격 tunnel의 IPv4 주소이다. SHARED_SECRET은 secret 문자열이고, TARGET_VPN_GATEWAY는 VPN 게이트웨이에 대한 참조이다.
+
+## Summary
+
+이 챕터는 VPC와 VPN을 생성하는 방법을 확인했다. VPC는 GCP 리소스를 연결하기 위해 구글 클라우드에서 네트워크를 정의한다. GCP의 VPN은 GCP 네트워크와 자체 내부 네트워크를 연결하는데 사용된다. VPC, shared VPC, subnets을 생성하는 방법을 논의했다. CIDR 표기법의 설명도 있다. 또한, 커스텀 네트워크 연결과 함께 VM을 설정하는 방법을 배웠다. 다음으로 방화벽 규칙과 규칙을 생성하는 방법을 배웠다. 이 챕터는 VPN을 생성하는데 필요한 단계를 설명하고 마무리했다.
+
+## 시험 요소
+
+**VPC는 클라우드에서 논리적 데이터 센터이고, VPN은 VPC 서브넷과 자체 내부 네트워크간 보안 연결이다.** 클라우드 리소스는 VPC내에 있다. VPC는 서브넷과 서브넷간 트래픽을 라우팅하기 위한 라우팅 규칙이 있다. 방화벽 규칙을 사용하여 트래픽의 흐름을 제어한다.
+
+**VPC는 auto 모드에 있을 때, 각 region에 서브넷을 생성한다.** 추가적으로 서브넷을 생성할 수 있다. 각 서브넷은 IP 주소의 범위를 갖고 있다. 방화벽 규칙은 네트워크라고도 하는 서브넷에 적용된다. 라우터는 regional 경로나 global 경로만 학습하도록 설정될 수 있다.
+
+**CIDR 표기법을 읽고 계산하는 방법을 이해해야한다.** CIDR 표기법은 서브넷 마스크와 IP 주소 범위에서 사용할수 있는 IP 주소의 크기를 표현한다. CIDR 블록에서 슬래쉬 뒤에 있는 숫자인 서브넷 마스크 사이즈가 작을수록, 더 많은 IP 주소를 사용할 수 있다. CIDR 주소의 포맷은 IP 주소 위에 슬래쉬가 있고, 그 뒤에 서브넷 마스크의 사이즈가 있다. 예를 들어, 10.0.0.0/8
+
+**VPC는 `gcloud` 명령을 사용하여 생성될 수 있다.** VPC는 `gcloud compute networks create`로 생성될 수 있다. shared VPC는 `gcloud compute shared-vpc`를 사용하여 생성될 수 있다. Shared VPC는 조직이나 폴더 수준에서 공유된다. Shared VPC Admin roles을 활성화하는 조직이나 폴더 수준에서 IAM 정책을 할당해야 한다. VPC peering은 내부 프로젝트간 연결을 위해 사용된다.
+
+**VM에 네트워크 인터페이스를 추가할 수 있다.** 특정 서브넷을 사용하여 인터페이스를 설정할 수 있다. 임시 혹은 static IP주소를 할당할 수 있다.
+
+**방화벽 규칙은 네트워크 트래픽의 흐름을 제어한다.** 방화벽 규칙은 direction, priority, action, target, source/destination, protocols, port, enforcement status로 구성된다. 방화벽 규칙은 서브넷에 적용된다.
+
+**Cloud Console로 VPN을 생성하는 방법을 알아야 한다.** VPN은 클라우드 리소스와 자체 내부 네트워크간 트래픽을 라우팅한다. VPN은 gateway, forwarding ruls, tunnels을 포함한다.
+
+[맨 위로](#chapter-14-cloud-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-vpcvirtual-private-cloud%ec%99%80-vpnvirtual-private-networks)
