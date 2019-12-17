@@ -17,3 +17,7 @@
 [Chapter 12 Deploying Storage in Google Cloud Platform](Chapter_12.md)  
 [Chapter 13 Loading Data into Storage](Chapter_13.md)  
 [Chapter 14 Networking in the Cloud: Virtual Private Clouds and Virtual Private Networks](Chapter_14.md)  
+[Chapter 15 Networking in the Cloud: DNS, Load Balancing, IP Addressing](Chapter_15.md)  
+[Chapter 16 Deploying Applications with Cloud Launcher and Deployment Manager](Chapter_16.md)  
+Chapter 17 Configuring Access and Security  
+Chapter 18 Monitoring, Logging, and Cost Estimating
