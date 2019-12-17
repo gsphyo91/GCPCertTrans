@@ -35,6 +35,6 @@
 
 ### [Chapter 16 Deploying Applications with Cloud Launcher and Deployment Manager](Chapter_16.md)  
 
-### Chapter 17 Configuring Access and Security  
+### [Chapter 17 Configuring Access and Security](Chapter_17.md)
 
 ### Chapter 18 Monitoring, Logging, and Cost Estimating
