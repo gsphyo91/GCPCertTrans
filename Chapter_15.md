@@ -211,3 +211,73 @@ gcloud compute target-pools add-instances ace-exam-pool --instances ig1, ig2
 
 ## IP 주소 관리
 
+Associate Cloud Engineer certification을 위한 시험 주제는 구체적으로 2개의 IP 주소를 식별한다. - 관련된 주제: CIDR 블록 확장, IP주소 선점
+
+**Notice**
+
+> 임시(ephemeral)과 고정(static) IP 주소의 차이를 이해해야 한다. statis IP주소는 해제될 때까지 프로젝트에 할당된다. 웹사이트같은 서비스에 고정된 IP 주소가 필요할 경우 사용된다. Ephemeral IP 주소는 동일한 프로젝트의 다른 VM에만 접근하는 어플리케이션을 실행하는 VM에서와 같이 리소스가 IP주소를 사용하는 한에만 존재한다. VM이 삭제되거나 중지되면, ephemeral 주소는 해제된다.
+
+### CIDR 블록 확장
+
+CIDR 블록은 서브넷에서 사용할 수 있는 IP 주소의 범위를 정의한다. 예를 들어, 사용할 수 있는 주소의 수를 늘려야할 경우, 서브넷에서 실행하는 클러스터의 사이즈를 확장해야하는 경우, `gcloud compute networks subnets expand-ip-range` 명령을 사용할 수 있다. 서브넷의 이름과 신규 prefix 길이를 받는다. prefix 길이는 네트워크 마스크의 사이즈를 결정한다.
+
+예를 들어, `ace-exam-subnet1` 주소의 수를 65,536으로 증가하기 위해, prefix 길이를 16으로 설정한다.
+
+```bash
+gcloud compute networks subnets expand-ip-range ace-exam-subnet1 --prefix-length 16
+```
+
+이 명령을 실행하기 전에 prefix의 길이가 16보다 크다고 가정한다. `expand-ip-rnage` 명령은 주소의 수를 증가하는데만 사용된다. 감소할 순 없다. 더 적은 주소의 수르 갖는 서브넷을 re-create 해야한다.
+
+### IP 주소 선점
+
+static external IP 주소는 Cloud Console이나 커맨드 라인을 사용하여 선점할 수 있다. Cloud Console을 사용하여 static IP 주소를 선점하기 위해, 콘솔의 Virtual Private Cloud(VPC) 섹션을 열고, External IP Address를 선택한다.
+
+그림 15.17과 같은 양식이 표시된다.
+
+![15.17](./img/ch15/15.17.png)
+
+**그림 15.17** 선점된 static IP주소 리스트
+
+Reserve Static Address를 클릭하면 IP 주소를 선점하기위한 양식이 표시된다. (그림 15.18)
+
+IP 주소를 선점할 때, 이름과 optional로 설명을 입력해야 한다. 일부 데이터 전송에는 인터넷을 사용하는 저렴한 Standard Service tier를 네트워킹에 사용할 수 있다. Premium tier는 구글의 글로벌 네트워크에서 모든 트래픽을 라우팅한다. 또한, 주소가 IPv4인지 IPv6인지, regional인지 global인지 결정해야 한다. 선점 프로세스의 일부로 static IP 주소를 리소스에 연결하거나 연결을 해제할 수 있다.
+
+선점된 주소는 사용하지 않을 때 VM에 연결되고, 해제될때까지 연결된다. VM이 중지될 때 자동적으로 해제되는 ephemeral 주소와 다르다.
+
+커맨드라인을 사용하여 IP주소를 선점하기 위해, `gcloud compute addresses create`를 사용한다. 예를 들어, `us-west2` region에 Premium tier를 사용하는 static IP 주소를 생성하기 위해 다음 명령을 사용한다.
+
+```bash
+gcloud compute addresses create ace-exam-reserved-static1 --region=us-west2 --network-tier=PREMIUM
+```
+
+![15.18](./img/ch15/15.18.png)
+
+**그림 15.18** static IP 주소 선점
+
+## Summary
+
+Associate Cloud Engineer 시험은 Cloud DNS, 로드 밸런싱, IP 주소 관리의 지식을 테스트한다. Cloud DNS는 도메인 주소에 IP 주소를 매핑하기 위한 공식적인 네임 서비스이다. Public이나 private DNS zone을 설정할 수 있다. 또한, 로드밸런싱과 로드밸런서의 다양한 타입에 친숙해야 한다. 일부 로드 밸런서는 regional이고 일부는 global이다. 일부는 오직 internal만 사용하고, 다른 것들은 트래픽의 external source를 지원한다. 또한 챕터는 서브넷에서 사용할 수 있는 주소의 수를 확장하는 방법을 확인했고, IP 주소를 선점하는 방법에 대해 논의했다.
+
+## 시험 요소
+
+**Cloud DNS는 도메인 이름과 IP 주소를 매핑하는데 사용된다.** 인터넷에서 오는 쿼리를 지원하려면 public DNS zone을 사용한다. 프로젝트의 리소스에서 오는 쿼리를 수용하려면 private DNS zone을 사용한다.
+
+**example.com 같은 DNS 엔트리는 관련된 다양한 레코드를 갖을 수 있다.** A 레코드는 도메인 이름과 IP 주소를 매핑하는 DNS resolver의 주소를 지정한다. CNAME 레코드는 도메인의 정식 이름을 지정한다.
+
+**로드밸런서가 어떻게 구별되는지 알아야 한다.** 로드밸런서는 global vs regional, externsl vs internal, 지원되는 프로토콜을 기반으로 구별된다. Global 밸런서는 region 전체적으로 로드가 분산된다. 반면 regional 로드밸런서는 region 내에서 동작한다. Internal 로드밸런서는 external source가 아닌 GCP 내에서 오는 트래픽만 분산한다. 일부 로드밸런서는 HTTP와 SSL 로드밸런서같이 프로토콜을 지정한다.
+
+**로드밸런서의 5가지 타입과 사용해야하는 시기를 알아야 한다.** 5가지는 HTTP(S), SSL Proxy, TCP Proxy, Internal TCP/UDP, Network TCP/UDP이다.
+* HTTP(S)는 HTTP와 HTTPS 로드를 분산한다.
+* SSL Proxy는 SSL/TLS 연결을 종료한다.
+* TCP Proxy는 TCP 세션을 종료한다.
+* Internal TCP/UDP는 internal VM을 호스팅하는 private 네트워크의 TCP/UDP 트래픽을 분산한다.
+* Network TCP/UDP 로드밸런싱은 IP 프로토콜, 주소, 포트 기반이다.
+
+**로드밸런서를 구성하는 것은 프론트엔드와 백엔드를 구성해야 한다.** 네트워크 로드밸런서는 target pool의 VM으로 트래픽을 라우팅하는 forwarding 규칙에 의해 구성될 수 있다.
+
+**서브넷의 IP 주소 수를 증가시키는 방법을 알아야 한다.** 서브넷의 IP 주소를 증가하기 위해 `gcloud compute network subnets expand-ip-range` 명령을 사용한다. 주소의 수는 증가만 할 수 있다. `expand-ip-range` 명령은 주소의 수를 감소시키는데 사용될 수 없다.
+
+**콘솔과 `gcloud compute address create` 명령을 사용하여 IP 주소를 선점하는 방법을 알아야 한다.** 선점된 IP 주소는 리소스에 연결되지 않아도 프로젝트에서 계속 사용할 수 있다. Preminum과 Standard tier 네트워크 서비스의 차이를 알아야 한다.
+
+[맨 위로](#chapter-15-cloud-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-dns-%eb%a1%9c%eb%93%9c-%eb%b0%b8%eb%9f%b0%ec%8b%b1-ip%ec%a3%bc%ec%86%8c)
