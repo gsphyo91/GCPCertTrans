@@ -24,7 +24,7 @@ Cloud Console에서 IAM & Admin 섹션을 열어서 IAM 할당 계정을 조회�
 
 이 예시에서, dan@gcpcert.com 사용자는 3개의 roles을 갖고 있다: App Engine Admin, BigQuery Admin, Owner. App Engine Admin과 BigQuery Admin은 사전 정의된 IAM roles이다. Owner는 primitive role이다.
 
-![17.1](./img/ch17/17.1.png)
+![17.1](../img/ch17/17.1.png)
 
 **그림 17.1** member로 필터링된 수행관한 리스트
 
@@ -32,7 +32,7 @@ Primitive roles는 IAM전에 사용된다. 3가지 primitive roles이 있다: ow
 
 IAM roles는 수행 권한의 집합이다. 작업을 수행하는 데 필요한 권한만으로 ID를 제공하도록 맞춰져있다. role이 할당된 사용자의 리스트를 확인하기 위해서, IAM 양식에서 Roles 탭을 클릭한다. (그림 17.2)
 
-![17.2](./img/ch17/17.2.png)
+![17.2](../img/ch17/17.2.png)
 
 **그림 17.2** App Engine Admin과 Editor가 할당된 ID의 리스트
 
@@ -61,23 +61,23 @@ gcloud projects get-iam-policy ace-exam-project
 
 New Member 파라미터에 사용자나 그룹의 이름을 입력한다. Select A Role을 클릭하면 role을 추가할 수 있다. 다수의 role을 추가할 수 있다. Role 파라미터의 화살표를 클릭하면, 서비스의 리스트와 관련 role을 확인할 수 있다. 리스트에서 role을 선택할 수 있다. 그림 17.4는 BigQuery의 role을 보여주는 리스트의 예시이다.
 
-![17.3](./img/ch17/17.3.png)
+![17.3](../img/ch17/17.3.png)
 
 **그림 17.3** IAM에서 Add 옵션은 하나 이상의 role을 사용자나 그룹에 할당할 수 있는 곳이다.
 
-![17.4](./img/ch17/17.4.png)
+![17.4](../img/ch17/17.4.png)
 
 **그림 17.4** Role 파라미터의 드롭다운 메뉴는 서비스에 그룹화된 사용할 수 있는 role을 보며준다.
 
 역할을 할당할 때 부여되는 최소 단위의 권한을 알고 싶다면, 커맨드라인이나 콘솔에서 권한을 조회할 수 있다. 또한 `gcloud iam roles describe` 명령을 사용하여 role이 할당된 수행권한을 확인할 수 있다. 예를 들어, 그림 17.5는 App Engine Deployer role의 수행 권한 리스트를 보여준다.
 
-![17.5](./img/ch17/17.5.png)
+![17.5](../img/ch17/17.5.png)
 
 **그림 17.5** `gcloud iam roles describe` 명령을 사용하여 수행 권한 조회 예시
 
 또한 수행 권한을 확인하기 위해 Cloud Console을 사용할 수 있다. IAM & Admin 섹션을 열고 메뉴에서 Roles을 선택한다. role의 리스트가 표시된다. role 이름 옆에 체크박스를 클릭하면 오른쪽에 수행권한의 리스트가 표시된다. 그림 17.6은 App Engine Deployer를 보여준다.
 
-![17.6](./img/ch17/17.6.png)
+![17.6](../img/ch17/17.6.png)
 
 **그림 17.6** Cloud Console을 사용하여 App Engine Deployer를 위해 사용할 수 있는 수행 권한 리스트 예시
 
@@ -110,7 +110,7 @@ IAM role은 사전 정의된 role에 최소한의 권한을 할당하는 최소 
 
 Cloud Console에서 커스텀 role을 정의하기 위해, 콘솔의 IAM & Admin 섹션에서 Roles 옵션을 연다. 페이지 위쪽에 Create Role 링크를 클릭하면 그림 17.7과 같은 양식이 표시된다.
 
-![17.7](./img/ch17/17.7.png)
+![17.7](../img/ch17/17.7.png)
 
 **그림 17.7** Cloud Console에서 role 생성
 
@@ -120,11 +120,11 @@ Add Permissions를 클릭하면 permission의 리스트가 표시된다. 그림 
 
 리스트에 role의 모든 수행 권한이 포함하지만, 모든 수행 권한이 커스텀 role에서 사용할 수 있는 것은 아니다. 예를 들어, `appengine.runtimes.actAsAdmin`은 커스텀 role에서 사용할 수 없다. 수행 권한을 사용할 수 없을 때, 상태가 Not Supported로 표시된다. 사용할 수 있는 수행권한은 Supported로 표시된다. 이 예시에서 모든 수행권한은 사용할 수 있다. 수행 권한 옆에 체크박스를 클릭하면 커스텀 role에 포함된다. Add를 클릭하여 Create Role 양식으로 돌아가면, 수행권한 리스트에 선택한 권한이 포함된다. (그림 17.9)
 
-![17.8](./img/ch17/17.8.png)
+![17.8](../img/ch17/17.8.png)
 
 **그림 17.8** role로 필터링된 사용할 수 있는 수행권한 리스트
 
-![17.9](./img/ch17/17.9.png)
+![17.9](../img/ch17/17.9.png)
 
 **그림 17.9** 추가된 수행권한이 있는 Create Role 양식의 수행권한 섹션
 
@@ -168,13 +168,13 @@ Compute Engine 로그를 쓸 수 있는 scope는 다음과 같다.
 
 인스턴스에 scope를 설정하기 위해 Cloud Console에서 VM instance 페이지를 연다. 인스턴스가 실행 중이면 중지한다. Instance Detail 페이지에서 Edit 링크를 클릭한다. Edit 페이지 아래쪽에 Access Scopes 섹션을 확인할 수 있다. (그림 17.10)
 
-![17.10](./img/ch17/17.10.png)
+![17.10](../img/ch17/17.10.png)
 
 **그림 17.10** VM instance details edit 페이지에서 Access Scopes 섹션
 
 옵션은 Allow Default Access, Allow Full Access To All Cloud APIs, Set Access For Each API가 있다. Default 접근은 보통 충분하다. 무엇을 설정해야하는지 모르면, Allow Full Access를 선택할 수 있다. 하지만, 인스턴스가 무엇을 할 수 있는지 제한하기 위해 IAM role을 할당해야 한다. 개별적으로 scopes를 선택하려면, Set Access For Each API를 선택한다. 서비스와 scopes의 리스트가 표시된다. (그림 17.11)
 
-![17.11](./img/ch17/17.11.png)
+![17.11](../img/ch17/17.11.png)
 
 **그림 17.11** 개별적으로 구성될 수 있는 서비스와 scopes 리스트의 일부분
 
@@ -198,7 +198,7 @@ gcloud compute instances set-service-account ace-instance \
 
 VM 인스턴스에 서비스 계정을 할당할 수 있다. 첫번째, 콘솔의 IAM & Admin 섹션의 Service Account 섹션을 열어 서비스 계정을 생성한다. Create Service Account를 클릭하면 그림 17.12와 같은 양식이 표시된다.
 
-![17.12](./img/ch17/17.12.png)
+![17.12](../img/ch17/17.12.png)
 
 **그림 17.12** 콘솔에서 서비스 계정 생성
 
@@ -206,13 +206,13 @@ name, identifier, description을 입력한 후, Create를 클릭한다. 다음, 
 
 콘솔의 Compute Engine 섹션에서 VM Instance 페이지를 연다. VM Instance를 선택하고, Edit을 클릭한다. 인스턴스의 파라미터가 포함된 양식이 표시된다. 아래로 내려가면 Service Account로 표시된 파라미터가 있다. (그림 17.13)
 
-![17.13](./img/ch17/17.13.png)
+![17.13](../img/ch17/17.13.png)
 
 **그림 17.13** Service Account 파라미터를 보여주는 Edit Instance 페이지
 
 드롭다운 리스트에서 인스턴스에 할당할 서비그 계정을 선택한다. (그림 17.14)
 
-![17.14](./img/ch17/17.14.png)
+![17.14](../img/ch17/17.14.png)
 
 **그림 17.14** 인스턴스에 할당될 수 있는 서비스 계정 리스트
 
@@ -229,7 +229,7 @@ gcloud compute instances create [INSTANCE_NAME] --service-account [SERVICE_ACCOU
 
 감시 로그를 조회하기 위해, Cloud Console에서 Stackdriver Logging 페이지를 연다. 그림 17.15과 같은 리스트가 표시된다.
 
-![17.15](./img/ch17/17.15.png)
+![17.15](../img/ch17/17.15.png)
 
 **그림 17.15** Stackdriver Logging 페이지의 기본 리스트
 

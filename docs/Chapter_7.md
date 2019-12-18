@@ -85,25 +85,25 @@ Kubernetes 클러스터는 Cloud Shell이나 Cloud Shell이나 Cloud SDK가 설�
 
 Kubernetes Engine을 사용하기 위해, Kubernetes Engine API를 활성화해야 한다. API를 활성화하면, Cloud Console에서 Kubernetes Engine 페이지를 이동할 수 있다. 그림 7.1은 Overview 페이지의 예를 보여준다.
 
-![7.1](./img/ch07/7.1.png)
+![7.1](../img/ch07/7.1.png)
 
 **그림 7.1** Cloud Console의 Kubernets Engine 섹션의 Overview 페이지
 
 Kubernetes Engine을 처음 사용하면, credentials을 만들어야 한다. Overview 페이지 위쪽에 Create Credentials 버튼을 클릭해서 생성할 수 있다. 그림 7.2에서 보여지는 양식이 나타날 것이다. 사용할 API를 지정한 다음 credentials을 생성한다.
 
-![7.2](./img/ch07/7.2.png)
+![7.2](../img/ch07/7.2.png)
 
 **그림 7.2** Kubernetes Engine을 사용하는 데 필요한 credential을 생성하기 위한 양식
 
 credentials을 생성한 후, 클러스커를 생성할 수 있다. 그림 7.3은 클러스터 생성 단계의 첫번째 단계를 보여준다.
 
-![7.3](./img/ch07/7.3.png)
+![7.3](../img/ch07/7.3.png)
 
 **그림 7.3** Cloud Console에서 Kubernetes 클러스터를 생성하기 위한 첫 번째 양식
 
 Create Cluster를 클릭하면, 그림 7.4에서 보여지는 것처럼 몇몇 템플릿을 선택하는 옵션이 표시될 것이다. 템플릿은 vCPU 수, 메모리, GPU 사용에 따라 다르다. 예를 들어, Standard Cluster 템플릿은 1 개의 vCPU와 3.75GB의 메모리를 갖는 3개의 노드를 사용한다. 반면에, CPU Intensive 템플릿은 4개의 vCPU와 3.6GB의 메모리를 사용한다.
 
-![7.4](./img/ch07/7.4.png)
+![7.4](../img/ch07/7.4.png)
 
 **그림 7.4** Kubernetes 클러스터를 생성하기 위한 템플릿
 
@@ -111,19 +111,19 @@ Create Cluster를 클릭하면, 그림 7.4에서 보여지는 것처럼 몇몇 �
 
 클러스터를 생성하는데 몇 분이 소요되다. 클러스터가 생성되면, 그림 7.5처럼 클러스터의 리스트가 표시된다.
 
-![7.5](./img/ch07/7.5.png)
+![7.5](../img/ch07/7.5.png)
 
 **그림 7.5** 클러스터의 리스트는 인스턴스의 수, 전체 코어(vCPU), 전체 메모리를 보여준다.
 
 클러스터 리스트에서 클러스터를 수정하고, 삭제하고, 클러스터에 연결할 수 있다. Connect를 클릭하면, 커맨드 라인에서 클러스터에 연결하는 `gcloud` 명령어를 수신된다. 또한 그림 7.6처럼 워크로드 페이지를 볼 수도 있다.
 
-![7.6](./img/ch07/7.6.png)
+![7.6](../img/ch07/7.6.png)
 
 **그림 7.6** 커맨드라인에서 `gcloud` 커맨드를 사용하거나 워크로드 페이지를 확인하는 것으로 클러스터에 연결할 수 있다.
 
 Kubernetes는 클러스터를 관리하기위해 많은 워크로드를 실행한다. Cloud Console의 Kubernetes Engine 섹션에서 Workloads 페이지에서 현재 실행 중인 워크로드를 확인할 수 있다. 그림 7.7은 새로 생성된 클러스터에서 실행 중인 워크로드의 일부를 보여준다.
 
-![7.7](./img/ch07/7.7.png)
+![7.7](../img/ch07/7.7.png)
 
 **그림 7.7** Workloads 페이지는 현재 실행 중인 워크로드를 리스트화 한다.
 
@@ -170,13 +170,13 @@ Cloud Console에서 Kubernetes Engine의 Cluster 페이지에서 Create Deployme
 * Namespace
 * Cluster to deploy to
 
-![7.8](./img/ch07/7.8.png)
+![7.8](../img/ch07/7.8.png)
 
 **그림 7.8** Create Deployment 옵션은 실행할 컨테이너와 실행할 어플리케이션을 기동할 때 초기 명령어를 지정하는 양식을 제공한다.
 
 deployment를 지정하면, 그에 맞는 YAML 명세서가 표시된다. 이 명세서는 커맨드 라인에서 deployment를 생성하는데 저장되고, 사용된다. 그림 7.9는 deployment YAML 파일의 예시를 보여준다. 아웃풋은 항상 YAML 포맷으로 표시된다.
 
-![7.9](./img/ch07/7.9.png)
+![7.9](../img/ch07/7.9.png)
 
 **그림 7.9** Kubernetes deployment를 위한 YAML 명세서
 
@@ -215,7 +215,7 @@ Stackdriver는 GCP의 포괄적인 모니터링, 로깅, 알림 제품이다. Ku
 
 클러스터를 생성하면, Cloud Console의 Create Cluster 양식에서 Advanced Options를 선택하여 Stackdriver 모니터링과 로깅을 활성화 할 수 있다. Additional Features 아래에 Enable Logging Service와 Enable Monitoring Service를 선택한다.
 
-![7.10](./img/ch07/7.10.png)
+![7.10](../img/ch07/7.10.png)
 
 **그림 7.10** Create Cluster 양식에서 Advanced Options를 확장하면 Stackdriver 로깅과 모니터링을 활성화하는 2가지 체크박스가 나타난다.
 
@@ -223,25 +223,25 @@ Cloud Console에서 Stackdriver를 세팅하기 위해, 왼쪽에 있는 메뉴�
 
 Workspace는 모니터링을 위한 리소스이고, 모니터링하는 프로젝트를 100개까지 지원할 수 있다. Workspace는 dashboards, alerting policies, group definitions, notification checks를 포함한다.
 
-![7.11](./img/ch07/7.11.png)
+![7.11](../img/ch07/7.11.png)
 
 **그림 7.11** Stackdriver에서 workspace를 생성하는 초기 화면
 
 workspace를 생성한 후에, Stackdriver를 열면, Monitoring Overview 페이지가 표시된다.
 
-![7.12](./img/ch07/7.12.png)
+![7.12](../img/ch07/7.12.png)
 
 **그림 7.12** Stackdriver Monitoring Overview 페이지
 
 Overview 페이지에서, Resource를 클릭하고, 클러스터의 인스턴스를 조회하는 Instances를 선택한다. 그림 7.13과 같은 리스트가 표시된다.
 
-![7.13](./img/ch07/7.13.png)
+![7.13](../img/ch07/7.13.png)
 
 **그림 7.13** Kubernetes 클러스터의 인스턴스 리스트
 
 인스턴스의 이름을 클릭하여 모니터링 상세 정보 페이지를 볼 수 있다.
 
-![7.14](./img/ch07/7.14.png)
+![7.14](../img/ch07/7.14.png)
 
 **그림 7.14** Kubernetes 클러스터에서 실행 중인 인스턴스의 전형적인 상세 모니터링 페이지
 
@@ -249,19 +249,19 @@ Overview 페이지에서, Resource를 클릭하고, 클러스터의 인스턴스
 
 Stackdriver 상제 페이지에서, Create Alerting Policy 버튼을 클릭하여 alert를 생성할 수 있다. 조건, 알림, 글을 생성할 수 있는 화면이 표시된다.(그림 7.15) 또한 policy의 이름을 부여할 수 있다.
 
-![7.15](./img/ch07/7.15.png)
+![7.15](../img/ch07/7.15.png)
 
 **그림 7.15** alerting 정책을 생성하면, 정책의 컴포넌트를 지정할 수 있다.
 
 조건을 추가하면, 그림 7.16고 같은 양식이 표시된다.
 
-![7.16](./img/ch07/7.16.png)
+![7.16](../img/ch07/7.16.png)
 
 **그림 7.16** Stackdriver는 다양한 타입의 조건을 지원한다.
 
 Metric Threshold를 선택하면 그림 7.17같은 양식이 표시된다. 그림은 5분동안 CPU 사용량이 80%를 넘으면 알림을 보내도록 지정하는 방법을 보여준다.
 
-![7.17](./img/ch07/7.17.png)
+![7.17](../img/ch07/7.17.png)
 
 **그림 7.17** Stackdriver metric threshold 조건은 CPU 사용량 같은 모니터링되는 리소스의 집합을 기반으로 한다.
 
@@ -271,7 +271,7 @@ Stackdriver는 process health, uptime checks, group aggregate thresholds, metric
 
 CPU 사용량을 모니터링하는 정책을 생성하는 예로 얘기해보자
 
-![7.18](./img/ch07/7.18.png)
+![7.18](../img/ch07/7.18.png)
 
 **그림 7.18** Stackdriver는 다양한 타입의 notification 채널을 지원한다.
 
@@ -279,31 +279,31 @@ CPU 사용량을 모니터링하는 정책을 생성하는 예로 얘기해보�
 
 > 모니터링의 더 많은 상제 정보는 챕터 18을 확인해라. CPU 사용량을 모니터링하는 정책을 생성하기 위해 Stackdriver에서 모니터링 페이지를 열고, Create Policy를 클릭한다. 정책을 생성하는 양식이 표시되고 4가지 단계가 있다. 조건 생성, notification 채널 지정, 설명 추가, 정책 이름 부여(그림 7.19)
 
-![7.19](./img/ch07/7.19.png)
+![7.19](../img/ch07/7.19.png)
 
 **그림 7.19** CPU 사용량을 모니터링하는 정책 생성
 
 Add Condition을 클릭하면 그림 7.20같은 양식이 표시된다.
 
-![7.20](./img/ch07/7.20.png)
+![7.20](../img/ch07/7.20.png)
 
 **그림 7.20** 정책 조건 추가
 
 Filter 파라미터에서 **GKE Container**와 **CPU Usage**를 입력한다. Configuration 섹션에서, threshold로 80%와 시간 간격으로 2분을 지정한다. 그러면 Create Policy 양식으로 돌아간다. Notification 파라미터에서 그림 7.21처럼 이메일을 선택한다.
 
-![7.21](./img/ch07/7.21.png)
+![7.21](../img/ch07/7.21.png)
 
 **그림 7.21** notification 채널을 선택
 
 description과 policy 이름을 추가한다.
 
-![7.22](./img/ch07/7.22.png)
+![7.22](../img/ch07/7.22.png)
 
 **그림 7.22** 완성된 policy 생성 양식
 
 policy specification을 저장하면 모니터랑 summary가 표시된다.
 
-![7.23](./img/ch07/7.23.png)
+![7.23](../img/ch07/7.23.png)
 
 **그림 7.23** CPU 사용량 정책의 모니터링 결과
 

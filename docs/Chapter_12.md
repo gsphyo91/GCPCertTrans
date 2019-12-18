@@ -24,13 +24,13 @@ Cloud SQL은 관리형 relational 데이터베이스 서비스이다. 이 섹션
 
 콘솔에서 SQL을 열고, Create Instance를 클릭하다. MySQL을 선택하고 Second Generation Instance 타입을 선택한다. 그림 12.1과 같은 양식을 확인할 수 있다.
 
-![12.1](./img/ch12/12.1.png)
+![12.1](../img/ch12/12.1.png)
 
 **그림 12.1** MySQL 인스턴스 생성
 
 몇 분 후, 인스턴스가 생성된다. MySQL 인스턴스 리스트는 그림 12.2와 유사하다.
 
-![12.2](./img/ch12/12.2.png)
+![12.2](../img/ch12/12.2.png)
 
 **그림 12.2** MySQL 인스턴스 리스트
 
@@ -44,7 +44,7 @@ gcloud sql connect ace-exam-mysql -user=root
 
 MySQL 인스턴스에 대한 커맨드라인 프롬프트가 열린다. (그림 12.3)
 
-![12.3](./img/ch12/12.3.png)
+![12.3](../img/ch12/12.3.png)
 
 **그림 12.3** `gcloud sql connect`를 사용하여 연결한 후에 MySQL 작업을 위한 커맨드라인 프롬프트
 
@@ -73,7 +73,7 @@ SELECT * from books;
 
 이는 테이블의 모든 row를 조회한다. (그림 12.4)
 
-![12.4](./img/ch12/12.4.png)
+![12.4](../img/ch12/12.4.png)
 
 **그림 12.4** MySQL의 테이블 컨텐츠 조회
 
@@ -83,25 +83,25 @@ Cloud SQL은 on-demand와 automatic backups 모두 적용할 수 있다.
 
 on-demand 백업을 생성하기 위해 콘솔의 Instances 페이지에서 인스턴스의 이름을 클릭한다. 그림 12.5처럼 Instance Details 페이지가 표시된다.
 
-![12.5](./img/ch12/12.5.png)
+![12.5](../img/ch12/12.5.png)
 
 **그림 12.5** MySQL Instance Detail 페이지
 
 Backups 탭을 클릭하면 Create Backup 옵션이 표시된다. (그림 12.6)
 
-![12.6](./img/ch12/12.6.png)
+![12.6](../img/ch12/12.6.png)
 
 **그림 12.6** Create Backup을 클릭하는데 사용되는 양식
 
 Create Backup을 클릭하면 그림 12.7과 같은 양식이 열린다.
 
-![12.7](./img/ch12/12.7.png)
+![12.7](../img/ch12/12.7.png)
 
 **그림 12.7** 백업에 설명을 지정하고 생성한다.
 
 선택적으로 description을 채우고, Create를 클릭한다. 백업이 완료되면, 그림 12.8처럼 백업 리스트가 표시된다.
 
-![12.8](./img/ch12/12.8.png)
+![12.8](../img/ch12/12.8.png)
 
 **그림 12.8** 인스턴스를 위해 사용할 수 있는 백업 리스트
 
@@ -135,7 +135,7 @@ gcloud sql instances patch [INSTANCE_NAME] -backup-start-time [HH:MM]
 gcloud sql instance patch ace-exam-mysql -backup-start-time 01:00
 ```
 
-![12.9](./img/ch12/12.9.png)
+![12.9](../img/ch12/12.9.png)
 
 **그림 12.8** Cloud Console에서 자동 백업 활성화
 
@@ -149,13 +149,13 @@ gcloud sql instance patch ace-exam-mysql -backup-start-time 01:00
 
 Create Entity를 클릭하고, 나타나는 양식을 채워서 엔티티를 생성한다. 관계형 데이터베이스에서 테이블과 유사한 Kind와 Properties를 채워야 한다. (그림 12.10)
 
-![12.10](./img/ch12/12.10.png)
+![12.10](../img/ch12/12.10.png)
 
 **그림 12.10** Datastore 엔티티에 데이터 추가
 
 엔티티를 생성한 후, SQL과 유사한 쿼리인 GQL을 사용하여 document 데이터베이스에 쿼리할 수 있다. 그림 12.11은 `SELECT` 명령을 사용한 예시 쿼리를 보여준다.
 
-![12.11](./img/ch12/12.11.png)
+![12.11](../img/ch12/12.11.png)
 
 **그림 12.11** SQL과 유사한 쿼리인 GQL을 사용하여 데이터 저장소에 쿼리
 
@@ -211,13 +211,13 @@ BigQuery는 fully 관리형 데이터베이스 서비스이다. 그래서 구글
 
 콘솔의 메인 메뉴에서 BigQuery를 선택하면 BigQuery 쿼리 인터페이스가 표시된다. (그림 12.12)
 
-![12.12](./img/ch12/12.12.png)
+![12.12](../img/ch12/12.12.png)
 
 **그림 12.12** BigQuery 사용자 인터페이스. 이 것은 신규 인터베이스의 베타 버전이다. 이전 버전은 다르게 보인다.
 
 이 양식에서 `use_1910_2013` 테이블에서 이름과 성에 대해 쿼리하는 것 같이 Query Editor에서 쿼리를 입력할 수 있다. (그림 12.13)
 
-![12.13](./img/chd12/12.13.png)
+![12.13](../img/chd12/12.13.png)
 
 **그림 12.13** 예상 데이터 양이 스캔된 예시 쿼리
 
@@ -237,11 +237,11 @@ BugQuery에서 Jobs은 데이터 로드, 추출, 복사, 쿼리에 사용되는 
 
 Jobs의 상태를 확인하기 위해 BigQuery 콘솔을 열고, 왼쪽 메뉴에서 Job History를 클릭한다. jobs의 리스트와 상태가 표시될 것이다. 그림 12.15에서, 리스트의 상위 job은 green bar이다. 이는 성공적으로완료된 job을 가리킨다. 이것은 job 항목의 확장된 보기의 예시이다. 아래에 실패된 job의 한줄 요약이 있다. 실패는 job 설명 옆에 빨간 아이콘으로 표시된다.
 
-![12.14](./img/ch12/12.14.png)
+![12.14](../img/ch12/12.14.png)
 
 **그림 12.14** Pricing Calculator를 사용하여 쿼리의 비용을 추정한다.
 
-![12.15](./img/ch12/12.15.png)
+![12.15](../img/ch12/12.15.png)
 
 **그림 12.15** BigQuery에서 job 상태 리스트
 
@@ -257,13 +257,13 @@ bq --location=US show -j gcpace-project:US.bquijob_119adae7_167c373d5c3
 
 처음, Cloud Spanner 인스턴스를 생성할 것이다. 콘솔에서 Cloud Spanner를 열고, Create Instance를 선택한다. 그림 12.16과 같은 양식이 표시된다.
 
-![12.16](./img/ch12/12.16.png)
+![12.16](../img/ch12/12.16.png)
 
 **그림 12.16** Cloud Spanner 인스턴스 생성
 
 다음, 인스턴스에서 데이터베이스를 생성해야 한다. Instance Detail 페이지의 위에 Create Database를 선택한다. (그림 12.17)
 
-![12.17](./img/ch12/12.17.png)
+![12.17](../img/ch12/12.17.png)
 
 **그림 12.17** Cloud Spanner 인스턴스 내에 데이터베이스 생성
 
@@ -281,29 +281,29 @@ bq --location=US show -j gcpace-project:US.bquijob_119adae7_167c373d5c3
 
 `CREATE TABLE` 명령을 실행한 후, 그림 12.19같은 테이블 구조의 리스트를 확인할 수 있다.
 
-![12.18](./img/ch12/12.18.png)
+![12.18](../img/ch12/12.18.png)
 
 **그림 12.18** 데이터베이스 내에 테이블 생성
 
-![12.19](./img/ch12/12.19.png)
+![12.19](../img/ch12/12.19.png)
 
 **그림 12.19** 테이블의 테이블 열 리스트
 
 테이블에 데이터를 추가하기 위해 Table Details 페이지에서 Data 테이블을 선택한다. (그림 12.20)
 
-![12.20](./img/ch12/12.20.png)
+![12.20](../img/ch12/12.20.png)
 
 **그림 12.20** Data 탭을 선택하여 테이블에 데이터를 삽입한다.
 
 roq을 추가할 때, 그림 12.21과 같은 형식으로 표의 열을 보여준다. 이 예시에서, 열은 SingerID, BirthData, FirstName, LastName, SingerInfo이다.
 
-![12.21](./img/ch12/12.21.png)
+![12.21](../img/ch12/12.21.png)
 
 **그림 12.21** 테이블에 입력되는 데이터
 
 마지막으로, Table Datails 페이지에서 쿼리를 선택하여 쿼리를 실행할 수 있다. (그림 12.22)
 
-![12.22](./img/ch12/12.22.png
+![12.22](../img/ch12/12.22.png
 
 **그림 12.22** 쿼리 양식에서 테이블 쿼리
 
@@ -315,29 +315,29 @@ Pub/Sub 메시지 큐를 배포하기 위해 필요한 2가지 작업이 있다:
 
 Pub/Sub을 작업하기 위한 첫번째 단계는 Cloud Console에서 Pub/Sub 페이지를 연다. Pub/Sub을 처음 사용할 때, 양식은 그림 12.23과 유사하다.
 
-![12.23](./img/ch12/12.23.png)
+![12.23](../img/ch12/12.23.png)
 
 **그림 12.23** Pub/Sub 토픽 생성
 
 Create a Topic을 클릭하면, 토픽 이름을 위한 입력을 받는다. (그림 12.24)
 
-![12.24](./img/ch12/12.24.png)
+![12.24](../img/ch12/12.24.png)
 
 **그림 12.24** 토픽 이름 지정
 
 첫번째 토픽을 생성한 후에 Topic 페이지에서 토릭의 리스트를 확인할 수 있다. (그림 12.25)
 
-![12.25](./img/ch12/12.25.png)
+![12.25](../img/ch12/12.25.png)
 
 **그림 12.25** 토픽 리스트
 
 토픽에 구독을 생성하기 위해, 토픽 리스트의 끝에 3개 점 아이콘을 클릭한다. New Subscription 옵션을 포함하는 메뉴가 표시된다. (그림 12.26) New Subscription을 클릭하여 토픽의 구독을 생성한다. 그림 12.27과 같은 양식이 표시될 것이다.
 
-![12.26](./img/ch12/12.26.png)
+![12.26](../img/ch12/12.26.png)
 
 **그림 12.26** 토픽에 구독을 생성
 
-![12.27](./img/ch12/12.27.png)
+![12.27](../img/ch12/12.27.png)
 
 **그림 12.27** 구독을 생성하기 위한 양식
 
@@ -349,7 +349,7 @@ Create a Topic을 클릭하면, 토픽 이름을 위한 입력을 받는다. (�
 
 구독 생성을 완료하면, 그림 12.28같은 구독 리스트를 확인할 수 있다.
 
-![12.28](./img/ch12/12.28.png)
+![12.28](../img/ch12/12.28.png)
 
 **그림 12.28** 구독 리스트
 
@@ -366,7 +366,7 @@ gcloud pubsub subscriptions create [SUBSCRIPTION_NAME] --topic [TOPIC-NAME]
 
 Bigtable 인스턴스를 생성하기 위해, Bigtable 콘솔을 열고 Create instance를 클릭한다. 그림 12.29와 같은 양식이 표시된다. (Bigtable 인스턴스를 생성하는 추가 상세 정보는 챕터 11을 확인한다.)
 
-![12.29](./img/ch12/12.29.png)
+![12.29](../img/ch12/12.29.png)
 
 **그림 12.29** Bigtable 인스턴스 생성
 
@@ -430,7 +430,7 @@ cbt read ace-exam-bt-table
 
 `read`명령은 그림 12.30과 같은 output이 생성된다.
 
-![12.30](./img/ch12/12.30.png)
+![12.30](../img/ch12/12.30.png)
 
 **그림 12.30** `cbt read` 명령을 사용하여 테이블 컨텐츠 조회
 
@@ -440,7 +440,7 @@ Cloud Dataproc은 구글의 관리형 Apache Spark와 Apache Hadoop 서비스이
 
 클러스터를 생성하기 위해 Cloud Console에서 Dataproc을 연다. (그림 12.31)
 
-![12.31](./img/ch12/12.31.png)
+![12.31](../img/ch12/12.31.png)
 
 **그림 12.31** Dataproc 콘솔 페이지
 
@@ -448,31 +448,31 @@ Create Cluster 양식을 채워서 Dataproc 클러스터를 생성한다. 클러
 
 또한 마스터 노드와 워커 노드를 위해 머신 설정 정보를 지정해야 한다. CPU, 메모리, 디스크 정보를 지정한다. 클러스터 모드는 마스터노드의 수를 결정하지만, 워커노드의 수는 선택할 수 있다. 고급 옵션의 리스트를 확장하면, Preemptible VM을 사용한다고 선택하거나 실행할 Preemptible VM의 수를 지정할 수 있다. (그림 12.32)
 
-![12.32](./img/ch12/12.32.png)
+![12.32](../img/ch12/12.32.png)
 
 **그림 12.32** Dataproc 클러스터 생성
 
 클러스터를 생성한 후, 클러스터의 리스트를 확인할 수 있다. (그림 12.33)
 
-![12.33](./img/ch12/12.33.png)
+![12.33](../img/ch12/12.33.png)
 
 **그림 12.33** Dataproc 클러스터 리스트
 
 클러스터가 실행 중이면, 그럼 12.34처럼 Jobs을 사용하여 jobs을 적용할 수 있다.
 
-![12.34](./img/ch12/12.34.png)
+![12.34](../img/ch12/12.34.png)
 
 **그림 12.34** Cluster Details 페이지에서 Job을 적용
 
 job을 실행할 클러스터와 Spark, PySpark, SparkR, Hive, Spark SQL, Pig, Hadoop 중에서 job의 타입을 지정해야 한다. JAR 파일은 실행될 Java 프로그램이고, Main Class나 JAR은 job을 실행할 때 호출되어야하는 함수나 메소드의 이름이다. PySpark를 선택하면, Python 프로그램을 적용한다. SparkR을 적용하면 R 프로그램일 적용한다. Hive나 SparkSQL이 실행할 때, 쿼리 파일을 제출해야 한다. 선택적으로 arguments를 전달할 수 있다. job이 실행 중이면, job 리스트 페이지에서 확인할 수 있다. (그림 12.35)
 
-![12.35](./img/ch12/12.35.png)
+![12.35](../img/ch12/12.35.png)
 
 **그림 12.35** job의 리스트
 
 리스트에서 Jobs ID를 더블클릭하면 job 로그의 상세 정보를 확인할 수 있다. (그림 12.36)
 
-![12.36](./img/ch12/12.36.png)
+![12.36](../img/ch12/12.36.png)
 
 **그림 12.36** 실행 중인 job의 상세 로깅
 
@@ -522,7 +522,7 @@ gsutil mv gs://[BUCKET_NAME]/[OLD_BUCKET_NAME] gs://[BUCKET_NAME]/[NEW_OOBJECT_N
 
 또한, 버킷에서 object를 이동하고 이름을 재지정하기 위해 콘솔을 사용할 수 있다. 콘솔의 Cloud Storage 섹션을 열고 버킷을 연다.(그림 12.37) object 설명 끝에 3개의 점 아이콘을 클릭한다. 이름 재지정과 이동을 포함한 동작의 리스트가 표시된다.
 
-![12.37](./img/ch12/12.37.png)
+![12.37](../img/ch12/12.37.png)
 
 **그림 12.37** 콘솔에서 object를 이동하고 이름을 재지정
 

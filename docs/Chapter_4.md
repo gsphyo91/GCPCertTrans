@@ -13,7 +13,7 @@ Compute Engine은 GCP에서 동작하는 VM을 제공하는 서비스이다. 일
 
 인스턴스는 OS, 라이브러리, 다른 코드를 포함한 이미지를 실행한다. 구글에 의해서 제공되는 퍼블릭 이미지를 실행하도록 선택할 수 있다. (그림 4.1) 리눅스와 윈도우 이미지 모두 사용할 수 있다. 구글에서 제공되는 이미지 이외에도, 오플소스 프로젝트나 3rd 파티 벤더에서 제공하는 다른 퍼블릭 이미지도 존재한다.
 
-![4.1_compute_engine_OS_image](./img/ch04/4.1_compute_engine_OS_image.png)
+![4.1_compute_engine_OS_image](../img/ch04/4.1_compute_engine_OS_image.png)
 
 **그림 4.1** Compute Engine에서 사용할 수 있는 OS 이미지 일부분
 
@@ -21,19 +21,19 @@ Compute Engine은 GCP에서 동작하는 VM을 제공하는 서비스이다. 일
 
 필요로하는 퍼블릭 이미지가 없다면, boot disk로부터 커스텀 이미지를 생성하거나 다른 이미지로 시작할 수 있다. 콘솔에서 VM을 생성하기 위해 Compute Engine을 찾은 다음 VM Instance를 찾는다. 그림 4.2와 비슷한 화면을 볼 수 있다.
 
-![4.2_creating_VM](./img/ch04/4.2_creating_VM.png)
+![4.2_creating_VM](../img/ch04/4.2_creating_VM.png)
 
 **그림 4.2** Compute Engine에서 VM 생성
 
 위 화면에서, VM을 생성하는 Create Instance를 클릭한다. 필요한 것과 가까운 이미지를 선택하고, VM을 생성한다. 그 다음 라이브러리나 다른 소프트웨어 패키지를 설치하는 것과 같이 이미지에 필요한 변경 사항을 수행한다. VM이 생성되고, 변경사항이 적용되었다면, Google Cloud Console의 Compute Engine 메뉴에서 Snapshot을 선택한다. (그림 4.3)
 
-![4.3_creating_snapshot](./img/ch04/4.3_creating_snapshot.png)
+![4.3_creating_snapshot](../img/ch04/4.3_creating_snapshot.png)
 
 **그림 4.3** snapshot 생성하기의 첫 번째 단계
 
 Create Snapshot를 클릭한다. 보이는 양식에서 스냅샷의 이름, 설명, 그리고 가장 중요하게 스냅샷을 위한 원본인 디스크를 지정할 수 있다. 그림 4.4에서, *myvm*이라고 되어있는 VM의 boot disk가 선택되었다. 옵션을 선택한 후에, 스냅샷을 저장하는 Create 버튼을 클릭한다. 이 이미지는 다른 VM의 이미지로 사용될 수 있다.
 
-![4.4_creating_a_snapshot](./img/ch04/4.4_creating_a_snapshot.png)
+![4.4_creating_a_snapshot](../img/ch04/4.4_creating_a_snapshot.png)
 
 **그림 4.4** Compute Engine에서 스냅샷 생성하기
 
@@ -65,13 +65,13 @@ Create Snapshot를 클릭한다. 보이는 양식에서 스냅샷의 이름, 설
 
 Google Cloud Console을 열 때, 그림 4.5에서 보여지는 것처럼 맨 위에 프로젝트 이름이나 Select a Project 문구중 하나가 표시될 것이다.
 
-![4.5_current_project_name](./img/ch04/4.5_current_project_name.png)
+![4.5_current_project_name](../img/ch04/4.5_current_project_name.png)
 
 **그림 4.5** 현재 프로젝트 이름이나 선택 옵션 중 하나가 Google Cloud Console에서 보여진다.
 
 Select a Project를 선택할 때, 그림 4.6처럼 양식이 나타난다. 거기에서 VM을 포함하여 리소스를 저장할 프로젝트를 선택할 수 있다.
 
-![4.6_choosing_project_name](./img/ch04/4.6_choosing_project_name.png)
+![4.6_choosing_project_name](../img/ch04/4.6_choosing_project_name.png)
 
 **그림 4.6** 계정의 기존 프로젝트 중에서 프로젝트를 선택
 
@@ -81,7 +81,7 @@ Select a Project를 선택할 때, 그림 4.6처럼 양식이 나타난다. 거�
 
 VM을 생성할 때 region과 zone을 지정한다. 그림 4.7에서 볼 수 있는 것처럼, Create VM 양식은 region과 zone을 선택할 수 있는 drop-down 리스트 양식을 포함한다.
 
-![4.7_selecting_region_zone](./img/ch04/4.7_selecting_region_zone.png)
+![4.7_selecting_region_zone](../img/ch04/4.7_selecting_region_zone.png)
 
 **그림 4.7** Create VM 양식에서 region과 zone 선택하기
 
@@ -112,7 +112,7 @@ VM이 실행되는 장소를 선택할 때 고려할 몇 가지 요소는 아래
 
 권한이 프로젝트 단위로 사용자에게 부여될 때, 이 사용 권한은 프로젝트 내의 모든 리소스에 적용된다. 예를 들어, 사용자가 프로젝트 레벨에서 Compute Engine Admin role을 부여 받았다면, 프로젝트에서 모든 Compute Engine 인스턴스들을 관리할 수 있다. 그림 4.8은 사용자와 role의 리스트를 보여주는 예시이다.
 
-![4.8_example_listing_of_user](./img/ch04/4.8_example_listing_of_user.png)
+![4.8_example_listing_of_user](../img/ch04/4.8_example_listing_of_user.png)
 
 **그림 4.8** 사용자와 role 리스트의 예시
 
@@ -146,7 +146,7 @@ VM의 predefined 옵션은 많은 예시의 요구를 충족하지만, 미리 �
 
 커스텀 이미지를 생성하기 위해 콘솔에서 Create VM 옵션을 선택한다. Machine Type 영역에서 Customize 링크를 클릭한다. 그림 4.9처럼 Machine Type 영역에 확장된다. 거기에서 원하는 CPU의 수와 메모리의 양을 슬라이더로 증가시키거나 감소시킬 수 있다.
 
-![4.9_customizing_vm](./img/ch04/4.9_customizing_vm.png)
+![4.9_customizing_vm](../img/ch04/4.9_customizing_vm.png)
 
 **그림 4.9** CPU 수와 메모리 양을 조정하여 VM을 커스터마이징
 
@@ -174,7 +174,7 @@ VM 인스턴스처럼, App Engine의 어플리케이션을 프로젝트 내에 �
 
 App Engine 어플리케이션은 공통적인 구조를 갖고, 서비스로 구성된다. 서비스는 유통 웹 어플리케이션에서 판매 세금을 계산하거나 제품이 사이트에서 판매되었을 때 창고를 업데이트 하는 것처럼 특정 기능을 제공한다. 서비스는 버전이 있고, 이를 통해 여러 버전이 동시에 실행될 수 있다. 서비스의 각 버전은 App Engine에 의해서 관리되는 인스턴스에서 실행된다. (그림 4.10)
 
-![4.10_structure_app_engine](./img/ch04/4.10_structure_app_engine.png)
+![4.10_structure_app_engine](../img/ch04/4.10_structure_app_engine.png)
 
 **그림 4.10** App Engine 어플리케이션의 구조
 
@@ -216,7 +216,7 @@ App Engine Flexible 환경은 기본적인 빌딩 블록 추상화로 컨테이�
 
 어떤 면에서 App Engine flexible 환경은 다음 섹션에서 논의되는 Kubernetes Engine과 비슷하다. 이러한 2가지 구글 제품(App Engine Flexible 환경, Kubernetes Engine)은 커스텀화된 Docker 컨테이너를 실행할 수 있다. App Engnie flexible 환경은 완전한 관리형 PaaS를 제공하고, 작은 컨테이너에 어플리케이션과 서비스를 패키지할 때 좋은 옵션이다. 곧 알게 되겠지만, Kubernetes Engine은 제어하는 클러스터에서 실행하는 컨테이너를 관리하도록 설계되었다. Kubernetes Engine으로 클러스터를 제어할 수 있지만, Stackdriver 모니터링과 오토스케일링 같은 툴을 사용하여 클러스터를 모니터링하고 관리해야 한다. App Engine flexible 환경을 사용하면 App Engine 서버의 상태는 구글에 의해서 모니터링 되고, 어떠한 개입 없이 필요에 따라 수정된다.
 
-![4.11_create_kubernetes_engine](./img/ch04/4.11_create_kubernetes_engine.png)
+![4.11_create_kubernetes_engine](../img/ch04/4.11_create_kubernetes_engine.png)
 
 **그림 4.11** Kubernetes Engine에서 Kubernetes 클러스터를 생성하는 인터페이스
 

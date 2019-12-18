@@ -50,7 +50,7 @@ MemoryStore를 사용할 때, Redis를 실행할 인스턴스를 생성한다. �
 
 Memorystore 캐시는 Compute Engine, App Engine, Kubernetes Engine에서 실행하는 어플리케이션과 사용될 수 있다. 그림 11.1은 Memorystore를 구성하는데 사용되는 파라미터를 보여준다. 메인 콘솔 메뉴에서 Memorystore를 선택한 다음 Redis instance 생성 옵션을 선택하여 아래 양식을 확인할 수 있다.
 
-![11.1](./img/ch11/11.1.png)
+![11.1](../img/ch11/11.1.png)
 
 **그림 11.1** Memorystore 캐시를 위한 설정 파라미터
 
@@ -78,7 +78,7 @@ Persistent disk는 디스크의 데이터가 자동적으로 암호화된다.
 
 콘솔에서 Compute Engine을 열고 Disk를 선택해서 persistent disk를 생성, 설정할 수 있다. Disk 페이지에서 Create Disk를 클릭하면 그림 11.2와 같은 양식이 나타난다.
 
-![11.2](./img/ch11/11.2.png)
+![11.2](../img/ch11/11.2.png)
 
 **그림 11.2** persistent disk 생성 양식
 
@@ -151,7 +151,7 @@ object를 삭제하거나 object의 스토리지 등급을 변경할 수 있다.
 
 콘솔을 사용하여 Cloud Storage의 버킷을 생성할 수 있다. 메인 메뉴에서 Storage를 열고, Create Bucket을 선택한다. 그림 11.3과 유사한 양식이 표시될 것이다.
 
-![11.3](./img/ch11/11.3.png)
+![11.3](../img/ch11/11.3.png)
 
 **그림 11.3** 콘솔에서 스토리지 버킷 생성하는 양식. 고급 옵션이 표시된다.
 
@@ -159,13 +159,13 @@ object를 삭제하거나 object의 스토리지 등급을 변경할 수 있다.
 
 버킷이 생성되면 lifecycle 정책을 정의한다. 콘솔에서 Storage 메뉴로부터 Browse 옵션을 선택하면 그림 11.4 같은 화면이 표시된다.
 
-![11.4](./img/ch11/11.4.png)
+![11.4](../img/ch11/11.4.png)
 
 **그림 11.4** 버킷의 리스트는 lifecycle 정책을 정의하거나 수정하는 링크를 포함한다.
 
 lifecycle 열은 lifecycle 설정이 활성화됐는지 가리킨다. lifecycle을 생성하거나 수정할 버킷을 선택하고 Lifecycle 열에서 None이나 Enabled를 클릭한다. 그림 11.5와 같은 양식이 표시된다.
 
-![11.5](./img/ch11/11.5.png)
+![11.5](../img/ch11/11.5.png)
 
 **그림 11.5** lifecycle 정책을 생성할 때, 규칙을 정의하는 Add Rule option을 클릭한다.
 
@@ -173,19 +173,19 @@ lifecycle 열은 lifecycle 설정이 활성화됐는지 가리킨다. lifecycle�
 
 정책의 예시를 살펴보자. 콘솔에서 Cloud Storage의 Browser 섹션에서 버킷의 리스트와 현재 lifecycle 정책을 확인할 수 있다.
 
-![11.6](./img/ch11/11.6.png)
+![11.6](../img/ch11/11.6.png)
 
 **그림 11.6** Cloud Storage Browser에서 버킷의 리스트
 
 버킷의 정책 상태를 클릭하면 lifecycle 규칙을 생성할 수 있다.
 
-![11.7](./img/ch11/11.7.png)
+![11.7](../img/ch11/11.7.png)
 
 **그림 11.7** 버킷에 lifecycle 정책을 추가하는 양식
 
 Add Object Lifecycle Rule 양식은 그림 11.8처럼 표시된다. 이 양식에서, AGe, Storage Class와 같은 object condition을 지정할 수 있고, Set To Nearline과 같은 action을 지정할 수 있다.
 
-![11.8](./img/ch11/11.8.png)
+![11.8](../img/ch11/11.8.png)
 
 **그림 11.8** 버킷에 object lifecycle 규칙을 추가
 
@@ -227,13 +227,13 @@ BigQuery는 데이터 웨어하우스와 분석 어플리케이션을 위해 설
 
 콘솔 메인 메뉴에서 Cloud SQL을 열고 Create Instance를 선택해 Cloud SQL 인스턴스를 생성할 수 있다. 그림 11.9처럼 MySQL이나 PostgreSQL 인스턴스 중 하나를 선택할 수 있다.
 
-![11.9](./img/ch11/11.9.png)
+![11.9](../img/ch11/11.9.png)
 
 **그림 11.9** Cloud SQL은 MySQL과 PostgreSQL 인스턴스를 제공한다.
 
 PostgreSQL을 선택하면 설정 양식이 표시된다. MySQL을 선택하면 MySQL 인스턴스의 First Generation이나 Second Generation 중 하나를 선택해야 한다. (그림 11.10) MySQL의 오래된 버전을 사용해야하지 않는다면, Second Generation 인스턴스가 추천된다. MySQL 2nd generation은 더 좋은 용량과 선택적으로 high availability 설정, MySQL 5.7 지원, 많은 경우 더 낮은 비용을 제공한다.
 
-![11.10](./img/ch11/11.10.png)
+![11.10](../img/ch11/11.10.png)
 
 **그림 11.10** MySQL 인스턴스는 1st와 2nd generation을 사용할 수 있다.
 
@@ -249,11 +249,11 @@ MySQL 인스턴스를 설정하기 위해, 이름, root 패스워드, region, zo
 
 그림 11.11은 MySQL 2nd generation을 위한 설정 양식을 보여주고, 그림 11.12는 PostgreSQL 설정 양식을 보여준다.
 
-![11.11](./img/ch11/11.11.png)
+![11.11](../img/ch11/11.11.png)
 
 **그림 11.11** MySQL 2nd generation 인스턴스를 위한 설정 양식
 
-![11.12](./img/ch11/11.12.png)
+![11.12](../img/ch11/11.12.png)
 
 **그림 11.12** PostgreSQL 인스턴스를 위한 설정 양식
 
@@ -261,7 +261,7 @@ MySQL 인스턴스를 설정하기 위해, 이름, root 패스워드, region, zo
 
 트랜잭션을 지원하는 글로벌, 일관된 데이터베이스를 생성해야 한다면, Cloud Spanner를 고려해야 한다. Spanner의 고급 특성을 고려할 때, Spanner의 설정은 놀랍게도 간단하다. 콘솔에서 Cloud Spanner를 열고 Create Instance를 선택하면 그림 11.13같은 양식이 표시된다.
 
-![11.13](./img/ch11/11.13.png)
+![11.13](../img/ch11/11.13.png)
 
 **그림 11.13** Cloud Console에서의 Cloud Spanner 설정 양식
 
@@ -275,13 +275,13 @@ Cloud Spanner는 Cloud SQL이나 다른 데이터베이스 옵션보다 상당�
 
 BigQuery는 스토리지와 쿼리, 통계, 머신러닝 분석 툴을 제공하는 관리형 분석 서비스이다. BigQuery는 인스턴스를 설정할 필요가 없다. 대신, 콘솔 메뉴에서 BigQuery를 열면 그림 11.14와 같은 양식을 확인할 수 있다.
 
-![11.14](./img/ch11/11.14.png)
+![11.14](../img/ch11/11.14.png)
 
 **그림 11.14** 데이터를 생성하고 쿼리하기 위한 BigQuery 사용자 인터페이스
 
 BigQuery를 사용하기 위한 첫번째 업무는 데이터를 보유할 데이터 셋을 생성하는 것이다. Create Dataset을 클릭하면 그림 11.15처럼 양식을 확인할 수 있다.
 
-![11.15](./img/ch11/11.15.png)
+![11.15](../img/ch11/11.15.png)
 
 **그림 11.15** BigQuery에서 dataset을 생성하는 양식
 
@@ -330,13 +330,13 @@ Datastore는 트랜잭션과 쿼리 성능을 증진시키는 인덱스를 지�
 
 BigQuery처럼 Datastore는 노드 설정을 지정하지 않는 관리형 데이터베이스 서비스이다. 대신, 콘솔에서 데이터베이스에 엔티티를 추가할 수 있다. 그림 11.16은 Cloud Console에서 Datastore를 열었을 때 나타나는 초기 야식을 보여준다.
 
-![11.16](./img/ch11/11.16.png)
+![11.16](../img/ch11/11.16.png)
 
 **그림 11.16** 데이터를 생성하고 쿼리할 수 있는 Datastore의 사용자 인터페이스
 
 Create Entity를 선택하면 양식이 표시되고 document 데이터 구조의 데이터를 추가할 수 있다.
 
-![11.17](./img/ch11/11.17.png)
+![11.17](../img/ch11/11.17.png)
 
 **그림 11.17** Datastore에 엔티티 추가
 
@@ -354,13 +354,13 @@ Cloud Firestore는 document 데이터 모델을 사용하는 관리형 NoSQL 데
 
 Cloud Firestore는 인스턴스를 설정할 필요가 없는 관리형 데이터베이스 서비스이다. 그러나 데이터 스토리지 시스템을 선택해야 한다. 옵션은 Datastore를 사용하는 것, Datastore 모드로 Firestore를 사용하는 것(Datastore 스토리지 시스템을 사용한다.), 또는 native 모드에서 Firestore를 사용하는 것을 포함한다. 신규 Firestore 사용자는 native 모드의 Firestore를 사용해야 한다. (그림 11.18)
 
-![11.18](./img/ch11/11.18.png)
+![11.18](../img/ch11/11.18.png)
 
 **그림 11.18** Firestore는 Datastore의 백엔드 스토리지 시스템이나 신규 native 모드 스토리지 시스템을 사용하도록 설정할 수 있다.
 
 스토리지 시스템을 선택한 후, 데이터베이스의 위치를 선택할 수 있다. (그림 11.19)
 
-![11.19](./img/ch11/11.19.png)
+![11.19](../img/ch11/11.19.png)
 
 **그림 11.19** Firestore 데이터베이스의 위치를 선택
 
@@ -376,7 +376,7 @@ Bigtable은 페타바이트급의 데이터베이스로 설계되었다. IoT 데
 
 Bigtable은 데이터 양이 많고, 데이터 수집 속도가 빠른 어플리케이션을 위해 설계되었다. 시간 단위, IoT, 금융 어플리케이션은 이 카테고리 안에 있다.
 
-![11.20](./img/ch11/11.20.png)
+![11.20](../img/ch11/11.20.png)
 
 **그림 11.20** Firestore 데이터베이스가 사용되기 위한 ready 상태
 
@@ -390,7 +390,7 @@ Bigtable은 다수의 클러스터를 지원한다. 각 클러스터를 위해 �
 
 챕터 12에서는 Bigtable에서 데이터를 가져오고 쿼리하는 방법을 설명한다.
 
-![11.21](./img/ch11/11.21.png)
+![11.21](../img/ch11/11.21.png)
 
 **그림 11.21** Bigtable을 위한 설정 양식
 

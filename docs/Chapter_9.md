@@ -21,7 +21,7 @@ App Engine 어플리케이션은 project에서 생성되는 고수준의 리소�
 
 Service는 전형적으로 *microservices*로 알려진 다수의 서비스로 구성된 복합한 어플리케이션으로 하나의 기능을 수행하도록 구성된다. 하나의 microservice는 데이터 접근을 위한 API 요청을 처리한다. 반면에, 또 다른 microservice는 비용 청구를 목적으로 인증과 3번째 레코드 데이터를 수행한다.
 
-![9.1](./img/ch09/9.1.png)
+![9.1](../img/ch09/9.1.png)
 
 **그림 9.1** App Engine 어플리케이션의 컴포넌트 계층
 
@@ -66,7 +66,7 @@ cat app.yaml
 
 그림 9.2에서 보여지는 것 처럼 설정의 상세정보를 보여준다.
 
-![9.2](./img/ch09/9.2.png)
+![9.2](../img/ch09/9.2.png)
 
 **그림 9.2** Python 어플리케이션을 위한 `app.yaml`파일의 컨텐츠
 
@@ -87,13 +87,13 @@ gcloud app deploy app.yaml
 
 `gcloud app deploy` 명령을 실행하면, 그림 9.3같은 output을 확인할 수 있다.
 
-![9.3](./img/ch09/9.3.png)
+![9.3](../img/ch09/9.3.png)
 
 **그림 9.3** `gcloud app deploy` 명령의 output
 
 브라우저에서 https://gcpace-project.appspot.com과 같이 프로젝트 URL을 입력하면 HelloWorld 프로그램의 output을 확인할수 있다. 프로젝트 URL은 project name 위에 .appspot.com이 붙는다. 예를 들어, 그림 9.8는 output을 보여준다.
 
-![9.4](./img/ch09/9.4.png)
+![9.4](../img/ch09/9.4.png)
 
 **그림 9.4** App Engine Standard에서 실행할 때, Hello World 어플리케이션의 output
 
@@ -103,19 +103,19 @@ gcloud app deploy app.yaml
 
 App Engine 콘솔에서 왼쪽 패널 메뉴에서 Services를 선택하면 service의 리스트를 확인할 수 있다. (그림 9.5)
 
-![9.5](./img/ch09/9.5.png)
+![9.5](../img/ch09/9.5.png)
 
 **그림 9.5** App Engine 콘솔에서의 service 리스트
 
 그림 9.6.은 버전의 리스트를 보여준다. 왼쪽 패널 메뉴에서 Versions을 선택하여 확인할 수 있다.
 
-![9.6](./img/ch09/9.6.png)
+![9.6](../img/ch09/9.6.png)
 
 **그림 9.6** App Engine 콘솔에서의 버전 리스트
 
 그림 9.7은 인스턴스 성능의 상세정보를 보여준다. 왼쪽 패널 메뉴에서 Instances를 선택하여 상세정보를 확인할 수 있다. 이 정보는 어플리케이션의 부하를 이해하는데 유용하다.
 
-![9.7](./img/ch09/9.7.png)
+![9.7](../img/ch09/9.7.png)
 
 **그림 9.7** App Engine 콘솔에서 인슽턴스 성능 상세 정보
 
@@ -154,7 +154,7 @@ App Engine 콘솔에서 Settings의 Disable App 버튼을 클릭하여 전체 �
 
 **Maximum and Minimum Latency** 요청이 queue에서 처리되기 기다리는 최대, 최소 시간을 가리킨다.
 
-![9.8](./img/ch09/9.8.png)
+![9.8](../img/ch09/9.8.png)
 
 **그림 9.8** 오토스케일링 파라미터를 갖는 Hello World 앱의 `app.yaml` 예시
 
@@ -162,13 +162,13 @@ App Engine 콘솔에서 Settings의 Disable App 버튼을 클릭하여 전체 �
 
 그림 9.9는 최대 10개의 인스턴스와 20분의 `idle_timeout` basic scaling이 설정된 Hello World 앱의 `app.yaml`의 예시를 보여준다.
 
-![9.9](./img/ch09/9.9.png)
+![9.9](../img/ch09/9.9.png)
 
 **그림 9.9** basic scaling을 사용한 `app.yaml`의 예시
 
 scaling을 제어해야하기 때문에 manual scaling 사용을 선호한다면, `manual_scaling` 파라미너와 실행할 인스턴스의 수를 지정한다. 그림 9.10 예시에서는 Hello World 앱이 7개 인스턴스를 실행하도록 설정되었다.
 
-![9.10](./img/ch09/9.10.png)
+![9.10](../img/ch09/9.10.png)
 
 **그림 9.10** manual scaling을 사용한 `app.yaml` 예시
 

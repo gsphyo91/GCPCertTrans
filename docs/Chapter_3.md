@@ -25,7 +25,7 @@ GCP 리소스를 관리하기위한 중요한 추상화는 리소스 계층이�
 
 조직은 리소스 계층의 루트이고, 전형적으로 회사나 조직과 일치한다. G-suite 도메인과 Cloud Identity 계정은 GCP 조직에 매핑한다. G Suite는 Gmail, Docs, Drive, Calendar, 다른 서비스를 포함하여 구글의 업무 상샌성 세트이다. 회사에서 G suite를 사용한다면, GCP 계층에 조직을 생성할 수 있다. 회사에서 G Suite를 사용하지 않는다면 Cloud Identity를 사용할 수 있다. 구글은 Identity as a Service(IDaaS)를 제공한다.(그럼 3.1)
 
-![3.1_IDaaS](./img/ch03/3.1_IDaaS.png)
+![3.1_IDaaS](../img/ch03/3.1_IDaaS.png)
 
 **그림 3.1** Cloud Identity 계정을 생성하고, Identity & Organization 형식으로 G-Suite 사용자를 관리할 수 있다.
 
@@ -42,13 +42,13 @@ G Suite 조직/Cloud Identity 계정의 멤버가 과금 계정이나 프로젝�
 
 폴더는 다층적인 조직 계층의 빌딩 블록이다. 조직은 폴더를 포함한다. 폴더는 다른 폴더나 프로젝트를 포함할 수 있다. 단일 폴더는 폴더와 프로젝트 모두 포함할 수도 있다. (그림 3.2) 폴더 구성은 보통 포함된 프로젝트의 리소스에서 제공되는 서비스의 종류와 폴더와 프로젝트를 관리하는 정책을 중심으로 구축된다.
 
-![3.2_organization_folder_project](./img/ch03/3.2_organization_folder_project.png)
+![3.2_organization_folder_project](../img/ch03/3.2_organization_folder_project.png)
 
 **그림 3.2** 일반적인 조직 폴더 프로젝트
 
 리소스 계층의 예시를 살펴보자. 조직은 4개의 부서를 갖고 있다: 회계, 마케팅, 소프트웨어 개발, 법무. 회계 부서는 받아야할 계정과 지불해야할 계정 리소스를 분리해서 가져야한다. 그래서 관리자는 회계 폴더 내에 2개의 폴더를 생성했다: Account Receivable, Accounts Payable. 소프트웨어 개발은 개발, 검증, 대기, 상용을 포함한 다양한 환경을 사용한다. 각 환경의 접근은 그 환경에 지정된 정책에 의해서 제어된다. 그래서 소유하고 있는 폴더 내에 각 환경을 구성했다. 마케팅과 법무는 부서의 멤버들 간에 그들의 모든 리소스를 공유한다. 그래서 단일 폴더는 두 부서에 모두 충분하다. 그림 3.3은 이 조직을 위한 조직 계층을 보여준다.
 
-![3.3_example_organization_folder_project](./img/ch03/3.3_example_organization_folder_project.png)
+![3.3_example_organization_folder_project](../img/ch03/3.3_example_organization_folder_project.png)
 
 **그림 3.3** 조직 폴더 프로젝트의 예시
 
@@ -93,7 +93,7 @@ Organizations는 클라우드에서 데이터와 리소스를 보호하기 위�
 
 다양한 정책은 folder나 project에 유효할 수 있다. 예를 들어, organization은 시리얼 포트 접근에 대한 정책을 갖고 있고, project를 포함하는 folder는 누가 service account를 생성할 수 있는지 제한하는 정핵을 갖고 있다면, project는 두 가지 정책을 상속받을 것이고, project에서 리소스로 할 수 있는 일을 제약할 것이다.
 
-![3.4_IAM_admin_console](./img/ch03/3.4_IAM_admin_console.png)
+![3.4_IAM_admin_console](../img/ch03/3.4_IAM_admin_console.png)
 
 **그림 3.4** Organizational policies는 IAM & admin console에서 관리된다.
 
@@ -101,27 +101,27 @@ Organizations는 클라우드에서 데이터와 리소스를 보호하기 위�
 
 새로운 클라우드 계획을 시작할 때 수행할 첫 번째 업무 중 하나는 프로젝트를 세팅하는 것이다. 이 것은 구글 클라우드 Console에서 할 수 있다. GCP에 계정을 생성했다면 가정하면, [https://console.cloud.google.com](https://console.cloud.google.com)에서 Google Cloud Console을 찾고, 로그인한다. 그림 3.5와 같은 홈페이지가 보일 것이다.
 
-![3.5_home_page_console](./img/ch03/3.5_home_page_console.png)
+![3.5_home_page_console](../img/ch03/3.5_home_page_console.png)
 
 **그림 3.5** console 홈페이지
 
 왼쪽 위에 메뉴에서 IAM & admin을 선택하고, Manage Resoucce를 선택한다.(그림 3.6, 3.7)
 
-![3.6_navigation_menu](./img/ch03/3.6_navigation_menu.png)
+![3.6_navigation_menu](../img/ch03/3.6_navigation_menu.png)
 
 **그림 3.6** 네비게이션 메뉴
 
-![3.7_select_namage_resources](./img/ch03/3.7_select_namage_resources.png)
+![3.7_select_namage_resources](../img/ch03/3.7_select_namage_resources.png)
 
 **그림 3.7** Manage Resource 선택
 
 페이지에서 Create Project를 선택하여 Create Project 화면이 표시된다. 프로젝트의 이름을 입력하고, 화면에서 organization을 선택할 수 있다.(그림 3.8, 3.9)
 
-![3.8_create_project](./img/ch03/3.8_create_project.png)
+![3.8_create_project](../img/ch03/3.8_create_project.png)
 
 **그림 3.8** Creat Project 클릭
 
-![3.9_create_project_dialog](./img/ch03/3.9_create_project_dialog.png)
+![3.9_create_project_dialog](../img/ch03/3.9_create_project_dialog.png)
 
 **그림 3.9** Create Project 화면
 
@@ -147,7 +147,7 @@ Predefined roles는 GCP 리소스에 세밀한 접근을 제공하고, GCP 제�
 * `appengine.ServiceAdmin`, 어플리케이션 세팅에 대한 read-only 접근 권한과 모듈 수준과 버전 수준 세팅에 대한 쓰기 수준의 접근 권한을 부여
 * `appengine.appView`, 어플리케이션에 대한 read-only 접근 권한을 부여
 
-![3.10_sample_list_of_roles](./img/ch03/3.10_sample_list_of_roles.png)
+![3.10_sample_list_of_roles](../img/ch03/3.10_sample_list_of_roles.png)
 
 **그림 3.10** GCP roles의 샘플 리스트
 
@@ -155,13 +155,13 @@ Custom roles은 클라우드 관리자가 자신의 role을 생성하고 관리�
 
 IAM 콘솔에서 그림 3.11과 같이 사용권한 인터페이스를 표시할 프로젝트를 선택할 수 있다.
 
-![3.11_IAM_permissions](./img/ch03/3.11_IAM_permissions.png)
+![3.11_IAM_permissions](../img/ch03/3.11_IAM_permissions.png)
 
 **그림 3.11** IAM Permissions
 
 여기에서 Add 옵션을 선택하면 username과 role를 입력하는 화면이 표시된다.
 
-![3.12_adding_a_user](./img/ch03/3.12_adding_a_user.png)
+![3.12_adding_a_user](../img/ch03/3.12_adding_a_user.png)
 
 **그림 3.12** 사용자 추가
 
@@ -181,7 +181,7 @@ Service account는 프로젝트 수준에서 account 그룹이나 service accoun
 
 service account는 리소스가 생성될 때 자동적으로 생성된다. 예를 들어, service account는 VM이 생성될 때 VM에 생성될 것이다. 어플리케이션 중 하나에 service account를 생성하고 싶은 상황이 있을지도 모른다. 이 경우에는 IAM & admin 콘솔에서 Service Account를 선택한다. 그림 3.13에서 보여지는 것처럼 위쪽에 Create Service Account를 클릭한다.
 
-![3.13_service_accounts_listing](./img/ch03/3.13_service_accounts_listing.png)
+![3.13_service_accounts_listing](../img/ch03/3.13_service_accounts_listing.png)
 
 **그림 3.13** IAM & admin 콘솔에서 Service account 리스트
 
@@ -199,13 +199,13 @@ Billing account는 리소스 계층과 비슷한 구조를 갖는다. 작은 기
 
 구글 클라우드 콘솔의 메인에서 기존의 billing account를 나열한 Billing console을 찾을 수 있다. (그림 3.14)
 
-![3.14_main_billing_form](./img/ch03/3.14_main_billing_form.png)
+![3.14_main_billing_form](../img/ch03/3.14_main_billing_form.png)
 
 **그림 3.14** 기존 billing account를 나열하는 Billing 메인 형식
 
 여기에서 그림 3.15에서 보여지는 것처럼 새로운 billing account를 생성할 수 있다.
 
-![3.15_new_billing_account](./img/ch03/3.15_new_billing_account.png)
+![3.15_new_billing_account](../img/ch03/3.15_new_billing_account.png)
 
 **그림 3.15** 새로운 billing account를 생성하는 양식
 
@@ -225,7 +225,7 @@ Billing Account Creator를 담당하는 사용자는 거의 없고, 이 사람�
 
 GCP Billing 서비스는 예산을 정의하고 과금 알림을 설정하는 옵션을 포함한다. 콘솔의 메인 메뉴에서 Billing을 선택하고, Budget & alerts를 선택해서 예산 양식을 확인할 수 있다. (그림 3.16)
 
-![3.16_budget_form](./img/ch03/3.16_budget_form.png)
+![3.16_budget_form](../img/ch03/3.16_budget_form.png)
 
 **그림 3.16** 예산 양식은 특정한 달에 예산의 일정 퍼센트를 지불한 경우 공지가 보내질 수 있다.
 
@@ -243,19 +243,19 @@ GCP Billing 서비스는 예산을 정의하고 과금 알림을 설정하는 �
 
 BigQuery로 과금 데이터를 추출하기 위해, 콘솔에서 Billing 영역을 찾고, 해당 메뉴에서 Billing export를 선택한다. 나타나는 화면의 형식에서 추출하기 원하는 billing account를 선택하고, BigQuery Export나 File Export 중에서 하나를 선택한다. (그림 3.17)
 
-![3.17_billing_export_form](./img/ch03/3.17_billing_export_form.png)
+![3.17_billing_export_form](../img/ch03/3.17_billing_export_form.png)
 
 **그림 3.17** Billing 추출 양식
 
 BigQuery에서 Edit Setting을 선택한다. 포함하길 원하는 프로젝트를 선택한다. 데이터를 저장하기 위해서 BigQuery 데이터 셋을 생성할 필요가 있다. Go To BigQuery를 클릭해서 BigQuery 양식을 연다. 추출된 데이터를 저장하는데 사용되는 Billing export 데이터 셋을 생성한다. (그림 3.18) BigQuery를 사용한 추가 정보는 챕터 12에서 확인한다.
 
-![3.18_exporting_BigQuery](./img/ch03/3.18_exporting_BigQuery.png)
+![3.18_exporting_BigQuery](../img/ch03/3.18_exporting_BigQuery.png)
 
 **그림 3.18** BigQuery로 추출
 
 그 대신, Cloud Storage에 저장되는 파일로 billing 데이터를 추출할 수 있다. Billing Export 양식에서 그림 3.29에서 보이는 것처럼 File Export 탭을 선택한다.
 
-![3.19_exporting_billing_data](./img/ch03/3.19_exporting_billing_data.png)
+![3.19_exporting_billing_data](../img/ch03/3.19_exporting_billing_data.png)
 
 **그림 3.19** 파일로 billing 데이터 추출
 
@@ -267,13 +267,13 @@ GCP는 프로그램방식으로 접근이 가능한 서비스인 API를 사용�
 
 API 서비스를 사용하기 위해서 콘솔의 메인 메뉴에서 APIs & Services를 선택한다. 그림 3.20에서 보이는 것 처럼 대쉬보드를 볼 수 있다.
 
-![3.20_example_API_services_dashboard](./img/ch03/3.20_example_API_services_dashboard.png)
+![3.20_example_API_services_dashboard](../img/ch03/3.20_example_API_services_dashboard.png)
 
 **그림 3.20** API 서비스 대쉬보드의 예
 
 Enable API and Service 링크를 클릭하면, 그림 3.21처럼 사용할 수 있는 서비스의 리스트를 확인할 수 있다.
 
-![3.21_API_enabled](./img/ch03/3.21_API_enabled.png)
+![3.21_API_enabled](../img/ch03/3.21_API_enabled.png)
 
 **그림 3.21** API를 사용할 수 있는 서비스
 
@@ -281,7 +281,7 @@ Enable API and Service 링크를 클릭하면, 그림 3.21처럼 사용할 수 �
 
 또한, 그림 3.20에서 API의 목록과 상태를 기억해라. 사용가능한 API는 Disable 옵션을 갖고 있고, disable the API를 틀릭할 수 있다. 리스트에서 API의 이름을 클릭하여 API 사용에 대한 상세 정보를 확인할 수 있다. (그림 3.22)
 
-![3.22_details_API_usage](./img/ch03/3.22_details_API_usage.png)
+![3.22_details_API_usage](../img/ch03/3.22_details_API_usage.png)
 
 **그림 3.22** API 사용에 대한 상세 정보
 
@@ -291,13 +291,13 @@ oraganization과 project를 설정할 때, identities 생성, roles 지정, bill
 
 Stackdriver는 어플리케이션과 리소스의 모니터링, 로깅, 추적, 디버깅을 위한 서비스 셋이다. (그림 3.23)Stackdriver에 저장되는 모니터링과 로깅 데이터를 저장하기 위해서 workspace를 생성해야 한다. 콘솔 메인 메뉴에서 Stackdriver를 선택하여 진행할 수 있다.
 
-![3.23_stackdriver_dashboard](./img/ch03/3.23_stackdriver_dashboard.png)
+![3.23_stackdriver_dashboard](../img/ch03/3.23_stackdriver_dashboard.png)
 
 **그림 3.23** Stackdriver 대쉬보드
 
 대쉬보드 위쪽에는 연재 프로젝트의 이름이 보여진다. 관리자 옵션 리스트를 확인하기 위해 프로젝트 이름 옆에 화살표를 클릭한다. (그림 3.24)
 
-![3.24_managing_stackdriver_workspaces](./img/ch03/3.24_managing_stackdriver_workspaces.png)
+![3.24_managing_stackdriver_workspaces](../img/ch03/3.24_managing_stackdriver_workspaces.png)
 
 **그림 3.24** Stackdriver workspace 관리를 위한 관리 기능
 
@@ -305,7 +305,7 @@ Create Workspace를 클릭하면, 그림 3.25와 같은 양식이 나타난다. 
 
 챕터 18에서 Stackdriver에 대한 더 자세한 정보를 확인할 수 있다.
 
-![3.25_create_workspace_dialog](./img/ch03/3.25_create_workspace_dialog.png)
+![3.25_create_workspace_dialog](../img/ch03/3.25_create_workspace_dialog.png)
 
 **그림 3.25** Create Workspace 
 

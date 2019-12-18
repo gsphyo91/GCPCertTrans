@@ -16,31 +16,31 @@ Compute Engine에서 VM을 생성해보자. 이 것을 하기 위해 3가지 옵
 
 콘솔을 열기 위해서는 브라우저에서 [https://console.cloud.google.com](https://console.cloud.google.com)에 접속하고 로그인한다. 그림 5.1은 콘솔의 메인 페이지의 예를 보여준다.
 
-![5.1_main_form_console](./img/ch05/5.1_main_form_console.png)
+![5.1_main_form_console](../img/ch05/5.1_main_form_console.png)
 
 **그림 5.1** 구글 클라우드 콘솔의 메인 시작 페이지
 
 페이지 왼쪽 위에서, 기존 프로젝트를 보여주는 Select A Project 옵션을 클릭한다. 그림 5.2와 같은 화면에서 새로운 프로젝트를 생성할 수 있다.
 
-![5.2_create_new_project](./img/ch05/5.2_create_new_project.png)
+![5.2_create_new_project](../img/ch05/5.2_create_new_project.png)
 
 **그림 5.2** VM을 생성할 때 작업할 프로젝트르 선택하는 프로젝트 화면. 또한 새로운 프로젝트를 생성할 수 있다.
 
 기존 프로젝트를 선택하거나 새로운 프로젝트를 생성한 후에, 메인 콘솔 화면으로 돌아온다. 첫번째로 해야할 작업은 billing account을 생성한다. 이미 account가 있으면 생성하지 않아도 된다. 그림 5.3은 billing account를 생성하기 위한 메인 화면의 메시지와 버튼을 보여준다.
 
-![5.3_create_billing_account](./img/ch05/5.3_create_billing_account.png)
+![5.3_create_billing_account](../img/ch05/5.3_create_billing_account.png)
 
 **그림 5.3** billing account가 프로젝트에 없을 때, VM을 생성할 때 billing account를 생성하는 옵션이 있다.
 
 Enable Billine을 클릭하고 이름, 주소, 카드정보와 같은 billing 정보를 입력한다. billing이 적용되면, 메인 화면으로 돌아온다. (그림 5.4)
 
-![5.4_create_VM](./img/ch05/5.4_create_VM.png)
+![5.4_create_VM](../img/ch05/5.4_create_VM.png)
 
 **그림 5.4** VM을 생성하기 위한 첫 화면
 
 VM 설정을 가져오기 위해 화면에서 Create 버튼을 클릭한다.(그림 5.5)
 
-![5.5_create_vm_compute_engine](./img/ch05/5.5_create_vm_compute_engine.png)
+![5.5_create_vm_compute_engine](../img/ch05/5.5_create_vm_compute_engine.png)
 
 **그림 5.5** Compute Engine에서 VM을 생성하기 위한 메인 설정 화면의 한 부분
 
@@ -56,25 +56,25 @@ VM의 이름을 선택할 수 있다. 이 것은 주로 사용자가 사용한�
 
 Region을 지정해야 한다. Region은 주요 지리적 영역들이다. 그림 5.6은 region의 일부분을 보여준다.
 
-![5.6_regions](./img/ch05/5.6_regions.png)
+![5.6_regions](../img/ch05/5.6_regions.png)
 
 **그림 5.6** Compute Engine 서비스를 제공하는 region의 일부 리스트
 
 region을 선택한 후, zone을 선택할 수 있다. zone은 region 내에 있는 시설 처럼 데이터 센터라는 것을 기억해야 한다. 그림 5.7은 us-east-1 region에서 이용할 수 있는 zone의 예를 보여준다.
 
-![5.7_zone](./img/ch05/5.7_zone.png)
+![5.7_zone](../img/ch05/5.7_zone.png)
 
 **그림 5.7** us-east-1 region 내의 zone 리스트
 
 region과 zone을 지정한 후, 구글 클라우드는 zone에서 이용할 수 있는 VM을 결정한다. 모든 zone이 동일하게 이용할 수는 없다. 그림 5.8은 us-east1-b zone에서 시용할 수 있는 machine type의 예를 보여준다.
 
-![5.8_machine_type](./img/ch05/5.8_machine_type.png)
+![5.8_machine_type](../img/ch05/5.8_machine_type.png)
 
 **그림 5.8** us-east1-b zone에서 이용할 수 있는 machine type 리스트
 
 부트 디스트 옵션은 기본 설정이 나열된다. Change 버튼을 클릭하면 부트 디스트 옵션을 가져온다. (그림 5.9)
 
-![5.9_boot_disk](./img/ch05/5.9_boot_disk.png)
+![5.9_boot_disk](../img/ch05/5.9_boot_disk.png)
 
 **그림 5.9** VM의 부트 디스크 설정을 위한 화면
 
@@ -82,7 +82,7 @@ region과 zone을 지정한 후, 구글 클라우드는 zone에서 이용할 수
 
 아래는 부트 디스크의 ID와 API 접근 영역이다. 여기에서 VM을 위한 service account을 지정하고, API 접근의 범위를 설정할 수 있다. 이 VM에서 실행되는 프로세스가 일부 API만 사용하도록 하려면, VM의 특정 API로의 접근을 제한하는 옵션을 사용할 수 있다.
 
-![5.10_id_api_firewall](./img/ch05/5.10_id_api_firewall.png)
+![5.10_id_api_firewall](../img/ch05/5.10_id_api_firewall.png)
 
 **그림 5.10** ID, API 접근, 방화벽 설정
 
@@ -96,7 +96,7 @@ region과 zone을 지정한 후, 구글 클라우드는 zone에서 이용할 수
 
 페이지의 Management 탭(그림 5.11)은 VM을 설명할 수 있는 영역을 제공한다. 또한 Key-value 쌍의 label을 생성할 수 있다. 원하는 label을 지정할 수 있다. Label과 설명은 VM을 관리하고 VM을 사용하는 방법을 이해하는데 종종 사용된다. Label은 서버의 수가 늘어날 때 특히 중요하다. 모든 VM에 설명과 label을 포함하는 것은 좋다.
 
-![5.11_management_tab](./img/ch05/5.11_management_tab.png)
+![5.11_management_tab](../img/ch05/5.11_management_tab.png)
 
 **그림 5.11** VM 생성 페이지의 Management 탭 중 첫번째 부분
 
@@ -111,7 +111,7 @@ Availability Policy는 3가지 파라미터를 설정한다.
 * Automatic restart, 서버가 하드위어 장애, 유지보수, 비사용자가 제어하는 이슈로 인해 중지해야 하는지 여부
 * host maintenance, 유지보수 이벤트가 발생할 때, 가상서버를 다른 물리서버로 이동시켜야 하는 지 여부
 
-![5.12_management_tab_second](./img/ch05/5.12_management_tab_second.png)
+![5.12_management_tab_second](../img/ch05/5.12_management_tab_second.png)
 
 **그림 5.12** VM 생성 페이지 Management 탭의 두 번째 부분
 
@@ -122,7 +122,7 @@ Shielded VM은 실행하도록 선택할 수 있는 추가 보안 메커니즘�
 * Virtual Trusted Platform Module(vTPM), trusted platform module(TPM)의 가상화되 버전이다. TPM은 key와 인증처럼 보안 리소스를 보호하도록 설계된 특별한 컴퓨터 칩이다.
 * Integrity Monitoring, 잘 알려진 부트 측정 기준을 사용하여 최근 부트 측정을 비교한다. 확인이 실패하면, 측정 기준과 현재 측정간 차이점을 보여준다.
 
-![5.13_security_tab](./img/ch05/5.13_security_tab.png)
+![5.13_security_tab](../img/ch05/5.13_security_tab.png)
 
 **그림 5.13** 추가적인 security 제어는 VM에 배치할 수 있다.
 
@@ -132,13 +132,13 @@ GCP는 프로젝트전체 SSH key 개념을 지원하며, 사용자에게 프로
 
 Boot Disk 설정 탭 내에서, 새로운 디스크를 추가하거나 기존 디스크를 추가하는 옵션이 있다. 그림 5.14는 새로운 디스크를 추가하기 위한 탭을 보여준다.
 
-![5.14_boot_disk_advanced](./img/ch05/5.14_boot_disk_advanced.png)
+![5.14_boot_disk_advanced](../img/ch05/5.14_boot_disk_advanced.png)
 
 **그림 5.14** Boot Disk 고급 설정
 
 기존 디스크를 추가할 때, 그림 5.15처럼 페이지가 나타난다. 디스크 선택지는 선택할 수 있는 기존 디스크의 리스트이다. 디스크를 read-only나 read/write로 설정할 수 있다. 또한 인스턴스가 삭제될 때 디스크를 삭제할지 여부를 선택할 수 있다. read-only 모드의 기존 디스크를 사용하는 것은 VM의 다수 인스턴스간 참조 데이터를 복제하는 좋은 방법이다.
 
-![5.15_adding_disk](./img/ch05/5.15_adding_disk.png)
+![5.15_adding_disk](../img/ch05/5.15_adding_disk.png)
 
 **그림 5.15** VM에 기존 디스크를 추가하기 위한 화면
 
@@ -150,19 +150,19 @@ Boot Disk 설정 탭 내에서, 새로운 디스크를 추가하거나 기존 �
 * 기가바이트 급 사이즈
 * 어떻게 암호화 키가 관리될 지
 
-![5.16_adding_new_disk](./img/ch05/5.16_adding_new_disk.png)
+![5.16_adding_new_disk](../img/ch05/5.16_adding_new_disk.png)
 
 **그림 5.16** VM에 새로운 디스크를 추가하기위한 화면
 
 Networking 탭에서 VM의 IP주소를 포함한 네트워크 인터페이스 정보를 볼 수 있다. 다수의 네트워크를 갖고 있다면, 다른 네트워크에 다른 네트워크 인터페이스를 추가할 수 있는 옵션이 있다. 듀얼 네트워크 인터페이스의 이러한 사용은 네트워크 간 일부 트래픽을 제어하는 일부 유형의 프록시나 서버를 동작하는 경우 유용하다. 이 외에, 화면에서 네트워크 태그를 추가할 수 있다. (그림 5.17)
 
-![5.17_network_configuration](./img/ch05/5.17_network_configuration.png)
+![5.17_network_configuration](../img/ch05/5.17_network_configuration.png)
 
 **그림 5.17** VM의 네트쿼으 설정 화면
 
 VM이 오직 다른 VM과 함께 서버에서 실행되어야 한다면, sole tenancy(전용 테넌시)를 지정할 수 있다. Sole Tenancy 탭은 서버에서 sole tenancy에 관한 label을 지정할 수 있다. (그림 5.18)
 
-![5.18_sole_tenancy](./img/ch05/5.18_sole_tenancy.png)
+![5.18_sole_tenancy](../img/ch05/5.18_sole_tenancy.png)
 
 **그림 5.18** Sole Tenancy 설정 화면
 
@@ -266,13 +266,13 @@ gcloud compute instances create --machine-type=n1-standard-8 --preemptibl ace-in
 
 로컬 `gcloud` 명령어를 실행하는 것을 대체하는 것은 클라우드 인스턴스에서 실행하는 것이다. Cloud Shell은 이 기능을 제공한다. Cloud Shell을 사용하기 위해 그림 5.19에서 보여지는 것처럼 클라우드 콘솔 브라우저의 오른쪽 위에있는 shell 아이콘을 클릭하여 시작한다.
 
-![5.19_cloud_shell](./img/ch05/5.19_cloud_shell.png)
+![5.19_cloud_shell](../img/ch05/5.19_cloud_shell.png)
 
 **그림 5.19** Cloud Shell은 클라우드 콘솔을 통해 실행된다.
 
 Cloud Shell은 그림 5.20처럼 리눅스 CLI를 제공하고, Cloud SDK는 이미 설치되어있다. Cloud SDK가 설치된 로컬 디바이스에서 입력되는 모든 `gcloud` 명령어는 Cloud Shell에서 사용될 수 있다.
 
-![5.20_cloud_shell_open](./img/ch05/5.20_cloud_shell_open.png)
+![5.20_cloud_shell_open](../img/ch05/5.20_cloud_shell_open.png)
 
 **그림 5.20** Cloud Shell은 브라우저에서 CLI 화면을 실행한다.
 
@@ -284,7 +284,7 @@ VM이 실해 중일 때, 콘솔을 사용하거나 `gcloud` 명령어를 사용�
 
 콘솔에서 Compute Engine을 선택한다음 왼쪽 패널에서 VM Instance를 선택하여 인스턴스의 리스트를 확인한다. 작업할 VM을 선택한 다음 오른쪽 3개의 점으로 된 아이콘을 클릭해서 명령어 옵션 리스트를 선택할 수 있다. (그림 5.21)
 
-![5.21_basic_operation_VM](./img/ch05/5.21_basic_operation_VM.png)
+![5.21_basic_operation_VM](../img/ch05/5.21_basic_operation_VM.png)
 
 **그림 5.21** VM의 기본적인 동작은 콘솔의 팝업 메뉴를 사용하여 수행될 수 있다.
 
@@ -302,13 +302,13 @@ gcloud compute instances stop INSTANCE-NAME
 
 그림 5.22는 콘솔에서 SSH를 사용하기위한 옵션이다. 옵션 리스트는 관련된 VM의 SSH 버튼을 클릭할 떄 나타난다.
 
-![5.22_ssh_session](./img/ch05/5.22_ssh_session.png)
+![5.22_ssh_session](../img/ch05/5.22_ssh_session.png)
 
 **그림 5.22** 콘솔에서 SSH session을 시작하여 리눅스 서버에 접속할 수 있다.
 
 Open In Browser Window 옵션을 선택하는 것은 새로운 브라우저를 열고, 서버에서 CLI에 접근하기 위한 터미널을 표시한다.
 
-![5.23_new_browser_window](./img/ch05/5.23_new_browser_window.png)
+![5.23_new_browser_window](../img/ch05/5.23_new_browser_window.png)
 
 **그림 5.23** 터미널은 Cloud Shell을 사용할 때 새로운 브라우에서 열린다.
 
@@ -320,15 +320,15 @@ VM이 실행되는 동안 VM 인스턴스 상세페이지의 모니터링 페이
 
 그림 5.24, 5.25, 5.26dms CPU, 네트워크, 디스크에 대한 정보를 보여준다.
 
-![5.24_monitoring_tab_vm](./img/ch05/5.24_monitoring_tab_vm.png)
+![5.24_monitoring_tab_vm](../img/ch05/5.24_monitoring_tab_vm.png)
 
 **그림 5.24** VM인스턴스 상세 페이지의 모니터링 탭은 CPU 이용을 보여준다.
 
-![5.25_monitoring_network](./img/ch05/5.25_monitoring_network.png)
+![5.25_monitoring_network](../img/ch05/5.25_monitoring_network.png)
 
 **그림 5.25** VM 인스턴스 상세 페이지의 모니터링 탭은 네트워크 이용에 대해 보여준다.
 
-![5.26_monitoring_disk](./img/ch05/5.26_monitoring_disk.png)
+![5.26_monitoring_disk](../img/ch05/5.26_monitoring_disk.png)
 
 **그림 5.26** 디스크 이용량은 VM 인스턴스 상세 페이지의 모니터링 탭에 포함되어있다.
 

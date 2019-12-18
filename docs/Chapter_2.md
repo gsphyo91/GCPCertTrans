@@ -39,7 +39,7 @@ VM은 물리적인 서버의 추상화이다. 이는 기본적으로 물리적�
 
 하이퍼바이저는 리눅스나 윈도우 서버같은 운영체제 위에서 동작한다. 하이퍼바이저는 다른 `게스트 운영체제`라고 불리는 다양한 운영체제를 실행하는 동시에 각 운영체제의 활동을 다른 게스트 운영체제로부터 독립시킬 수 있다. 실행 중인 게스트 운영체제의 각 인스턴스는 VM 인스턴스이다. 그림 2.1은 물리적인 서버에서 실행하는 VM 인스턴스의 눈리적인 구성를 보여준다.
 
-![2.1_logical_organization_of_VM_instances](./img/ch02/2.1_logical_organization_of_VM_instances.png)
+![2.1_logical_organization_of_VM_instances](../img/ch02/2.1_logical_organization_of_VM_instances.png)
 
 FIGURE 2.1 하이퍼바이저 내에서 동작하는 VM 인스턴스
 
@@ -59,7 +59,7 @@ Kubernetes Engine은 사용자가 서버의 클러스터에서 컨테이너화�
 
 언급되었던것 처럼, VM은 물리서버 위에 게스트 OS에서 동작한다. 물리적인 서버는 하이퍼바이저와 함께 운영체제도 실행한다. 컴퓨팅 리소스를 독립시키기위한 또다른 방식은 프로세스와 리소스를 독립시키는 호스트 운영체제의 기능을 사용하는 것이다. 이 방식은 하이퍼바이저가 필요하지 않으므로 호스트 운영체제는 독립 상태를 유지한다. 컨테이너 매니저 위에서 실행하는 추가 혹은 게스트 OS가 없다. 그 대신, 컨테이너는호스트 운영체제 기능을 사용하는 동시에 운영체제와 컨테이너 매니저는 동작 중인 컨테이너간 독립을 보장한다. 그림 2.2는 컨테이너의 논리적인 구조를 보여준다.
 
-![2.2_logical_structure_of_containers](./img/ch02/2.2_logical_structure_of_containers.png)
+![2.2_logical_structure_of_containers](../img/ch02/2.2_logical_structure_of_containers.png)
 
 FIGURE 2.2 물리 서버에서 동작하는 컨테이너
 

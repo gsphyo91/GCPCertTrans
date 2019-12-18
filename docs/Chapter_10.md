@@ -75,13 +75,13 @@ Cloud Storage는 GCP의 object 스토리지이다. 이 서비스는 *buckets*이
 
 Cloud Console을 사용하여 함수를 생성하기 위해, 콘솔의 메뉴에서 Cloud Functions 옵션을 선택한다. (그림 10.1)
 
-![10.1](./img/ch10/10.1.png)
+![10.1](../img/ch10/10.1.png)
 
 **그림 10.1** Cloud Functions 콘솔
 
 Cloud Console 콘솔에서, 활성화되어있지 않는다면, Cloud Functions API를 활성화하는 입력화면이 보일 것이다. Cloud Functions API가 활성화 된 후에, 신규 함수를 생성할 수 있다. (그림 10.2)
 
-![10.2](./img/ch10/10.2.png)
+![10.2](../img/ch10/10.2.png)
 
 **그림 10.2** Cloud 콘솔에서 새로운 함수를 생성하는 프롬프트
 
@@ -95,7 +95,7 @@ Cloud Console 콘솔에서, 활성화되어있지 않는다면, Cloud Functions 
 * Source code
 * Python, Go or Node.js function to execute
 
-![10.3](./img/ch10/10.3.png)
+![10.3](../img/ch10/10.3.png)
 
 **그림 10.3** 콘솔에서 함수 생성
 
@@ -112,7 +112,7 @@ def cloud_storage_function_test(event_data, event_context):
 
 함수가 생성된 후에, 그림 10.4와 같이 Cloud Functions 콘솔에서 함수의 리스트를 확인할 수 있다.
 
-![10.4](./img/ch10/10.4.png)
+![10.4](../img/ch10/10.4.png)
 
 **그림 10.4** 콘솔에서 함수의 리스트
 
@@ -153,7 +153,7 @@ gcloud functions deploy cloud_storage_function_test --runtime python37 --trigger
 
 버킷에 파일이 업로드될 때, 함수가 실행되고, 그림 10.5에서 보여지는것과 유사한 로그 메시지가 생성된다.
 
-![10.5](./img/ch10/10.5.png)
+![10.5](../img/ch10/10.5.png)
 
 **그림 10.5** `cloud_storage_function_test`함수에 의해서 생성된느 로그 메시지의 예
 
@@ -187,7 +187,7 @@ def pub_sub_function_test(event_data, event_context):
 
 이 코드는 2가지 예외사항을 갖는 이전 Cloud Storage 예시와 동일한 방법으로 배포된다. Cloud Storage 트리거를 선택하는 것 대신에, 그림 10.6에서 보여지는 것처럼 트리거의 리스트에서 Cloud Pub/Sub을 선택한다. 또한, Cloud Pub/Sub 트리거를 지정한 후, Cloud Pub/Sub 토픽의 이름을 지정한다. 토픽이 존재하지 않으면 생성될 것이다.
 
-![10.6](./img/ch10/10.6.png)
+![10.6](../img/ch10/10.6.png)
 
 **그림 10.6** 클라우드 콘솔의 옵션에서 트리거를 선택
 
