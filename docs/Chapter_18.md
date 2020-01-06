@@ -170,4 +170,287 @@ Associate Cloud Engineering 시험 가이드는 클라우드 엔지니어가 친
 
 ### Log Sinks 구성
 
-Stackdriver 로딩은 로그 데이터를 30일동안 유지한다. 
+Stackdriver 로깅은 로그 데이터를 30일동안 유지한다. 이것은 운영적인 이슈를 진단하기 위해 로그를 사용하는 경우에 충분하지만, 며칠 뒤에 로그를 거의 볼 수 없다. 이것은 종종 충분하지 않다. 조직은 정부나 산업 규제를 준수하기위해 로그를 오래 유지해야할 수도 있다. 또한 어플리케이션 성능에서 인사이트를 얻기 위해 로그를 분석하기 원할 수 있다. 이러한 사례의 경우, Cloud Storage나 BigQuery와 같은 장기간 스토리지 시스템에 로깅 데이터를 추출하는게 가장 좋다.
+
+Logging에서 스토리지 시스템으로 데이터를 복사하는 프로세스를 exporting이라고 부르고, 로그 데이터를 작성하는 위치를 sink라고 부른다. 그림 18.18처럼 Cloud Console에서 Logging 섹션을 열고, Logging 메뉴에서 Export 옵션을 선택하여 log sink를 생성할 수 있다.
+
+![18.18](../img/ch18/18.18.png)
+
+**그림 18.18** Cloud Console에서 Logging Export 양식
+
+Create Export를 클릭하여 log sink를 생성하는 양식을 연다. 3가지 파라미터를 입력한다.
+* Sink name
+* Sink Service
+* Sink Destination
+
+그림 18.19처럼 sink name을 만들 수 있다. sink service는 다음 중 하나이다.
+* BigQuery
+* Cloud Storage
+* Cloud Pub/Sub
+* Custom Destination
+
+![18.19](../img/ch18/18.19.png)
+
+**그림 18.19** BigQuery log sink 생성
+
+서비스로 BigQuery로 선택하면, sink destination은 기존 BigQuery 데이터 셋이나 새로운 데이터 셋이 될 수 있다. (그림 18.19) 로그 데이터가 BigQuery로 추출될 때, 로그 이름과 타임스탬프를 기반으로 테이블이 구성된다. 예를 들어, 2019년 1월 1일에 추출된 syslog는 syslog_20190102 이름을 갖는다. 테이블은 타임스탬프, 로그 이름, 텍스트 페이로드나 로그 메시지를 저장하는 컬럼을 갖는다.
+
+Cloud Storage를 선택하면, 기존 버킷에 로그를 추출할 수 있거나 새로운 버킷을 생성할 수 있다. (그림 18.20) 로그 데이터가 Cloud Storage에 추출될 때, Logging은 파일 셋을 sink bucket에 작성한다. 파일은 로그 타입과 날짜의 계층으로 구성된다. 예를 들어, syslog가 ace-exam-log-sink1 이름의 버킷으로 2019년 1월 2일에 추출되면, 파일의 경로는 `ace-exam-log-sink1/syslog/2019/01/02/`이 될 것이다.
+
+![18.20](../img/ch18/18.20.png)
+
+**그림 18.20** Cloud Stoarge log sink 생성
+
+Cloud Pub/Sub을 선택하면, 토픽을 생성하거나 기존 토픽을 사용하여 선택할 수 있다. (그림 18.21) 로그 데이터가 Cloud Pub/Sub에 추출될 때, 데이터는 LogEctry로 알려진 오브젝트 구조에 base64로 인코딩된다. Log Entriy는 `type`, `instance_id`, `zone`, `project_id`와 같은 로그이름, 타임스탬프, 텍스트페이로드, 리소스 프로퍼티를 포함한다.
+
+![18.21](../img/ch18/18.21.png)
+
+**그림 18.21** Pub/Sub log sink 생성
+
+custom destination은 sink를 호스팅하는 현재 프로젝트 이외의 프로젝트의 이름을 지정하는데 사용된다. sink로 새로운 오브젝트를 생성하도록 선택하면, 그림 18.22처럼 새로운 sink의 이름을 입력해야 할 것이다.
+
+![18.22](../img/ch18/18.22.png)
+
+**그림 18.22** 신규 BigQuery 데이터 셋의 이름을 지정
+
+sink가 생성된 후, 그림 18.23처럼 새롭게 생성된 sink의 상세정보 메시지를 수신할 것이다. 
+
+![18.23](../img/ch18/18.23.png)
+
+**그림 18.23** 새로운 sink가 생성되었다는 확인 메시지
+
+### 로그 조회와 필터링
+
+로그의 내용을 확인하기 위해, console의 Stackdriver Logging 섹션을 열고, Logging 메뉴에서 Logs를 선택한다. (그림 18.24)
+
+![18.24](../img/ch18/18.24.png)
+
+**그림 18.24** Cloud Console의 로그 항목 리스트
+
+해당 양식 위쪽에 로그 메시지 필터링을 위한 아래와 같은 몇몇 옵션이 있다. 
+* Label or test 검색
+* Resource type
+* Log type
+* Log level
+* Time limit
+
+또한, Jump To Now를 선택하여 최신 항목으로 이동하는 옵션이 있다.
+
+로그 메시지의 문자열이나 label로 필터링하는 label or text serch를 사용할 수 있다. 예를 들어, 그림 18.25는 Monitoring 문자로 필터링되는 로그 항목을 보여준다. Stackdriver는 text:[항목] 으로 추가할 수 있다.
+
+![18.25](../img/ch18/18.25.png)
+
+**그림 18.25** Monitoring 문자열을 포함한 로그 항목
+
+resource type 메뉴(그립 18.26)은 감시중인 resource, VM instance, subnetworks, project, databases를 포함한 GCP 리소스 타입의 리스트를 제공한다.
+
+![18.26](../img/ch18/18.26.png)
+
+**그림 18.26** 로그 필터링을 위한 resource type의 리스트 일부분
+
+All Logs라고 표시된 메뉴는 로그 유형별로 필터링할 수 있다. (그림 18.27)
+
+![18.27](../img/ch18/18.27.png)
+
+**그림 18.27** Stackdriver Logging에서 항목을 생성하는 로그 리스트의 예
+
+다음 옵션인 Any Log Level은 Error, Info, Warning, Debug와 같은 로그 메시지 레벨을 보여준다. (그림 18.28)
+
+![18.28](../img/ch18/18.28.png)
+
+**그림 18.28** 표시된 로그 항목을 필터링하는데 사용될 수 있는 로그 레벨의 리스트
+
+시간 선택 필터는 기본적으로 No Limit을 보여준다. 그림 18.29와 같은 메뉴는 여러 기간을 포함하고, 커스텀 시간 제한을 선택할 수 있다.
+
+![18.29](../img/ch18/18.29.png)
+
+**그림 18.29** 로그 항목을 필터링하기 위한 사전 정의된 시간 간격 옵션
+
+Custome을 선택하면 시작과 끝 날짜를 선택할 수 있다. (그림 18.30)
+
+![18.30](../img/ch18/18.30.png)
+
+**그림 18.30** 로그 항목 필터링을 위해 커스텀 시간 범위를 지정하는 양식
+
+### 메시지 상세정보 조회
+
+각 로그 항목은 로그 내용을 조회할 때 한 줄로 표시된다. 라인 왼쪽 끝에 삼각형 아이콘을 확인한다. 해당 아이콘을 클릭하면, 라인은 추가 정보를 표시하기 위해 확장된다. 예를 들어, 그림 18.31은 한 단계 확장된 로그 항목을 보여준다.
+
+![18.31](../img/ch18/18.31.png)
+
+**그림 18.31** 한 단계 확장된 로그 항목
+
+한 단계 확장된 경우, insertID, logName, receiveTimestamp와 같은 상위 레벨의 정보를 확인할 수 있다. 또한 protoPayload, resource와 같은 다른 구조의 데이터 요소를 확인할 수 있다. 그림 18.32는 확장된 protoPayload 구조를 보여준다.
+
+![18.32](../img/ch18/18.32.png)
+
+**그림 18.32** 확장된 protoPayload 구조의 로그 항목
+
+각 구조별로 왼쪽에 삼각형이 있으면 계속 확장할 수 있다. 예를 들어, protoPayload 구조에서 authenticationInfo, authoricationInfo, requestMetadata 등을 확장할 수 있다. 대체로, 모든 구조를 확장하기 위해 로그 항목 리스트의 오른쪾 위에 있는 Expand All를 클릭할 수 있다.
+
+![18.33](../img/ch18/18.33.png)
+
+**그림 18.33** 확장된 로그 항목의 일부분
+
+Stackdriver Logging은 로그 데이터와 이벤트를 수집하고, 30일동안 저장하는데 사용된다. 로그는 Cloud Storage, BigQuery, Cloud Pub/Sub으로 추출될 수 있다. Cloud Console은 로그 항복을 필터링하고 검색하기 위한 다양한 방법을 제공하는 로깅 인터페이스를 제공한다.
+
+## Cloud 진단 사용
+
+GCP는 소프트웨어 개발자가 어플리케이션의 성능과 작동에 대한 정보를 수집할 수 있는 진단 툴을 제공한다. 구체적으로, 개발자는 어플리케이션이 실행될 때 데이터를 수집하는 Cloud Trace와 Cloud Debug를 사용할 수 있다.
+
+### Cloud Trace overview
+
+Cloud Trace는 어플리케이션으로 부터 데이터 지연시간을 수집하기위한 분산 추적 시스템이다. 이것은 개발자가 어플리케이션이 시간을 소비하는 장소를 이해하고, 성능이 저하되는 사례를 식별하는데 도와준다. 그림 18.34는 Cloud Trace 서비스의 overview 페이지를 보여준다.
+
+![18.34](../img/ch18/18.34.png)
+
+**그림 18.34** Cloud Trace의 overview
+
+Cloud Trace 콘솔에서 프로젝트에서 실행 중인 어플리케이션에서 생성되는 trace를 나열할 수 있다. Traces는 특히 개발자가 어플리케이션에서 Cloud Trace를 호출할 때 생성된다. trace 리스트를 조회하는 것 이외에, 리포트 기준에 따라서 trace 데이터를 필터링하는 리포트를 생성할 수 있다. (그림 18.35)
+
+![18.35](../img/ch18/18.35.png)
+
+**그림 18.35** Cloud Trace 데이터를 사용하여 리포트 생성
+
+시간과 추적 쿼리에 대한 필터링 이외에, HTTP 메소트와 리턴되는 상태로 필터링할 수 있다. (그림 18.36. 18.37)
+
+![18.36](../img/ch18/18.36.png)
+
+**그림 18.36** HTTP 메소드로 trace 데이터 필터링
+
+![18.37](../img/ch18/18.37.png)
+
+**그림 18.37** 응답 코드로 trace 데이터 필터링
+
+Associate Cloud Engineering 시험의 목적으로, Cloud Trace는 개발자와 DevOps 엔지니어가 병목현상이 발생하는 코드 영역을 식별하는데 도움을 주는 분산 추적 어플리케이션이라는 것을 기억하자.
+
+### Cloud Debug overview
+
+Cloud Debug는 실행 중인 프로그램의 상태를 점검하기 위한 어플리케이션 디버거이다. Cloud Trace처럼 소프트웨어 개발자에 의해서 사용되는 툴이지만, 클라우드 엔지니어가 Cloud Debug의 기능에 친숙해지는데 도움이 된다.
+
+Cloud Debug는 개발자가 로그 상태를 입력하거나 어플리케이션의 상태의 스냅샷을 만들 수 있다. 이 서비스는 기본적으로 App Engine에 적용되고, Compute Engine과 Kubernetes Engine에 적용될 수 있다.
+
+Cloud Debug를 조회하기 위해, Cloud Console에서 Cloud Debug를 열면, 그림 18.38과 같은 페이지가 표시된다.
+
+![18.38](../img/ch18/18.38.png)
+
+**그림 18.38** Cloud Debug의 overview 페이지
+
+프로그램 파일을 선택하면 파일의 내용이 표시된다. 예를 들어, 그림 18.39는 `main.py` 파일의 내용을 보여준다.
+
+![18.39](../img/ch18/18.39.png)
+
+**그림 18.39** 구글에 의해서 제공되는 파이썬 프로그램의 코드
+
+이 인터페이스에서, 라인이 실행될 때 스냅샷을 만들기 위해 코드의 라인을 클릭할 수 있다. 그림 18.40에서 20번 라인에 파란색 화살표는 Cloud Debug가 스냅샷을 생성해야하는 장소를 가리킨다.
+
+![18.40](../img/ch18/18.40.png)
+
+**그림 18.40** 20번 라인이 실행될 때 생성되는 스냅샷 설정
+
+코드가 실행될 때 로그를 작성할 수 있는 log statement로 logpoint를 입력할 수 있다. 그림 18.41에 있는 코드의 라인은 logpoint를 생성하고 메시지를 출력하기위해 추가되었다. 
+
+Associate Cloud Engineer 시험의 목적으로, Cloud Debug는 프로그램이 실행되는 동안 상태의 스냅샷을 생성하는데 사용되고, logpoint는 소스코드 변경 없이 로그 메시지를 입력할 수 있다는 것을 기억하자.
+
+![18.41](../img/ch18/18.41.png)
+
+**그림 18.41** 입력된 logpoint 코드
+
+### GCP 상태 조회
+
+어플리케이션과 서비스의 상태를 이해하는 것 이외에, 클라우드 엔지니어는 GCP 서비스의 상태를 인지하는 것이 필요하다. Google Cloud Status 대쉬보드에서 이 상태를 확인할 수 이따.
+
+Google Cloud 서비스의 상태를 조회하기 위해, Cloud Console의 홈페이지를 열고, Google Cloud Platrogm Status 카드를 확인한다. (그림 18.42) 또한, [https://status.cloud.google.com/](https://status.cloud.google.com/)의 대쉬보드에서 확인할 수 있다.
+
+![18.42](../img/ch18/18.42.png)
+
+**그림 18.42** Cloud Console 홈페이지는 Cloud Status Dashboard로 연결되는 카드를 갖고 있다.
+
+Go To Cloud Status Dashboard 링크를 클릭하면 대쉬보드가 표시된다. 그림 18.43은 예시를 보여준다.
+
+![18.43](../img/ch18/18.43.png)
+
+**그림 18.43** Google Cloud Status Dashboard의 리스트 일부분
+
+대쉬보드는 왼쪽에 GCP 서비스를 나열한다. 열은 최근 과거날짜를 표시한다. 각 셀의 내용은 상태를 가리킨다. 초록색 체크 마크가 있다면, 서비스는 실행 중이다. 주황색 아이콘이 있다면, 예를 들어, Cloud Storage 행과 12월 21일 열에, 서비스에 장애를 나타낸다. 주황색 아이콘을 클릭하면 추가 정보가 표시된다. (그림 18.44)
+
+![18.44](../img/ch18/18.44.png)
+
+**그림 18.44** 서비스 중단의 설명 예시
+
+## Pricing Calculator 사용
+
+구글은 GCP 사용자가 선택한 서비스의 리소스 설정과 관련된 비용을 이해하는데 도와주는 Pricing Calculator를 제공한다. Pricing Calculator는 온라인 도구이다. [https://cloud.google.com/products/calculator](https://cloud.google.com/products/calculator)
+
+Pricing Calculator를 사용하면, 리소스 구성, 리소스 사용 기간, 스토리지의 경우 저장할 데이터의 양을 지정할 수 있다. 다른 파라미터도 지정될 수 있다. 요금은 계산하는 서비스에 따라 다르다.
+
+예를 들어, 그림 18.45는 Pricing Calculator에서 사용될 수 있는 서비스의 일부분을 보여준다. 현재, Pricing Calculator에서 40개의 서비스를 이용할 수 있다.
+
+![18.45](../img/ch18/18.45.png)
+
+**그림 18.45** 이용할 수 있는 서비스의 일부를 보여주는 Pricing Calculator 배너
+
+그림 18.46은 VM의 비용을 측정하기 위한 양식의 일부를 보여준다. 이 양식에서 다음을 지정할 수 있다.
+* instance 수
+* Machine type
+* OS
+* 일, 주별 평균 사용량
+* Persistent disks
+* Load Balancing
+* Cloud TPUs(머신러닝 어플리케이션을 위한)
+
+![18.46](../img/ch18/18.46.png)
+
+**그림 18.46** VM을 위한 가격 양식의 일부 리스트
+
+양식에서 데이터를 입력한 후, Pricing Calculator는 그림 18.47처럼 예상 금액을 생성할 것이다.
+
+![18.47](../img/ch18/18.47.png)
+
+**그림 18.47** 2개의 n1-standard-1 VM을 위한 가격 예측의 예시
+
+다양한 리소스틑 측정을 위해 다양한 파라미터가 필요하다. 예를 들어, 그림 18.48은 Kubernetes 클러스터의 가격 예측을 보여주고, VM, persistent disk, load balancer에 대한 상세 정보가 필요하다.
+
+그림 18.49는 다른 예를 보여주고, BigQuery이다. 해당 서비스를 위해서, 데이터의 위치와 저장되는 데이터의 양, 스트리밍 양, 쿼리를 실행할 때 스캔되는 데이터의 양을 지정해야 한다. 테이블 파라미터는 쿼리할 BigQuery 테이블을 가리킨다. Storage Pricing과 Query Pricing은 모두 테이블에 저장된 양(GBs)과 쿼리하는 동안 스캔되는 양(TBs)을 위한 숫자를 허용한다. 또한, 한 달에 40,000달러 이상 사용하는 경우 정액 요금을 위한 옵션이 있다.
+
+![18.48](../img/ch18/18.48.png)
+
+**그림 18.48** Kubernetes 클러스터의 가격을 측정하기 위한 양식
+
+![18.49](../img/ch18/18.49.png)
+
+**그림 18.49** 파라미터는 BigQuery 데이터를 저장하고 쿼리하는 비용을 측정하기 위해 필요하다.
+
+Pricing Calculator는 다양한 서비스의 가격을 측정할 수 있고, 모든 서비스를 위한 전체 측정치를 생성한다.
+
+## Summary
+
+클라우드 엔지니어는 어플리케이션과 클라우드 서비스의 상태와 성능을 모니터링하는 책임을 가져야 한다. GCP는 monitoring, logging, debugging, tracing 서비스를 포함한 다양한 툴을 제공한다.
+
+Stackdriver Monitoring은 CPU 사용량 같은 메트릭으로 알람을 정의할 수 있고, 인프라의 일부가 예상대로 수행하지 않을 경우 알림을 받을 수 있다. Stackdriver Logging은 로그 항복을 수집, 저장, 관리한다. 30일 이상 저장되어야하는 로그 데이터는 Cloud Storage, BigQuery, Cloud Pub/Sub에 추출될 수 있다. Cloud Trace는 코드의 부분이 느려지는 것을 식별하는 분산 추적 서비스를 제공한다. Cloud Debug는 실행 중이 코드의 스냅샷을 생성하고, 원본 코드 변경 없이 로그 메시지를 입력하기 위해 제공된다.
+
+항상 [https://status.cloud.google.com/](https://status.cloud.google.com/)의 Google Cloud Status Dashboard에서 GCP 서비스의 상태를 확인할 수 있다.
+
+Pricing Calculator는 40개의 GCP 서비스의 비용을 측정하는데 도움이 되도록 설계되었다.
+
+## 시험 필수요소
+
+**모니터링을 위한 요구와 메트릭의 역할을 이해한다.** 메트릭은 어플리케이션과 인프라의 상태 데이터를 제공한다. 알람이 동작하는 CPU가 5분동안 80퍼센트를 초과한 것 같은 조건을 생성한다. 알람은 알림 채널로 전달된다. GCP는 사전 정의된 메트릭의 실질적인 수를 갖지만, 커스텀 메트릭을 생성할 수 있다.
+
+**Stackdriver Logging은 로그 데이터를 수집, 저장, 필터링, 표시한다.** 로그는 가상의 소스에서부터 온다. Logging은 로그 데이터를 30일동안 유지한다. 더 오래 로그 데이터가 유지되어야 한다면, log sink로 데이터를 추출해야 한다. Log sink는 Cloud Storage 버킷, BigQuery 데이터 셋, Cloud Pub/Sub 토픽일 수 있다.
+
+**로그 필터링 방법을 알아야 한다.** 로그는 데이터의 많은 양을 포함한다. 텍스트나 라벨을 위한 검색, 로그 타입, 관심있는 기간 간격에 의한 로그 항목 제한을 사용한다.
+
+로그 항목은 계층 구조이다. Stackdriver Logging은 기본적으로 로그 항목을 한 줄로 요약하여 보여주지만, 로그 항목의 상세정보를 위하 확장할 수 있다. Expand All와 Collapse All 옵션을 사용하여 로그 항목의 전체 정보를 조회하거나 숨길 수 있다.
+
+**Cloud Trace는 분산 추적 서비스이다.** 소프트웨어 개발자는 trace 데이터를 기록하기 위해 어플리케이션에 Cloud Trace 코드를 포함시킨다. Trace 데이터는 개별적으로 조회할 수 있거나 포함할 trace의 서브셋을 지정하는 파라미터가 포함된 리포트를 생성할 수 있다.
+
+**Cloud Debug는 스냅샷을 생성하거나 logpoint를 입력하여 실행 중인 코드를 분석하는데 사용된다.** 스냅샷은 프로그램의 실행 포인트에서 스택이나 실행 문맥을 보여준다. Logpoint는 실행 중인 코드에 입력된 log 문이지만, 원본 소스를 수정할 필요는 없다.
+
+**GCP는 Google Cloud Platform Status 페이지에서 서비스의 상테를 제공한다.** 이것은 모든 서비스의 리스트, 현재 상태, 최근 과거의 상태를 포함한다. 서비스에 장애가 있다면, 문제의 근본 원인과 영향에 대한 추가 정보를 확인할 수 있다.
+
+**Pricing Calculator는 GCP의 리소스와 서비스의 비용을 예측하는데 사용된다.** [https://cloud.google.com/products/calculator](https://cloud.google.com/products/calculator)에서 이용할 수 있다.
+
+각 서비스를 위한 계상기가 있다. 각 서비스는 비용 측정을 위한 파라미터 셋을 갖는다. Pricing Calculator는 다양한 서비스의 비용을 측정하고, 모든 서비스를 위한 전체 비용 측정을 생성할 수 있다.
+
+[맨 위로](#chapter-18-%eb%aa%a8%eb%8b%88%ed%84%b0%eb%a7%81-%eb%a1%9c%ea%b9%85-%eb%b9%84%ec%9a%a9-%ec%98%88%ec%b8%a1))
