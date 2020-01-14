@@ -8,7 +8,7 @@
 
 ## GCP의 프로젝트와 계정 구성 방법
 
-GCP를 사용할 때, 가상머신이나 클러스터를 설치하고, 스토리지 오브젝트에 버킷을 생성할 수도 있고, App Engine과 Cloud Functions과 같은 서버리스 컴퓨팅 서비스를 사용할수도 있다. 사용하는 리소스의 리소트는 빠르게 증가할 수 있다. 또한 워크로드에 응답하는 서비스의 오토스케일링에 따라 동적이고, 예측이 불가능한 방법으로 변화할 수 있다.
+GCP를 사용할 때, 가상머신이나 클러스터를 설치하고, 스토리지 오브젝트에 버킷을 생성할 수도 있고, App Engine과 Cloud Functions과 같은 서버리스 컴퓨팅 서비스를 사용할 수도 있다. 사용하는 리소스의 리소스는 빠르게 증가할 수 있다. 또한 워크로드에 응답하는 서비스의 오토스케일링에 따라 동적이고, 예측이 불가능한 방법으로 변화할 수 있다.
 
 당신의 부서에서 단일 어플리케이션이나 일부 서비스를 실행한다면, 사용 중인 리소스의 리스트를 확인하기 위해 모든 리소스를 추적해야 할지도 모른다. GCP의 범위가 넓어짐에 따라, 아마도 여러 개의 부서를 갖게 될 것이고, 각각의 부서는 다른 권한을 필요로하는 자체 관리자들을 갖게 될 것이다. GCP는 리소스를 그룹화하고, 단일 유닛으로 관리하는 방법을 제공한다. 이 것은 `resource hierarchy`라고 부른다. 리소스 계층에서 리소스에 대한 접근은 사용자가 정의할 수 있는 정책의 집합으로 제어된다.
 
@@ -105,7 +105,7 @@ Organizations는 클라우드에서 데이터와 리소스를 보호하기 위�
 
 **그림 3.5** console 홈페이지
 
-왼쪽 위에 메뉴에서 IAM & admin을 선택하고, Manage Resoucce를 선택한다.(그림 3.6, 3.7)
+왼쪽 위에 메뉴에서 IAM & admin을 선택하고, Manage Resource를 선택한다.(그림 3.6, 3.7)
 
 ![3.6_navigation_menu](../img/ch03/3.6_navigation_menu.png)
 
@@ -173,7 +173,7 @@ identities는 보통 사용자 개별적으로 할당된다. 때때로 어플케
 
 Service account는 때로는 리소스로 다루고, 때로는 identities로 취급한다는 점에서 다소 특이하다. service account에 role을 지정할 때, identity로 취급한다. 사용자에게 service account에 대한 접근 권한을 줄 때, 리소스로 취급한다.
 
-service account에는 사용자가 관리하는 servic account와 구글이 관리하는 service account가 있다. 사용자는 프로젝트당 service account를 100개까지 생성할 수 있다. Compute Engine API를 이용하는 프로젝트를 생헝할 때, Compute Engine service account는 자동적으로 생성된다. 유사하게, 프로젝트에 App Engine 어플리케이션이 있다면, GCP는 자동적으로 App Engine service account를 생성할 것이다. Compute Engine과 App Engine service account는 모두 생성된 프로젝트에서 editor role을 부여받는다. 또한 프로젝트에 custom service account를 생성할 수 있다.
+service account에는 사용자가 관리하는 service account와 구글이 관리하는 service account가 있다. 사용자는 프로젝트당 service account를 100개까지 생성할 수 있다. Compute Engine API를 이용하는 프로젝트를 생성할 때, Compute Engine service account는 자동적으로 생성된다. 유사하게, 프로젝트에 App Engine 어플리케이션이 있다면, GCP는 자동적으로 App Engine service account를 생성할 것이다. Compute Engine과 App Engine service account는 모두 생성된 프로젝트에서 editor role을 부여받는다. 또한 프로젝트에 custom service account를 생성할 수 있다.
 
 구글은 관리하는 service account를 생성할 수 있다. 이 account는 다양한 GCP 서비스와 사용된다.
 
@@ -189,7 +189,7 @@ service account를 생성하는 데 필요한 정보를 입력하는 양식을 �
 
 ## Billing(과금)
 
-VM, object storage, 특별한 서비스와 같은 리소스를 사용하는 것은 일반적으로 비용이 발생한다. GCP Billing API는 리소스 사용에 대해 어떻게 비용을 지불하는지 관리하는 방봅을 제공한다.
+VM, object storage, 특별한 서비스와 같은 리소스를 사용하는 것은 일반적으로 비용이 발생한다. GCP Billing API는 리소스 사용에 대해 어떻게 비용을 지불하는지 관리하는 방법을 제공한다.
 
 ### Billing Accounts
 
@@ -211,7 +211,7 @@ Billing account는 리소스 계층과 비슷한 구조를 갖는다. 작은 기
 
 Billing overview 페이지에서 billing account와 연결된 프로젝트를 확인하고 수정할 수 있다.
 
-billing account에는 2가지 유형이 있다: self-serve와 invoiced. Self-serve account는 신용카드나 은행 계좌로부터 직접 인출하여 지불한다. 비용은 자동적으로 부과된다. 다른 유형은 invoiced billing account로 사용자에게 영수증이나 인보이스를 전송한다. account의 유형은 기업이나 다른 대형 고객에 의해 공통적으로 사용된다.
+billing account에는 2가지 유형이 있다: self-service와 invoiced. Self-serve account는 신용카드나 은행 계좌로부터 직접 인출하여 지불한다. 비용은 자동적으로 부과된다. 다른 유형은 invoiced billing account로 사용자에게 영수증이나 인보이스를 전송한다. account의 유형은 기업이나 다른 대형 고객에 의해 공통적으로 사용된다.
 
 몇몇 roles는 billing과 연관된다. 시험을 위해서 아래 내용을 아는 것은 중요하다.
 * Billing Account Creator, 새로운 self-service billing account를 생성할 수 있다.
@@ -261,9 +261,9 @@ BigQuery에서 Edit Setting을 선택한다. 포함하길 원하는 프로젝트
 
 파일로 추출할 때, 버킨이름과 리포트의 prefix를 지정할 필요가 있다. CSV나 JSON 파일 포맷 중 하나를 선택하는 옵션이 있따. 가능한 파일 포맷 옵션에 대해서 궁금할 수 있지만, 2가지 옵션을 기억해라.
 
-## Enaling API
+## Enabling API
 
-GCP는 프로그램방식으로 접근이 가능한 서비스인 API를 사용한다. 예를 들어, VM이나 Cloud Storage 버킷을생성하는 양식을 사용할 때, 뒤에서 VM이나 버킷을 생성하는 API함수가 실행된다. 모든 GCP 서비스는 관련된 API를 갖고 있다. 그러나, 대부분 프로젝트에서 디폴트로 사용하지 않는다.
+GCP는 프로그램방식으로 접근이 가능한 서비스인 API를 사용한다. 예를 들어, VM이나 Cloud Storage 버킷을 생성하는 양식을 사용할 때, 백엔드에서 VM이나 버킷을 생성하는 API함수가 실행된다. 모든 GCP 서비스는 관련된 API를 갖고 있다. 그러나, 대부분 프로젝트에서 디폴트로 사용하지 않는다.
 
 API 서비스를 사용하기 위해서 콘솔의 메인 메뉴에서 APIs & Services를 선택한다. 그림 3.20에서 보이는 것 처럼 대쉬보드를 볼 수 있다.
 
@@ -285,7 +285,7 @@ Enable API and Service 링크를 클릭하면, 그림 3.21처럼 사용할 수 �
 
 **그림 3.22** API 사용에 대한 상세 정보
 
-## Provisionning Stackdriver Workspace
+## Provisioning Stackdriver Workspace
 
 oraganization과 project를 설정할 때, identities 생성, roles 지정, billing account 설정과 같이 이 챕터에서 나열한 업무를 하는데 시간을 쓸 것이다. 해야 할 다른 것은 Stackdriver Workspaces를 생성하는 것이다. (이전에는 이 것을 Stackdriver account로 불렀다. 그래서 때때로 이 용어를 볼 수도 있다.)
 
@@ -303,7 +303,7 @@ Stackdriver는 어플리케이션과 리소스의 모니터링, 로깅, 추적, 
 
 Create Workspace를 클릭하면, 그림 3.25와 같은 양식이 나타난다. GCP 프로젝트 상자를 클릭한 다음 Create Workspace를 클릭할 때 나타나는 리스트로부터 프로젝트를 선택한다. workspace를 생성되고, 프로젝트와 연결된다. 프로젝트의 모니터링, 로깅, 다른 Stackdriver 서비스를 바로 사용할 수 있다.
 
-챕터 18에서 Stackdriver에 대한 더 자세한 정보를 확인할 수 있다.
+[챕터 18](Chapter_18.md)에서 Stackdriver에 대한 더 자세한 정보를 확인할 수 있다.
 
 ![3.25_create_workspace_dialog](../img/ch03/3.25_create_workspace_dialog.png)
 
