@@ -5,7 +5,7 @@
 
 VM을 생성한 후에, 클라우드 엔지니어는 VM 단일 인스턴스와 동일한 설정으로 실행되는 VM 그룹 모두 작업해야 한다. 이후에는 *instance group*으로 불리고, 이 챕터에서 소개된다.
 
-이 챕터는 공통적인 관리 업무의 설명과 콘솔에서 업무를 완료하는 방법으로 시작하고, 그 뒤에 Cloud Shell이나 Cloud SDK CLI를 이용한 업무를 완료한느 방법의 설명이 있다. 다음, 인스턴스 그룹을 구성하고 관리하는 방법을 배운다. 이 챕터는 VM을 관리하기위한 가이드라인의 논의로 결론을 맺는다.
+이 챕터는 공통적인 관리 업무의 설명과 콘솔에서 업무를 완료하는 방법으로 시작하고, 그 뒤에 Cloud Shell이나 Cloud SDK CLI를 이용한 업무를 완료하는 방법의 설명이 있다. 다음, 인스턴스 그룹을 구성하고 관리하는 방법을 배운다. 이 챕터는 VM을 관리하기위한 가이드라인의 논의로 결론을 맺는다.
 
 ## 단일 VM 인스턴스 관리
 
@@ -94,7 +94,7 @@ GPU는 가상화와 머신러닝같은 계산 집중의 어플리케이션을 �
 
 **그림 6.9** 머신타입을 설청하기 위한 Cloud Console 양식
 
-Customaize를 클릭한다. 그림 6.10에서 보여지는 것처럼 머신 타입 파라미터를 설정하기 위한 화면으로 확장된다.
+Customize를 클릭한다. 그림 6.10에서 보여지는 것처럼 머신 타입 파라미터를 설정하기 위한 화면으로 확장된다.
 
 ![6.10](../img/ch06/6.10.png)
 
@@ -110,7 +110,7 @@ Customaize를 클릭한다. 그림 6.10에서 보여지는 것처럼 머신 타�
 
 **그림 6.12** VM에 추가할 GPU의 타입을 선택
 
-GPU 사용에는 몇 가지 제한이 있다. CPU는 선택된 GPU와 반드시 호환되어야 한다. 예를 들어, Intel Skylake나 이후 CPU의 서버에서 VM이 동작 중이라면, Tesla K80 GPU를 사용할 수 없다. GPU는 공유 메모리 머신에 추가될 수 없다. GPU 제약조선와 GPU의 zone 리스트의 최신 문서는 [https://cloud.google.com/compute/docs/gpus/](https://cloud.google.com/compute/docs/gpus/)에서 확인할 수 있다.
+GPU 사용에는 몇 가지 제한이 있다. CPU는 선택된 GPU와 반드시 호환되어야 한다. 예를 들어, Intel Skylake나 이후 CPU의 서버에서 VM이 동작 중이라면, Tesla K80 GPU를 사용할 수 없다. GPU는 공유 메모리 머신에 추가될 수 없다. GPU 제약조건와 GPU의 zone 리스트의 최신 문서는 [https://cloud.google.com/compute/docs/gpus/](https://cloud.google.com/compute/docs/gpus/)에서 확인할 수 있다.
 
 또한, VM에 GPU를 추가한다면, 유지보수 중에 종료되도록 인스턴스를 설정해야 한다. 이 것은 VM 설정 페이지의 Availability Policies 영역에서 설정한다. (rmfla 6.13)
 
@@ -122,13 +122,12 @@ GPU 사용에는 몇 가지 제한이 있다. CPU는 선택된 GPU와 반드시 
 
 스냅샷은 persistent disk의 데이터 복사본이다. 데이터를 복구하기 위해 디스크에 데이터를 저장하는 스냅샷을 사용한다. 이 것은 동일한 데이터로 다양한 persistent disk를 생성하는 편리한 방법이다. 
 
-처음 스냅샷을 생성할 때, GCP는 persistent disk에 데이터의 전체 복사본을 
-생성한다. 다음에 디스크에서 스냅샷을 생성하면, GCP는 이전 스냅샷에서 변경된 데이터만 복사할 것이다. 
+처음 스냅샷을 생성할 때, GCP는 persistent disk에 데이터의 전체 복사본을 생성한다. 다음에 디스크에서 스냅샷을 생성하면, GCP는 이전 스냅샷에서 변경된 데이터만 복사할 것이다. 
 이 것은 마지막으로 스냅샷이 발생된 디스크에 있는 데이터를 최신의 스냅샷으로 유지하면서 스토리지를 최적화한다.
 
-디스크에 쓰기 전에 메모리에 버퍼 데이터 갖는 데이터베이스나 다른 어플리케이션이 동작 중이라면, 스냅샷을 생성하기 전에 디스크 버퍼를 비워야한다. 그렇지 않으면, 디스크에 쓰여져야하는 메모리 데이터를 잃을 수 있다. 디스크 버서를 비우는 방법은 어플리케이션마다 다양하다. 예를 들어, MySQL은 `FLUSH` 조건을 갖는다.
+디스크에 쓰기 전에 메모리에 버퍼 데이터 갖는 데이터베이스나 다른 어플리케이션이 동작 중이라면, 스냅샷을 생성하기 전에 디스크 버퍼를 비워야한다. 그렇지 않으면, 디스크에 쓰여져야하는 메모리 데이터를 잃을 수 있다. 디스크 버퍼를 비우는 방법은 어플리케이션마다 다양하다. 예를 들어, MySQL은 `FLUSH` 조건을 갖는다.
 
-스냅샷을 작업하하려면, 사용자는 Compute Storage Admin role을 할당받아야 한다. IAM 페이지에 가서 Roles을 선택하고, role을 부여할 사용자의 이메일 주소를 지정한다. role 리스트에서 roleㅇ르 선택한다. (그림 6.14)
+스냅샷을 작업하려면, 사용자는 Compute Storage Admin role을 할당받아야 한다. IAM 페이지에 가서 Roles을 선택하고, role을 부여할 사용자의 이메일 주소를 지정한다. role 리스트에서 role을 선택한다. (그림 6.14)
 
 ![6.14](../img/ch06/6.14.png)
 
@@ -144,7 +143,7 @@ Cloud Console에서 스냅샷을 생성하기 위해, Compute Engine 페이지�
 
 ![6.16](../img/ch06/6.16.png)
 
-**그림 6.16** 스탭샷을 생성하는 양식
+**그림 6.16** 스냅샷을 생성하는 양식
 
 Windows 서버 디스크에 스냅샷을 만드는 경우, 인스턴스를 중단해야하는 것 없이 어플리케이션에 일관된 스냅샷을 생성하는 Enable VSS를 체크한다.
 
@@ -206,7 +205,7 @@ Delete는 이미지를 제거하고, Derecated는 이미지를 더이상 지원�
 
 ### Cloud Shell과 CLI로 단일 VM 인스턴스 관리하기
 
-콘솔을 통해 VM을 관리하는 것 이외에도, CLI를 사용하여 compute 리소스를 관리할 수 있다. 콘솔과 동일한 명령어는 Cloud Shell이나 챕터 5에서 다뤘던 구글 Cloud SDK가 설치된 로컬 환경에서 사용될 수 있다.
+콘솔을 통해 VM을 관리하는 것 이외에도, CLI를 사용하여 compute 리소스를 관리할 수 있다. 콘솔과 동일한 명령어는 Cloud Shell이나 [챕터 5](Chapter_5.md)에서 다뤘던 구글 Cloud SDK가 설치된 로컬 환경에서 사용될 수 있다.
 
 이 섹션은 인스턴스와 작업하기 위한 가장 중요한 명령어를 설명한다. 명령어는 고유한 파라미터 집합을 갖고 있다. 그러나, 모든 `gcloud` 명령어는 flag의 집합을 지원한다. 이러한 집합은 gcloud global flags라고 부르며, 다음을 포함한다.
 * `--account`는 기본 계정을 재지정를 사용하기위해 GCP 계정을 지정한다.
@@ -226,7 +225,7 @@ Delete는 이미지를 제거하고, Derecated는 이미지를 더이상 지원�
 명령어 문법은 다음과 같다.
 
 ```bash
-gcloud compute instance start INSTANCE_NAMES
+gcloud compute instances start INSTANCE_NAMES
 ```
 
 다음은 예시이다.
@@ -244,7 +243,7 @@ gcloud compute instances start ch06-instance-1 ch06-instance-2 --async
 GCP는 인스턴스를 생성할 zone을 알 필요가 있다. 이 것은 `--zone` 파라미터로 지정될 수 있다.
 
 ```bash
-gcloud compute instances start ch06-instance-1 ch06-instance-2 --zone us-coentral1-c
+gcloud compute instances start ch06-instance-1 ch06-instance-2 --zone us-central1-c
 ```
 
 아래 명령어를 이용하여 zone의 리스트를 확인할 수 있다.
@@ -309,7 +308,7 @@ gcloud compute instances delete ch06-instance-1 --zone us-central2-b
 gcloud compute instances delete ch06-instance-1 --zone us-central2-b --keep-disks=all
 ```
 
-반면에 모든 부틸되지않는 디스크를 삭제하는 것
+반면에 모든 부팅되지않는 디스크를 삭제하는 것
 
 ```bash
 gcloud comptue instance delete ch06-instance-1 --zone us-central2-b --delete-disks=data
@@ -329,9 +328,9 @@ gcloud compute instances list
 gcloud compute instances list --filter="zone:ZONE"
 ```
 
-`ZONE`은 zone의 이름이다. 콤마(,)로 분리횐 리스트를 사용하여 다양한 zone을 조회할 수 있다. 
+`ZONE`은 zone의 이름이다. 콤마(,)로 분리된 리스트를 사용하여 다양한 zone을 조회할 수 있다. 
 
-`--limit` 파라미터는 나열되는 VM의 수를 제한한느데 사용되고, `--sort-by` 파라미터는 리소스 필드를 지정하는 VM의 리스트를 정리하는데 사용된다. 다음은 실행 중인 VM의 리소스 필드를 확인할 수 있다.
+`--limit` 파라미터는 나열되는 VM의 수를 제한하는데 사용되고, `--sort-by` 파라미터는 리소스 필드를 지정하는 VM의 리스트를 정리하는데 사용된다. 다음은 실행 중인 VM의 리소스 필드를 확인할 수 있다.
 
 ```bash
 gcloud compute instances describe
@@ -386,7 +385,7 @@ gcloud compute images create IMAGE_NAME
 * `--source-snapshot`
 * `--source-uri`
 
-`source-disk`, `soutce-image`, `source-snapshot` 파라미터는 각각 디스크, 이미지, 스냅샷을 사용하여 이미지를 생성할 때 사용된다.`source-image-family` 파라미터는 family의 이미지 중 최신 버전을 사용한다. Families는 관련된 이미지의 그룹이며, 일반적으로 동일한 이미지의 다른 버전이다. `source-uri` 파라미터는 웹 주소를 사용하여 이미지를 지정할 수 있다.
+`source-disk`, `source-image`, `source-snapshot` 파라미터는 각각 디스크, 이미지, 스냅샷을 사용하여 이미지를 생성할 때 사용된다.`source-image-family` 파라미터는 family의 이미지 중 최신 버전을 사용한다. Families는 관련된 이미지의 그룹이며, 일반적으로 동일한 이미지의 다른 버전이다. `source-uri` 파라미터는 웹 주소를 사용하여 이미지를 지정할 수 있다.
 
 이미지는 description과 label 집합을 갖을 수 있다. `--description`과 `--labels` 파라미터를 사용하여 설정한다.
 
@@ -412,7 +411,7 @@ gcloud compute images export --destination-uri DETINATION_URI --image IMAGE_NAME
 
 인스턴스 그룹은 단일 엔티티로서 관리되는 VM의 집합이다. 인스턴스 그룹에 적용되는 `gcloud`나 콘솔 명령은 인스턴스 그룹의 모든 멤버에 적용된다. 구글은 인스턴스 그룹의 2가지 유형을 제공한다: 관리형, 비관리형.
 
-관리형 그룹은 동일한 그룹으로 구성된다. 머신타입, 부트 디스크 이미지, zone, labels, 인스턴스의 다른 파라미터를 포함한 VM 설정의 사향이 포함된 인스턴스 템플릿을 사용하여 생성된다. 관리형 인스턴스 그룹은 자동적으로 그룹의 인스턴스 수를 확장할 수 있고, 인스턴스 그룹 전반적으로 워크로드를 분산하는 로드 밸런싱이 사용될 수 있다. 그룹의 인스턴스가 충돌하면, 자동적으로 재생성된다. 관리형 그룹은 선호하는 인스턴스 그룹이다. 
+관리형 그룹은 동일한 그룹으로 구성된다. 머신타입, 부트 디스크 이미지, zone, labels, 인스턴스의 다른 파라미터를 포함한 VM 설정의 사항이 포함된 인스턴스 템플릿을 사용하여 생성된다. 관리형 인스턴스 그룹은 자동적으로 그룹의 인스턴스 수를 확장할 수 있고, 인스턴스 그룹 전반적으로 워크로드를 분산하는 로드 밸런싱이 사용될 수 있다. 그룹의 인스턴스가 충돌하면, 자동적으로 재생성된다. 관리형 그룹은 선호하는 인스턴스 그룹이다. 
 
 비관리형 그룹은 그룹 내의 다른 VM 내에서 다른 설정으로 작업해야할 때만 사용되어야 한다.
 
@@ -483,7 +482,7 @@ gcloud compute instance-groups managed list-instances INSTANCE-GROUP-NAME
 
 확장 가능하고, 고가용성의 어플리케이션을 배포하기 위해서는 로드 밸런싱된 인스턴스의 세트에서 어플리케이션을 실행해야 한다. GCP는 여러 종류의 로드밸런싱을 제공하고, 모두 인스턴스 그룹을 사용해야 합니다.
 
-로드밸런싱 이외에도, 관리형 인스턴스 그룹은 오토스케일을 구성할 수 있다. CPU 사용량, 모니터링 메트릭, 로드밸런싱 조정량, 큐기반 워크로드를 기반으로 인스턴스를 추가나 제거를 트리거하는 오토스케일링 정책을 구성할 수 있다.
+로드밸런싱 이외에도, 관리형 인스턴스 그룹은 오토스케일링을 구성할 수 있다. CPU 사용량, 모니터링 메트릭, 로드밸런싱 조정량, 큐기반 워크로드를 기반으로 인스턴스를 추가나 제거를 트리거하는 오토스케일링 정책을 구성할 수 있다.
 
 #### 실 사례
 **더이상 최대 용량 기획을 하지 않음**
@@ -496,7 +495,7 @@ gcloud compute instance-groups managed list-instances INSTANCE-GROUP-NAME
 ## VM 관리를 위한 가이드라인
 
 다음은 VM을 관리하기 위한 몇 가지 가이드라인이다.
-* Label과 descriptions를 사용해라. 이 것은 인스턴스의 목적을 확인하는데 도움을 주고, 인스턴스의 리스트를 필터링할 때 도음을 준다.
+* Label과 descriptions를 사용해라. 이 것은 인스턴스의 목적을 확인하는데 도움을 주고, 인스턴스의 리스트를 필터링할 때 도움을 준다.
 * 오토스케일링과 로드밸런싱이 적용되는 관리형 인스턴스 그룹(managed instance group)을 사용해라. 이는 확장 가능하고 고가용성 서비스를 배포하는데 핵심이다.
 * 머신 러닝이나 고성능 컴퓨팅과 같은 계산 집약적인 처리를 위해 GPU를 사용해라. 일부 어플리케이션에서 GPU는 다른 CPU를 추가하는 것 보다 성능적으로 더 큰 이점을 준다.
 * 디스크의 상태를 저장하거나 복사본을 만들기 위해 스냅샷을 사용해라. 이들은 Cloud Storage에 저장되어 백업 역할을 할 수 있다.

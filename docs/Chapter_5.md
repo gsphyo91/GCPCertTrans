@@ -108,7 +108,7 @@ Meatdata 섹션은 인스턴스와 연관된 key-value을 지정할 수 있다. 
 
 Availability Policy는 3가지 파라미터를 설정한다.
 * Preemptibility, 설정하면, 구글이 30초간 통지하고 서버를 중지할 수 있다. 그 대신, preemptible 서버의 비용은 nonpreemptible 서버보다 훨씬 적다.
-* Automatic restart, 서버가 하드위어 장애, 유지보수, 비사용자가 제어하는 이슈로 인해 중지해야 하는지 여부
+* Automatic restart, 서버가 하드웨어 장애, 유지보수, 비사용자가 제어하는 이슈로 인해 중지해야 하는지 여부
 * host maintenance, 유지보수 이벤트가 발생할 때, 가상서버를 다른 물리서버로 이동시켜야 하는 지 여부
 
 ![5.12_management_tab_second](../img/ch05/5.12_management_tab_second.png)
@@ -119,7 +119,7 @@ Security 섹션에서는 Shielded VM과 Secure Shell(SSH) Key를 사용할 지 �
 
 Shielded VM은 실행하도록 선택할 수 있는 추가 보안 메커니즘을 갖도록 구성한다. 다음을 포함한다.
 * Secure Boot, 오직 인증된 OS 소프트웨어만 VM에서 실행한다. 소프트웨어의 디지털 서명을 확인하여 진행한다. 서명 확인이 실패하면 부트 프로세스틑 멈춘다.
-* Virtual Trusted Platform Module(vTPM), trusted platform module(TPM)의 가상화되 버전이다. TPM은 key와 인증처럼 보안 리소스를 보호하도록 설계된 특별한 컴퓨터 칩이다.
+* Virtual Trusted Platform Module(vTPM), trusted platform module(TPM)의 가상화된 버전이다. TPM은 key와 인증처럼 보안 리소스를 보호하도록 설계된 특별한 컴퓨터 칩이다.
 * Integrity Monitoring, 잘 알려진 부트 측정 기준을 사용하여 최근 부트 측정을 비교한다. 확인이 실패하면, 측정 기준과 현재 측정간 차이점을 보여준다.
 
 ![5.13_security_tab](../img/ch05/5.13_security_tab.png)
@@ -142,7 +142,7 @@ Boot Disk 설정 탭 내에서, 새로운 디스크를 추가하거나 기존 �
 
 **그림 5.15** VM에 기존 디스크를 추가하기 위한 화면
 
-또한, 5.16에서 보여지는 화면을 사용하여 새로운 디스크를 추가할 수 있따. 새로운 디스크를 추가할 때, 아래 정보를 제공해야 한다.
+또한, 5.16에서 보여지는 화면을 사용하여 새로운 디스크를 추가할 수 있다. 새로운 디스크를 추가할 때, 아래 정보를 제공해야 한다.
 * 디스크의 이름
 * Disk type, 기본이나 SSD Persistent Disk
 * Source image, 빈 디스크가 아니라면,
@@ -175,7 +175,7 @@ VM을 생성하고 설정하는 두번째 방법은 CLI를 제공하는 구글 C
 구글 클라우드 리소스와 상호작용하기 위한 3가지 옵션이 있다.
 * CLI
 * RESTful 인터페이스
-* CLoud Shell
+* Cloud Shell
 
 로컬 시스템에서 첫번째, 두번째 옵션 중 하나를 사용하기 전에 갖고 있는 장치에 CLoud SDK를 설치해야 한다. Cloud Console은 [https://connsole.cloud.google.com](https://console.cloud.google.com)를 통해 접근할 수 있는 GUI이다.
 
@@ -217,7 +217,7 @@ gcloud compute
 gcloud compute instance
 ```
 
-그리고 인스턴스를 생성다여 다음 동작을 수행한다.
+그리고 인스턴스를 생성하여 다음 동작을 수행한다.
 
 ```bash
 gcloud compute instances create ace-instance-1, ace-instance-2
@@ -226,7 +226,7 @@ gcloud compute instances create ace-instance-1, ace-instance-2
 zone과 같은 추가 파라미터를 지정하지 않았다면, 구글 클라우드는 디폴트 프로젝트의 정보를 사용한다. 아래 `gcloud` 명령어를 사용하여 프로젝트 정보를 확인할 수 있다.
 
 ```bash
-gcloud compute project-infe describe
+gcloud compute project-info describe
 ```
 
 us-central1-a zone에서 VM을 생성하기 위해 zone 파라미터를 추가한다.
@@ -242,7 +242,7 @@ gcloud compute instances list
 ```
 
 다음은 인스턴스를 생성하는 명령에서 공통적으로 사용되는 파라미터이다.
-* `--boot-disk-size`는 새로운 디스크를 위한 부트 디스크릐 크기이다. 디스크 사이즈는 10GB에서 2TB 사이일 수 있다.
+* `--boot-disk-size`는 새로운 디스크를 위한 부트 디스크의 크기이다. 디스크 사이즈는 10GB에서 2TB 사이일 수 있다.
 * `--boot-disk-type`은 디스크 타입이다. VM이 생성된 zone에서 이용할 수 있는 디스크 타입 리스트는  `gcloud compute disk-types list`를 사용한다.
 * `--labels`는 KEY=VALUE 포맷의 key-value 쌍의 리스트이다.
 * `--machine-type`은 사용하는 머신 타입이다. 지정하지 않는다면 n1-standard-1을 사용한다. 사용 중인 zone에서 이용할 수 있는 머신 타입 리스트를 확인하기 위해 `gcloud compute machine-type list`를 사용한다.
@@ -259,7 +259,7 @@ gcloud compute instances create ace-instance-n1s8 --machine-type=n1-standard-8
 이 인스턴스가 preemptible이 되려면, preemptible 파라미터를 추가한다.
 
 ```bash
-gcloud compute instances create --machine-type=n1-standard-8 --preemptibl ace-instance-1
+gcloud compute instances create --machine-type=n1-standard-8 --preemptible ace-instance-1
 ```
 
 ### Cloud Shell에서 VM 생성
@@ -278,9 +278,9 @@ Cloud Shell은 그림 5.20처럼 리눅스 CLI를 제공하고, Cloud SDK는 이
 
 ## 기본 VM 관리
 
-VM이 실해 중일 때, 콘솔을 사용하거나 `gcloud` 명령어를 사용해서 기본적인 관리 작업을 수행할 수 있다.
+VM이 실행 중일 때, 콘솔을 사용하거나 `gcloud` 명령어를 사용해서 기본적인 관리 작업을 수행할 수 있다.
 
-### 인스턴스를 기동하고 중기하기
+### 인스턴스를 기동하고 중지하기
 
 콘솔에서 Compute Engine을 선택한다음 왼쪽 패널에서 VM Instance를 선택하여 인스턴스의 리스트를 확인한다. 작업할 VM을 선택한 다음 오른쪽 3개의 점으로 된 아이콘을 클릭해서 명령어 옵션 리스트를 선택할 수 있다. (그림 5.21)
 
@@ -298,7 +298,7 @@ gcloud compute instances stop INSTANCE-NAME
 
 ### VM에 네트워크 접근
 
-클라우드 엔지니어로서, 일부 관리 업수를 수행하기 위해 VM에 접속할 필요가 있다. 가장 공통적인 방법은 리눅스 서버에서 접속할 때 SSH나 Windows 서버에서 접속할 때 Remote Desktop Protocol(RDP)이다.
+클라우드 엔지니어로서, 일부 관리 업무를 수행하기 위해 VM에 접속할 필요가 있다. 가장 공통적인 방법은 리눅스 서버에서 접속할 때 SSH나 Windows 서버에서 접속할 때 Remote Desktop Protocol(RDP)이다.
 
 그림 5.22는 콘솔에서 SSH를 사용하기위한 옵션이다. 옵션 리스트는 관련된 VM의 SSH 버튼을 클릭할 떄 나타난다.
 
@@ -314,11 +314,11 @@ Open In Browser Window 옵션을 선택하는 것은 새로운 브라우저를 �
 
 ### VM 모니터링
 
-VM이 실행되는 동안 VM 인스턴스 상세페이지의 모니터링 페이지에서 CPU, 디스트, 네트워크로드를 모니터링할 수 있다.
+VM이 실행되는 동안 VM 인스턴스 상세페이지의 모니터링 페이지에서 CPU, 디스크, 네트워크로드를 모니터링할 수 있다.
 
 콘솔에서 모니터링 정보에 접근하기 위해 모니터링 하려는 VM의 이름을 클릭하고 VM 인스턴스 페이지에서 VM 인스턴스를 선택한다. 이는 VM의 상테 페이지를 보여준다. 페이지 위쪽에 있는 Monitoring 옵션을 선택하여 모니터링 상세정보를 확인한다.
 
-그림 5.24, 5.25, 5.26dms CPU, 네트워크, 디스크에 대한 정보를 보여준다.
+그림 5.24, 5.25, 5.26은 CPU, 네트워크, 디스크에 대한 정보를 보여준다.
 
 ![5.24_monitoring_tab_vm](../img/ch05/5.24_monitoring_tab_vm.png)
 
@@ -341,7 +341,7 @@ VM의 기본적인 관리 중 일부는 실행중인 인스턴스의 비용을 �
 * 비용은 머신 타입을 기반으로 한다. 많은 CPU와 메모리를 사용하면 더 많은 비용이 발생한다.
 * 구글은 지속적인 사용에 대한 할인을 제공한다.
 * VM은 최소 1분 단위로 청구된다.
-* Preemptible VM은 VM의 비용을 80%까지 절약할 수 있따.
+* Preemptible VM은 VM의 비용을 80%까지 절약할 수 있다.
 
 ## VM 기획, 배포, 관리를 위한 가이드라인
 
@@ -350,7 +350,7 @@ VM 작업을 간소화하는 데 도움이 되는 다음 지침을 고려해야�
 * VM의 특별한 관리를 위해서 콘솔을 사용해야 한다. 반복될 수 있는 작업을 위해 `gcloud`명령어 스크립트를 사용한다.
 * 소프트웨어 업데이트와 기동될 때 수행해야하는 여러 작업을 수행하는 시작 스크립트를 사용해야 한다.
 * 머신 이미지에 많은 수정이 있다면, 모든 새로운 인스턴스에서 동일한 수정사항을 실행하는 것 보다 시스템 이미지를 저장하고, 새 인스턴스와 함께 사용하는 것을 고려해야 한다.
-* 예상치 못한 장에가 발생해도 된찮다면, 비용을 줄여주는 Preemptible VM을 사용해야 한다.
+* 예상치 못한 장애가 발생해도 괜찮다면, 비용을 줄여주는 Preemptible VM을 사용해야 한다.
 * SSH나 RDP를 사용하여 VM에 접근해서 OS레벨의 작업을 수행해야 한다.
 * VM레벨 작업을 수행하기 위해서 Cloud Console, Cloud Shell, Cloud SDK를 사용한다.
 
