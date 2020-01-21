@@ -1,4 +1,4 @@
-# Chapter 10 Computing with Cloud funcstions
+# Chapter 10 Computing with Cloud functions
 
 **이 챕터는 구글 Associate Cloud Engineer 인증 시험 과목 중, 아래 내용을 다룬다.**
 * 3.3 App Engine과 Cloud Functions 리소스를 배포하고 구현
@@ -41,7 +41,7 @@ Cloud Storage에서 이벤트는 파일 업로드, 삭제, 아카이빙을 포�
 
 ### Runtime 환경
 
-Functions는 자체 환경에서 실행한다. function가 호출될 때마다 다른 모든 호출로부터 분리된 인스턴스에서 실행된다. 오직 Cloud Functions을 사용하여 functions의 호출 간 정보를 공유하는 방법은 없다. 글로벌 카운트를 유지하는 것 같이 데이터를 업데이트를 동일하게 해야하거나 처리된 지난 이벤트의 이름같이 function의 상태에 대한 정보를 유지해야 하면, cloud Datastore나 Cloud Storage의 파일같은 데이터베이스를 사용해야 한다.
+Functions는 자체 환경에서 실행한다. function이 호출될 때마다 다른 모든 호출로부터 분리된 인스턴스에서 실행된다. 오직 Cloud Functions을 사용하여 functions의 호출 간 정보를 공유하는 방법은 없다. 글로벌 카운트를 유지하는 것 같이 데이터를 업데이트를 동일하게 해야하거나 처리된 지난 이벤트의 이름같이 function의 상태에 대한 정보를 유지해야 하면, cloud Datastore나 Cloud Storage의 파일같은 데이터베이스를 사용해야 한다.
 
 구글은 현재 3가지 런타임 환경을 지원한다.
 * Python 3
@@ -67,9 +67,9 @@ Python 함수는 `main.py` 파일로 저장되어야 한다.
 > Functions은 OCR 처리를 자동화하는데 사용될 수 있다. 파일이 업로드 되면, Cloud Storage는 파일을 트리거하고 함수를 호출한다. 함수는 파일이 겁색이 가능한 포맷인지, OCR 프로그램에 의해 전처리가 필요한지 결정한다. 파일이 OCR 처리가 필요하다면 함수는 Pub/Sub 토픽에 파일의 위치를 작성한다. <br>
 > 두번째 함수는 새로운 메시지 이벤트가 묶여있다. 파일 위치가 메시지에 쓰여지면, 팜수는 문서를 스캔하는 OCR 프로그램을 호출하고 파일의 검색가능한 버전을 생성한다. 검색이 가능한 버전은 Cloud Storage 버킷에 쓰여지고 다른 검색이 가능한 파일과 함께 검색 도구에 의해 색인을 생성할 수 있다.
 
-## Cloud Storage에서 이벤츠를 수신하는 CLoud Functions
+## Cloud Storage에서 이벤트를 수신하는 Cloud Functions
 
-Cloud Storage는 GCP의 object 스토리지이다. 이 서비스는 *buckets*이라는 컨테이너에 파일을 저장할 수 있다. 챕터 11에서 Cloud Storage에 대한 더 자세한 정보를 다룬다. 하지만, 이 챕터에서는 Cloud Storage가 버팃을 사용하여 파이릉 저장한다는 것을 이해하면 된다. 파일이 생성되고, 삭제되고, 저장되거나 내용이 변경되면, 이벤트를 함수를 호출한다. Cloud Console과 Cloud SDK와 Cloud SDK에 `gcloud` 명령을 사용하여 Cloud Storage Events를 위한 함수를 배포하는 예를 살펴보자
+Cloud Storage는 GCP의 object 스토리지이다. 이 서비스는 *buckets*이라는 컨테이너에 파일을 저장할 수 있다. [챕터 11](Chapter_11.md)에서 Cloud Storage에 대한 더 자세한 정보를 다룬다. 하지만, 이 챕터에서는 Cloud Storage가 버킷을 사용하여 파일을 저장한다는 것을 이해하면 된다. 파일이 생성되고, 삭제되고, 저장되거나 내용이 변경되면, 이벤트를 함수를 호출한다. Cloud Console과 Cloud SDK와 Cloud SDK에 `gcloud` 명령을 사용하여 Cloud Storage Events를 위한 함수를 배포하는 예를 살펴보자.
 
 ### Cloud Console을 사용하여 Cloud Storage Event를 위한 Cloud Functions 배포
 
@@ -99,7 +99,7 @@ Cloud Console 콘솔에서, 활성화되어있지 않는다면, Cloud Functions 
 
 **그림 10.3** 콘솔에서 함수 생성
 
-다음 예시에서, 함소 코드를 포함한 파일을 업로드한다. 파일의 내용은 다음과 같다.
+다음 예시에서, 함수 코드를 포함한 파일을 업로드한다. 파일의 내용은 다음과 같다.
 
 ```python
 def cloud_storage_function_test(event_data, event_context):
@@ -155,7 +155,7 @@ gcloud functions deploy cloud_storage_function_test --runtime python37 --trigger
 
 ![10.5](../img/ch10/10.5.png)
 
-**그림 10.5** `cloud_storage_function_test`함수에 의해서 생성된느 로그 메시지의 예
+**그림 10.5** `cloud_storage_function_test`함수에 의해서 생성되는 로그 메시지의 예
 
 함수가 완료되고 삭제하고자 할 때, `gcloud functions delete` 명령을 사용할 수 있다.
 
