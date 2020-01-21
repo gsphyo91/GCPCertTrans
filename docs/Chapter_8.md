@@ -14,11 +14,11 @@
 
 ## Kubernetes 클러스터 상태 확인
 
-챕터 7에서 설명된 단계를 사용하여 클러스터를 생성한다고 가정하면, 구글 Cloud Console이나 `gcloud` 명령어 중 하나를 사용하여 Kubernetes 클러스터의 상태를 확인할 수 있다.
+[챕터 7](Chapter_7.md)에서 설명된 단계를 사용하여 클러스터를 생성한다고 가정하면, 구글 Cloud Console이나 `gcloud` 명령어 중 하나를 사용하여 Kubernetes 클러스터의 상태를 확인할 수 있다.
 
 ### Cloud Console을 사용하여 Kubernetes 클러스터의 상태를 확인
 
-Cloud Console 홈 페이지에서 왼쪽 위에 3개의 선으로된 아잍콘을 클릭하여 메뉴를 연다. 그림 8.1에서 보여지는 것 처럼 GCP 서비스의 리스트가 표시된다.
+Cloud Console 홈 페이지에서 왼쪽 위에 3개의 선으로된 아이콘을 클릭하여 메뉴를 연다. 그림 8.1에서 보여지는 것 처럼 GCP 서비스의 리스트가 표시된다.
 
 ![8.1](../img/ch08/8.1.png)
 
@@ -62,7 +62,7 @@ Add-ons와 Permissions을 클릭하면 그림 8.7처럼 정보가 표시된다. 
 
 그림 8.8은 node pool의 상세 정보 예를 보여준다. node pool은 Kubernetes 클러스터에 실행 중인 개별 인스턴스 그룹이다. 이 섹션에서 상세 정보는 node에서 실행 중인 node 이미지, 머신 타입, 전체 vCPU의 수, 디스크 타입, node가 preemptible인지 아닌지를 포함한다.
 
-클러스터 이름 아래에는 3가지 옵션이 있다: Detals, Storage, Nodes. 지금 까지 상세 정보 페이지의 컨텐츠를 설명했다. Storage를 클릭하여 그림 8.9와 같이 정보를 표시한다. 클러스터에서 사용되는 persistent volumes과 storage classes를 표시한다.
+클러스터 이름 아래에는 3가지 옵션이 있다: Details, Storage, Nodes. 지금 까지 상세 정보 페이지의 컨텐츠를 설명했다. Storage를 클릭하여 그림 8.9와 같이 정보를 표시한다. 클러스터에서 사용되는 persistent volumes과 storage classes를 표시한다.
 
 클러스터는 persistent volumes을 갖지 않지만 standard storage를 사용한다. Persistenct volumes은 Kubernetes에 의해서 관리되는 영속성이 있는 디스크이고, Compute Engine persistenct disk를 사용하여 구현된다. storage class는 서비스의 품질, 정책 백업, provisioner(스토리지를 구현하는 서비스)를 지정하는 정책의 집합인 스토리지 유형이다.
 
@@ -140,7 +140,7 @@ gcloud container cluster describe --zone us-central1-a standard-cluster-1
 
 nodes와 pods에 대한 정보를 조회하기 위해서, `kubectl` 명령을 사용한다.
 
-첫 번째, 클러스터 API와 통신하는 방법에 대한 정포가 포함되어있는 `kubeconfig` 파일을 정확하게 설정했는지 확인해야 한다. zone이나 region의 이름과 클러스터의 이름을 `gcloud container cluster get-credentials` 명령과 함께 실행한다. 아래는 예시이다.
+첫 번째, 클러스터 API와 통신하는 방법에 대한 정보가 포함되어있는 `kubeconfig` 파일을 정확하게 설정했는지 확인해야 한다. zone이나 region의 이름과 클러스터의 이름을 `gcloud container cluster get-credentials` 명령과 함께 실행한다. 아래는 예시이다.
 
 ```bash
 gcloud container cluster get-credentials --zone us-central1-a standard-cluster-1
@@ -238,7 +238,7 @@ Cloud Console이나 로컬 환경, GCP VM, Cloud Shell의 Cloud SDK 중 하나�
 
 pods를 직접 조작하지 않는 것이 가장 좋다. Kubernetes는 deployment에 지정된 pods의 수를 유지한다. pods의 수를 변경하고 싶다면, deployment 설정을 바꿔야 한다.
 
-### Cloud Console로 Pods 수가, 수정, 삭제
+### Cloud Console로 Pods 추가, 수정, 삭제
 
 pods는 deployment를 통해 관리된다. deployment는 *replicas*라고 불리는 설정 파라미터를 포함한다. 이는 deployment에 지정된 어플리케이션을 실행할 pods의 수이다. 이 섹션은 Cloud Console을 사용하여 pods의 수가 차례로 변경되는 replicas의 수를 변경하는 방법을 설명한다.
 
@@ -272,7 +272,7 @@ Scale을 선택하면 워크로드를 위한 새로운 사이트를 설정하는
 
 **그림 8.28** 오토스케일링을 활성화면 부하에 따라서 자동적으로 replicas를 추가하고 삭제한다.
 
-또한 Action 메뉴는 그림 8.29처럼 port에 service를 노출하고, 8.30처럼 배포되는 코드를 rolling updates하는 파라미터를 지정하는 것을 제공한다. 파라미터는 pod를 업데이트를 파려고 판단하기 전에 대기하는 최소 시간, 허용된 목표 크기를 초과하는 pods의 최대 수, 사용할 수 없는 pods의 최대 수를 포함한다.
+또한 Action 메뉴는 그림 8.29처럼 port에 service를 노출하고, 8.30처럼 배포되는 코드를 rolling updates하는 파라미터를 지정하는 것을 제공한다. 파라미터는 pod를 업데이트를 하려고 판단하기 전에 대기하는 최소 시간, 허용된 목표 크기를 초과하는 pods의 최대 수, 사용할 수 없는 pods의 최대 수를 포함한다.
 
 ![8.29](../img/ch08/8.29.png)
 
