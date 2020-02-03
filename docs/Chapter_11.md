@@ -56,7 +56,7 @@ Memorystore 캐시는 Compute Engine, App Engine, Kubernetes Engine에서 실행
 
 Memorystore에서 Redis 캐시를 설정하기 위해, instance ID, display name, Redis Version을 지정해야 한다. 현재 Redis 3.2만 지원된다. Standard instance tier를 선택하여 high availability를 위해 다른 zone에 replica를 갖도록 선택할 수 있다. Basic instance tier는 replica를 포함하지 않지만 비용이 적다.
 
-캐시 전용 메모리 양에 따라서 region과 zone을 지정해야 한다. 캐시는 1GB에서 300GB의 사이즈가 될 수 있따. Redis 인스턴스는 다른 네트워크를 지정하지 않으면 기본 네트워크에서 접근할 수 있다.(GCP의 더 많은 네트워크 정보를 위해 챕터 14, 15를 참고). Memorystore를 위한 고급 옵션은 labels을 지정하고 IP 주소가 지정될 IP 범위를 정의할 수 있다.
+캐시 전용 메모리 양에 따라서 region과 zone을 지정해야 한다. 캐시는 1GB에서 300GB의 사이즈가 될 수 있다. Redis 인스턴스는 다른 네트워크를 지정하지 않으면 기본 네트워크에서 접근할 수 있다.(GCP의 더 많은 네트워크 정보를 위해 챕터 14, 15를 참고). Memorystore를 위한 고급 옵션은 labels을 지정하고 IP 주소가 지정될 IP 범위를 정의할 수 있다.
 
 ### Persistent Storage
 
@@ -94,11 +94,11 @@ Persistent disk는 공백이나 이미지나 스냅샷으로 생성될 수 있�
 
 #### Cloud Storage의 기능
 
-Cloud Storage는 object 스토리지 시스템이다. 시스템에 저장되는 파일은 최소 단위로 취급된다. 즉, 파일의 한 섹션만 읽는 것같이 파일의 부분만 조작할 수 없다. object를 생성하거나 삭제하는 동작을 수행할 수 있지만 Cloud Storage는 파일의 하위 구성요소를 조작하는 기능을 제공하지 않느다. 예를 들어 파일의 한 색션을 덮어쓰는 Cloud Storage 명령은 없다. 또한, Cloud Storage는 동시성과 잠금을 지원하지 않는다. 다수의 클라이언트가 파일을 작성하면, 파일에 작성된 마지막 데이터가 저장되고 유지된다.
+Cloud Storage는 object 스토리지 시스템이다. 시스템에 저장되는 파일은 최소 단위로 취급된다. 즉, 파일의 한 섹션만 읽는 것같이 파일의 부분만 조작할 수 없다. object를 생성하거나 삭제하는 동작을 수행할 수 있지만 Cloud Storage는 파일의 하위 구성요소를 조작하는 기능을 제공하지 않는다. 예를 들어 파일의 한 섹션을 덮어쓰는 Cloud Storage 명령은 없다. 또한, Cloud Storage는 동시성과 잠금을 지원하지 않는다. 다수의 클라이언트가 파일을 작성하면, 파일에 작성된 마지막 데이터가 저장되고 유지된다.
 
 Cloud Storage는 일관된 데이터 구조에 대한 요구없이 대량의 데이터를 저장하기 위해 적합하다. 버킷에 다양한 유형의 데이터를 저장할 수 있다. 버킷은 Cloud Storage의 논리적 구성 단위이다. 버킷은 프로젝트 내의 리소스이다. 버킷은 글로벌 namespace를 공유한다는 것을 기억해야 한다. 그래서 각 버킷의 이름은 globally 유니크해야 한다. "mytestbucket"으로 버킷 이름을 할 수 없을 경우 놀라지 않아도 된다. 특히, 버킷 및 object 이름 지정 규칙을 따르지 않는 경우, 유니크한 파일 이름을 찾는 것은 어렵지 않다.
 
-object storage는 파일 시스템을 제공하는 않는 것을 기억해야 한다. 버킷은 객체를 그룹으로 구성하는 데 도움을 주는 점에서 디렉토리와 유사하다. 하지만, 버킷은 하위 디렉토리같은 기능을 지원하는 디렉토리가 아니다. 구글은 Cloud Storage Fuse라는 오픈소스 프로젝트를 지원한다. 이는 리눅스와 MacOS에서 파일 시스템으로 버킷을 마운트하는 방법을 제공한다. Cloud Storage Fuse를 사용하면, 파일 시스템 명령을 사용하여 버킷에 파일을 다운로드하고 업로드할 수 있다. 하지만, 완전한 파일시스템 기능을 제공하지 않는다. Cloud Storage Fuse는 Cloud Storage와 동일한 제한조건을 갖는다. Cloud Storage Fuse의 목적은 리눅스나 Mac 파일시스템에서 작업할 때, 버킷에 내부, 외부에 데이터를 편하게 이동하게 만들어주는 것이다.
+object storage는 파일 시스템을 제공하지 않는 것을 기억해야 한다. 버킷은 객체를 그룹으로 구성하는 데 도움을 주는 점에서 디렉토리와 유사하다. 하지만, 버킷은 하위 디렉토리같은 기능을 지원하는 디렉토리가 아니다. 구글은 Cloud Storage Fuse라는 오픈소스 프로젝트를 지원한다. 이는 리눅스와 MacOS에서 파일 시스템으로 버킷을 마운트하는 방법을 제공한다. Cloud Storage Fuse를 사용하면, 파일 시스템 명령을 사용하여 버킷에 파일을 다운로드하고 업로드할 수 있다. 하지만, 완전한 파일시스템 기능을 제공하지 않는다. Cloud Storage Fuse는 Cloud Storage와 동일한 제한조건을 갖는다. Cloud Storage Fuse의 목적은 리눅스나 Mac 파일시스템에서 작업할 때, 버킷에 내부, 외부에 데이터를 편하게 이동하게 만들어주는 것이다.
 
 Cloud Storage는 object storage의 4가지 등급을 제공한다: multi-regional, regional, nearline, coldline.
 
@@ -126,7 +126,7 @@ Coldline 스토리지는 multiregional 위치에서 월 평균 99.95% 가용성�
 
 현재 비용보다 상대적인 비용 관계를 이해하는 것이 더 중요하다. 비용을 변할 수 있다. 하지만 다른 등급의 스토리지과 상대적으로 각 등급의 비용은 동일하게 유지될 가능성이 높다. 다양한 스토리지 유형을 위한 기능, 비용, 사례의 요익은 표 11.1을 확인하면 된다.
 
-**그림 11.1** 스토리지 서비스 - 기능 요약
+**표 11.1** 스토리지 서비스 - 기능 요약
 
 | :: | Regional | Multiregional | Nearline | Coldline |
 |---|---|---|---|---|
@@ -141,7 +141,7 @@ Cloud Storage에서 버킷은 Object가 변경될 때 object의 버전을 유지
 
 또한 Cloud Storage는 자동적으로 object의 스토리지 등급을 변경하거나 특정 기간 뒤에 object를 삭제하는 lifecycle 관리 정책을 제공한다. 때때로 configuration이라고 불리는 lifecycle 정책은 규칙의 집합이다. 규칙은 condition과 action을 포함한다. condition이 true면, action은 실행된다. Lifecycle 관리 정책은 버킷에 적용되고, 버킷의 모든 object에 영향을 미친다.
 
-Conditions는 종종 연대(age)를 기반으로 한다. object가 특정 age에 도달하면, 삭제되거나 더 적은 비용의 스토리지 등급으로 이동될 수 있다. age 이외에도, condiftion은 버전의 수, 버전이 live인지 아닌지, object가 특정 날짜 이전에 생성됐는지, object가 특정 스토리지 등급에 있는지를 확인할 수 있다. 
+Conditions는 종종 연대(age)를 기반으로 한다. object가 특정 age에 도달하면, 삭제되거나 더 적은 비용의 스토리지 등급으로 이동될 수 있다. age 이외에도, condition은 버전의 수, 버전이 live인지 아닌지, object가 특정 날짜 이전에 생성됐는지, object가 특정 스토리지 등급에 있는지를 확인할 수 있다. 
 
 object를 삭제하거나 object의 스토리지 등급을 변경할 수 있다. 버전이 있는 object과 없는 object 모두 삭제될 수 있다. 파일의 live 버전이 삭제되면, 실제로 삭제되지 않고 object가 보관된다. object의 보관된 버전이 삭제되면, object는 영구적으로 삭제된다.
 
@@ -209,7 +209,7 @@ GCP에서 사용할 수 있는 데이터 모델에는 3가지 카테고리가 �
 
 object storage 데이터 모델은 최소 단위의 object로 파일을 취급한다. 데이터의 블록을 읽거나 object의 일부분을 덮어쓰는데 object storage 명령을 사용할 수 없다. object를 업데이트해야 한다면, object를 서버에 복사하고, 변경을 적용하고, object storage 시스템에 업데이트된 버전을 다시 복사해야 한다.
 
-Object storage는 대용량 데이터를 저장해야 하고, object가 object 저장소에 있을 때 object 내의 데이터에 세분화된 접근이 필요하지 않을 때 사용된다. 이 데이터 모델은 저장되어야하지만, 더이상 적극적으로 분석되지 않는 데이터를 보관하고 머신러닝 학습 데이터, 오래된 IoT 데이터레 적합하다.
+Object storage는 대용량 데이터를 저장해야 하고, object가 object 저장소에 있을 때 object 내의 데이터에 세분화된 접근이 필요하지 않을 때 사용된다. 이 데이터 모델은 저장되어야하지만, 더이상 적극적으로 분석되지 않는 데이터를 보관하고 머신러닝 학습 데이터, 오래된 IoT 데이터에 적합하다.
 
 ### Relational: Cloud SQL, Cloud Spanner, BigQuery
 
@@ -217,7 +217,7 @@ Relational 데이터베이스는 수 십년동안 기업을 위한 주요 데이
 
 Cloud SQL과 Cloud Spanner와 같은 Relational 데이터베이스는 데이터베이스 트랜잭션을 지원한다. 트랜잭션은 전체적으로 성공이나 실패를 보장하는 일련의 작업이다. 일부 작업은 실행되고 다른 작업은 실행되지 않을 가능성이 있다. 예를 들어, 사용자가 제품을 구매할 때, 사용할 수 있는 제품 수는 인벤토리 테이블에서 감소된다. 그리고 레코드는 사용자가 구매한 제품 테이블에 추가된다. 트랜잭션의 경우, 데이터베이스가 인벤토리를 업데이트한 후, customer-purchased prodects 테이블에 업데이트하기 전에 실패한 경우, 데이터베이스는 데이터베이스를 재시작할 때 부분적으로 실행된 트랜잭션을 롤백할 것이다.
 
-Cloud SQL과 Cloud Spanner는 데이터가 구조화되고, 관계형 데이터베이스로 모델링 되었을 때 사용된다. Cloud SQL은 MySQL과 PostgreSQL 데이터베이스를 제공하는 관리형 데이터베이스 서비스이다. 즉, Cloud SQL은 클러스터에 추가적인 서버를 추가하는 수평적 확장이 필요하징 않을 때, 데이터베이스를 사용한다. 즉, Cloud SQL 데이터베이스는 실행 중인 서버에 더 많은 메모리와 CPU를 갖도록 수직적으로 확장된다. Cloud Spanner는 극단적으로 대규모의 관계형 데이터를 갖거나 모든 서버에 일관성과 무결성을 보장하도록 글로벌로 분리해야하는 데이터를 갖을 때 사용된다. 
+Cloud SQL과 Cloud Spanner는 데이터가 구조화되고, 관계형 데이터베이스로 모델링 되었을 때 사용된다. Cloud SQL은 MySQL과 PostgreSQL 데이터베이스를 제공하는 관리형 데이터베이스 서비스이다. 즉, Cloud SQL은 클러스터에 추가적인 서버를 추가하는 수평적 확장이 필요하지 않을 때, 데이터베이스를 사용한다. 즉, Cloud SQL 데이터베이스는 실행 중인 서버에 더 많은 메모리와 CPU를 갖도록 수직적으로 확장된다. Cloud Spanner는 극단적으로 대규모의 관계형 데이터를 갖거나 모든 서버에 일관성과 무결성을 보장하도록 글로벌로 분리해야하는 데이터를 갖을 때 사용된다. 
 
 큰 기업은 글로벌 공급망과 금융 서비스 어플리케이션 같은 어플리케이션을 위해 Cloud Spanner를 종종 사용한다. 반면, Cloud SQL은 웹 어플리케이션, business intelligence, e-커머스 어플리케이션을 위해 종종 사용된다.
 
@@ -287,7 +287,7 @@ BigQuery를 사용하기 위한 첫번째 업무는 데이터를 보유할 데�
 
 data set을 생성할 때, 이름을 지정해야 하고, 저장할 region을 선택해야 한다. 모든 regions이 BigQuery를 지원하지 않는다. 현재 US, Europe, Asia 전체적으로 9개의 지역에서 선택해야 한다.
 
-챕터 12에서는 BigQuery와 GCP 데이터베이스에서 데이터를 가져오고 쿼리하는 방법을 논의한다.
+[챕터 12](Chapter_12.md)에서는 BigQuery와 GCP 데이터베이스에서 데이터를 가져오고 쿼리하는 방법을 논의한다.
 
 ### NoSQL: Datastore, Cloud Firestore, Bigtable
 
@@ -298,27 +298,27 @@ NoSQL 데이터베이스는 관계형 모델을 사용하지 않고, 고정된 �
 
 #### Datastore 기능
 
-Datastore는 문서 데이터베이스이다. 스프레드시트나 텍스트 파일같음 문서를 저장하는데 사용된다는 의미는 아니다. 하지만, 데이터베이스의 데이터는 document라고 불리는 구조로 구성된다. Documents는 key-value 쌍의 집합으로 만들어진다. 아래는 간단한 예시이다.
+Datastore는 문서 데이터베이스이다. 스프레드시트나 텍스트 파일같은 문서를 저장하는데 사용된다는 의미는 아니다. 하지만, 데이터베이스의 데이터는 document라고 불리는 구조로 구성된다. Documents는 key-value 쌍의 집합으로 만들어진다. 아래는 간단한 예시이다.
 
-~~~json
+```
 {
     book : "ACE Exam Guide",
     Chapter: 11,
     length: 20,
     topic: "storage"
 }
-~~~
+```
 
 이 예시는 이 책에서 챕터의 특성을 설명한다. 이 예시에서는 4개의 key 또는 properties가 있다: book, chapter, length, storage. 이 key-value 쌍의 집합은 Datastore에서 엔티티라고 부른다. 엔티티는 공통적인 properties를 갖지만, Datastore는 schemaless 데이터베이스여서 모든 엔티티가 동일한 properties를 요구하지 않는다. 다음은 예시이다.
 
-~~~json
+```
 {
     book: "ACE Exam Guide",
     Chapter: 11,
     topic: "computing",
     number_of_figures: 8
 }
-~~~
+```
 
 Datastore는 관리형 데이터베이스이다. 그래서 서비스의 사용자는 서버를 관리하거나 데이터베이스 소프트웨어를 설치할 필요가 없다. Datastore는 자동적으로 데이터를 파티셔닝하고, 수요에 따라서 스케일을 업하거나 다운한다.
 
@@ -328,7 +328,7 @@ Datastore는 트랜잭션과 쿼리 성능을 증진시키는 인덱스를 지�
 
 #### Datastore 설정
 
-BigQuery처럼 Datastore는 노드 설정을 지정하지 않는 관리형 데이터베이스 서비스이다. 대신, 콘솔에서 데이터베이스에 엔티티를 추가할 수 있다. 그림 11.16은 Cloud Console에서 Datastore를 열었을 때 나타나는 초기 야식을 보여준다.
+BigQuery처럼 Datastore는 노드 설정을 지정하지 않는 관리형 데이터베이스 서비스이다. 대신, 콘솔에서 데이터베이스에 엔티티를 추가할 수 있다. 그림 11.16은 Cloud Console에서 Datastore를 열었을 때 나타나는 초기 양식을 보여준다.
 
 ![11.16](../img/ch11/11.16.png)
 
@@ -340,11 +340,11 @@ Create Entity를 선택하면 양식이 표시되고 document 데이터 구조�
 
 **그림 11.17** Datastore에 엔티티 추가
 
-엔티티를 추가할 때, 관계형 데이터베이스에서 스키마 그룹 테이블같이 엔티티를 그룹화하는 방법인 namespace를 지정한다. 관계형 데이터베이스에서 테이블과 유사항 kind를 지정해야 한다. 각 인스턴스는 자동으로 생성된 숫자 key나 custom-defined key가 될 수 있는 Key가 필요하다.
+엔티티를 추가할 때, 관계형 데이터베이스에서 스키마 그룹 테이블같이 엔티티를 그룹화하는 방법인 namespace를 지정한다. 관계형 데이터베이스에서 테이블과 유사한 kind를 지정해야 한다. 각 인스턴스는 자동으로 생성된 숫자 key나 custom-defined key가 될 수 있는 Key가 필요하다.
 
-다음, names, types, values를 갖는 하나 이상의 properties를 추가한다. Types은 strine, data 및 time, Boolean, array같은 다른 구조화 타입을 포함한다.
+다음, names, types, values를 갖는 하나 이상의 properties를 추가한다. Types은 string, data 및 time, Boolean, array같은 다른 구조화 타입을 포함한다.
 
-Datastore에서 데이터를 가져오고 쿼리하는 추가 상세 정보는 챕터 12에 있다.
+Datastore에서 데이터를 가져오고 쿼리하는 추가 상세 정보는 [챕터 12](Chapter_12.md)에 있다.
 
 #### Cloud Firestore 기능
 
@@ -366,9 +366,9 @@ Cloud Firestore는 인스턴스를 설정할 필요가 없는 관리형 데이�
 
 Firestore는 거의 몇분이 안돼서 데이터베이스를 생성한다. 데이터베이스가 ready 상태일 때, 그림 11.20같은 화면을 확인할 수 있다.
 
-챕터 12에서는 Firestore에서 데이터를 가져오고 쿼리하는 것을 살펴볼 것이다.
+[챕터 12](Chapter_12.md)에서는 Firestore에서 데이터를 가져오고 쿼리하는 것을 살펴볼 것이다.
 
-#### Bigtable 설정
+#### Bigtable 기능
 
 Bigtable은 또다른 NoSQL 데이터베이스이지만 Datastore와 다르다. Bigtable은 wide-column 데이터베이스이고, document 데이터베이스가 아니다. 이름에서 알 수 있듯이, Wide-column 데이터베이스는 대량의 컬럼을 갖을 수 있는 테이블을 저장한다. 모든 행이 모든 열을 사용해야 하는 것은 아니어서 Datastore와 같은 방식으로 데이터를 구성하는 고정된 스키마가 필요하지 않다.
 
@@ -388,7 +388,7 @@ Cloud Console에서, Bigtable을 열고, Create Instance를 클릭한다. 그림
 
 Bigtable은 다수의 클러스터를 지원한다. 각 클러스터를 위해 클러스터 ID, region과 zone 위치, 클러스터의 노드 수를 지정해야 한다. 클러스터는 가용성 향상을 위해서 복사될 수 있다.
 
-챕터 12에서는 Bigtable에서 데이터를 가져오고 쿼리하는 방법을 설명한다.
+[챕터 12](Chapter_12.md)에서는 Bigtable에서 데이터를 가져오고 쿼리하는 방법을 설명한다.
 
 ![11.21](../img/ch11/11.21.png)
 
@@ -410,11 +410,11 @@ GCP는 다양한 스토리지 솔루션을 제공한다. 클라우드 엔지니�
 
 **트랜잭션 지원** 어플리케이션에서 최소단위의 트랜잭션을 수행해야 한다면, 트랜잭션을 지원하는 데이터베이스를 사용해야 한다. 어플리케이션에서 지원하는 트랜잭션을 구현할수도 있다. 하지만, 코드는 개발과 유지보수하기 어렵다. 관계형 데이터베이스, Cloud SQL, Cloud Spanner, Datastore는 트랜잭션 지원을 제공한다.
 
-**비용** 특정 스토리지 시스템을 사용하는 것의 비용은 저장된 데이터의 양, 조회하거나 스캔하는 데이터의 양, 스토리지 시스템의 단위단 요금에 따라 다르다. VM을 프로비저닝하는 스토리지 서비스를 사용한다면, VM 프로비저닝 비용도 고려해야 한다.
+**비용** 특정 스토리지 시스템을 사용하는 것의 비용은 저장된 데이터의 양, 조회하거나 스캔하는 데이터의 양, 스토리지 시스템의 단위당 요금에 따라 다르다. VM을 프로비저닝하는 스토리지 서비스를 사용한다면, VM 프로비저닝 비용도 고려해야 한다.
 
 **Latency(지연시간)** Latency는 데이터베이스에 데이터 row를 읽는 요청같은 동작의 시작부터 완료되기 까지의 시간이다. Bigtable은 밀리초 미만의 동작을 일관되게 제공한다. Spanner는 Letency가 더 길수 있지만, 글로벌로 일관되고 확장 가능한 데이터베이스가 제공된다.
 
-일번작으로, 데이터 저장소를 선택하는 것은 절충안을 만드는 것이다. 이상적으로, 저비용, 글로벌 확장, 저지연, 강한 일관성 데이터베이스를 갖을 수 있다. 하지만 이상적이지 않다. 위의 특성 중 하나를 포기해야 한다.
+일번적으로, 데이터 저장소를 선택하는 것은 절충안을 만드는 것이다. 이상적으로, 저비용, 글로벌 확장, 저지연, 강한 일관성 데이터베이스를 갖을 수 있다. 하지만 이상적이지 않다. 위의 특성 중 하나를 포기해야 한다.
 
 다음 챕터에서는, 여기서 설명한 스토리지 솔루션의 사용 방법을 데이터 로드와 쿼리 중점으로 배울 것이다. 
 

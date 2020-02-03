@@ -20,7 +20,7 @@ Cloud SQL은 관리형 relational 데이터베이스 서비스이다. 이 섹션
 
 ### MySQL 인스턴스 생성 및 연결
 
-챕터 11에서 MySQL 인스턴스를 생성하고 설정하는 방법을 설명했지만, 여기서 다시 확인한다.
+[챕터 11](Chapter_11.md)에서 MySQL 인스턴스를 생성하고 설정하는 방법을 설명했지만, 여기서 다시 확인한다.
 
 콘솔에서 SQL을 열고, Create Instance를 클릭하다. MySQL을 선택하고 Second Generation Instance 타입을 선택한다. 그림 12.1과 같은 양식을 확인할 수 있다.
 
@@ -34,7 +34,7 @@ Cloud SQL은 관리형 relational 데이터베이스 서비스이다. 이 섹션
 
 **그림 12.2** MySQL 인스턴스 리스트
 
-데이터베이스가 생성된 후, Cloud Shell을 시작하고 `gcloud sql connect` 명령을 사용하여 연겷할 수 있다. 이 명령은 연결할 인스턴스 이름과 선택적으로 username과 패스워드를 사용한다. 커맨드라인에서 패스워드를 지정하지 않는 것이 좋은 방법이다. 그 대신에, 입력하라는 메시지가 표시되고, 입력할 때는 화면에 표시되지 않는다. IP주소 허용에 대한 메시지를 확인할 수도 있다; 이는 보안 조치이며, Cloud Shell에서 인스턴스에 연결할 수 이따.
+데이터베이스가 생성된 후, Cloud Shell을 시작하고 `gcloud sql connect` 명령을 사용하여 연결할 수 있다. 이 명령은 연결할 인스턴스 이름과 선택적으로 username과 패스워드를 사용한다. 커맨드라인에서 패스워드를 지정하지 않는 것이 좋은 방법이다. 그 대신에, 입력하라는 메시지가 표시되고, 입력할 때는 화면에 표시되지 않는다. IP주소 허용에 대한 메시지를 확인할 수도 있다; 이는 보안 조치이며, Cloud Shell에서 인스턴스에 연결할 수 있다.
 
 `ace-exam-mysql`을 인스턴스에 연결하기 위해, 아래 명령을 사용한다.
 
@@ -107,17 +107,17 @@ Create Backup을 클릭하면 그림 12.7과 같은 양식이 열린다.
 
 또한 `gcloud sql backups` 명령을 사용하여 백업을 생성할 수 있다.
 
-~~~bash
+```bash
 gcloud sql backups create --async --instance [INSTANCE_NAME]
-~~~
+```
 
 여기에서 *[INSTANCE_NAME]*은 ace-exam-mysql같은 이름이고 --async 파라미터는 optional이다.
 
 `ace-exam-mysql` 인스턴스를 위한 on-demand 백업을 생성하기 위해서 다음 명령을 사용한다.
 
-~~~bash
+```bash
 gcloud sql backups create --async --instance ace-exam-mysql
-~~~
+```
 
 또한 Cloud SQL이 자동적으로 백업을 생성하도록 할 수도 있다.
 
@@ -125,9 +125,9 @@ gcloud sql backups create --async --instance ace-exam-mysql
 
 커맨드라인에서 자동 백업을 활성화하기 위해, `gcloud` 명령을 사용한다.
 
-~~~bash
+```bash
 gcloud sql instances patch [INSTANCE_NAME] -backup-start-time [HH:MM]
-~~~
+```
 
 이 예시 인스턴스에서, 1:00am에 자동 백업을 실행할 수 있다.
 
@@ -137,11 +137,11 @@ gcloud sql instance patch ace-exam-mysql -backup-start-time 01:00
 
 ![12.9](../img/ch12/12.9.png)
 
-**그림 12.8** Cloud Console에서 자동 백업 활성화
+**그림 12.9** Cloud Console에서 자동 백업 활성화
 
 ## Datastore 배포 및 관리
 
-챕터 11은 Datastore document 데이터베이스를 초기화하는 방법을 설명했다. 이제 엔티티를 생성하고 document 데이터베이스에 properties를 추가하는 방법을 확인할 것이다. 또한 백업과 복구 동작을 확인할 것이다.
+[챕터 11](Chapter_11.md)은 Datastore document 데이터베이스를 초기화하는 방법을 설명했다. 이제 엔티티를 생성하고 document 데이터베이스에 properties를 추가하는 방법을 확인할 것이다. 또한 백업과 복구 동작을 확인할 것이다.
 
 ### Datastore 데이터베이스에 데이터 추가
 
@@ -175,7 +175,7 @@ gsutil mb gs://[BUCKET_NAME]/
 gsutil mb gs://ace_exam_backups/
 ```
 
-백업을 생성한 사용자는 `datastore.databases.export` 권한이 필요하다. 데이터가 인입되는 경우, `datastore.databases.import`가 필요하다. Cloud Datastore Import Export Admin role은 두 권한을 갖는다; 사용자에게 roles을 지정하는 상세 정보는 챕터 17을 확인한다.
+백업을 생성한 사용자는 `datastore.databases.export` 권한이 필요하다. 데이터가 인입되는 경우, `datastore.databases.import`가 필요하다. Cloud Datastore Import Export Admin role은 두 권한을 갖는다; 사용자에게 roles을 지정하는 상세 정보는 [챕터 17](Chapter_17.md)을 확인한다.
 
 Cloud Datastore Import Export Admin role을 갖는 사용자는 다음 명령을 사용하여 백업을 만든다.
 
@@ -221,7 +221,7 @@ BigQuery는 fully 관리형 데이터베이스 서비스이다. 그래서 구글
 
 **그림 12.13** 예상 데이터 양이 스캔된 예시 쿼리
 
-오른쪽 아래에, BigQuerysms 얼마나 많은 데이터가 스캔될지 측정 값을 제공한다. 또한, 커맨드 라인에서 `bq` 명령에 `--dry-run` 옵션을 함께 사용하여 이 측정을 얻을 수 있다.
+오른쪽 아래에, BigQuery는 얼마나 많은 데이터가 스캔될지 측정 값을 제공한다. 또한, 커맨드 라인에서 `bq` 명령에 `--dry-run` 옵션을 함께 사용하여 이 측정을 얻을 수 있다.
 
 ```bash
 bq --location=[LOCATION] query --use_legacy_sql=false --dry-run [SQL_QUERY]
@@ -235,7 +235,7 @@ bq --location=[LOCATION] query --use_legacy_sql=false --dry-run [SQL_QUERY]
 
 BugQuery에서 Jobs은 데이터 로드, 추출, 복사, 쿼리에 사용되는 프로세스이다. Jobs은 이러한 동작을 시작할 때 자동적으로 생성된다.
 
-Jobs의 상태를 확인하기 위해 BigQuery 콘솔을 열고, 왼쪽 메뉴에서 Job History를 클릭한다. jobs의 리스트와 상태가 표시될 것이다. 그림 12.15에서, 리스트의 상위 job은 green bar이다. 이는 성공적으로완료된 job을 가리킨다. 이것은 job 항목의 확장된 보기의 예시이다. 아래에 실패된 job의 한줄 요약이 있다. 실패는 job 설명 옆에 빨간 아이콘으로 표시된다.
+Jobs의 상태를 확인하기 위해 BigQuery 콘솔을 열고, 왼쪽 메뉴에서 Job History를 클릭한다. jobs의 리스트와 상태가 표시될 것이다. 그림 12.15에서, 리스트의 상위 job은 green bar이다. 이는 성공적으로 완료된 job을 가리킨다. 이것은 job 항목의 확장된 보기의 예시이다. 아래에 실패된 job의 한줄 요약이 있다. 실패는 job 설명 옆에 빨간 아이콘으로 표시된다.
 
 ![12.14](../img/ch12/12.14.png)
 
@@ -295,7 +295,7 @@ bq --location=US show -j gcpace-project:US.bquijob_119adae7_167c373d5c3
 
 **그림 12.20** Data 탭을 선택하여 테이블에 데이터를 삽입한다.
 
-roq을 추가할 때, 그림 12.21과 같은 형식으로 표의 열을 보여준다. 이 예시에서, 열은 SingerID, BirthData, FirstName, LastName, SingerInfo이다.
+row을 추가할 때, 그림 12.21과 같은 형식으로 표의 열을 보여준다. 이 예시에서, 열은 SingerID, BirthData, FirstName, LastName, SingerInfo이다.
 
 ![12.21](../img/ch12/12.21.png)
 
@@ -343,7 +343,7 @@ Create a Topic을 클릭하면, 토픽 이름을 위한 입력을 받는다. (�
 
 구독을 생성하기 위해, 구독 이름과 전송 타입을 지정한다. 구독은 어플리케이션이 토픽을 읽는 *pulled*가 될 수 있거나 엔드포인트에 메시지를 작성하는 구독인 *pushed*가 될 수 있다. push 구독을 원한다면, 메시지를 수신할 엔드포인트의 URL을 지정해야 한다.
 
-메시지가 읽어지면, 메시지를 읽어야 하는 어플리케이션을 메시지를 수신을 확인한다. Pub/Sub은 Acknowledgement Deadline 파라미터로 지정된 시간동안 기다린다. 대기 시간은 10에서 600초의 범위이다.
+메시지가 읽어지면, 메시지를 읽어야 하는 어플리케이션은 메시지를 수신을 확인한다. Pub/Sub은 Acknowledgement Deadline 파라미터로 지정된 시간동안 기다린다. 대기 시간은 10에서 600초의 범위이다.
 
 또한, 전달할 수 없을 때 메시지를 유지하는 시간인 보유 기간을 지정할 수 있다. 보유 기간이 전달된 후, 메시지는 토픽에서 삭제된다.
 
@@ -364,7 +364,7 @@ gcloud pubsub subscriptions create [SUBSCRIPTION_NAME] --topic [TOPIC-NAME]
 
 클라우드 엔지니어로서, Bigtable 클러스터나 Bigtable 서비스를 실행하는 서버의 집합을 생성할 뿐만 아니라, 테이블 생성, 데이터 추가, 데이터로 쿼리를 해야 한다.
 
-Bigtable 인스턴스를 생성하기 위해, Bigtable 콘솔을 열고 Create instance를 클릭한다. 그림 12.29와 같은 양식이 표시된다. (Bigtable 인스턴스를 생성하는 추가 상세 정보는 챕터 11을 확인한다.)
+Bigtable 인스턴스를 생성하기 위해, Bigtable 콘솔을 열고 Create instance를 클릭한다. 그림 12.29와 같은 양식이 표시된다. (Bigtable 인스턴스를 생성하는 추가 상세 정보는 [챕터 11](Chapter_11.md)을 확인한다.)
 
 ![12.29](../img/ch12/12.29.png)
 
@@ -410,10 +410,10 @@ cbt createtable ace-exam-bt-table
 cbt ls
 ```
 
-모든 테이블의 리스트가 표시될 것이다. 테이블은 column을 포함하지만 Bigtable은 column families의 개념을 갖고 있다. `colfam`이라는 column family를 생성하기 위해, 다음 명령을 사용한다.
+모든 테이블의 리스트가 표시될 것이다. 테이블은 column을 포함하지만 Bigtable은 column families의 개념을 갖고 있다. `colfam1`이라는 column family를 생성하기 위해, 다음 명령을 사용한다.
 
 ```bssh
-cbt createfamily ace-exam-bt-table colfm1
+cbt createfamily ace-exam-bt-table colfam1
 ```
 
 `row1`이라는 row에 `colfam1` column이 있는 셀 값을 설정하기 위해, 다음 명령을 사용한다.
@@ -464,7 +464,7 @@ Create Cluster 양식을 채워서 Dataproc 클러스터를 생성한다. 클러
 
 **그림 12.34** Cluster Details 페이지에서 Job을 적용
 
-job을 실행할 클러스터와 Spark, PySpark, SparkR, Hive, Spark SQL, Pig, Hadoop 중에서 job의 타입을 지정해야 한다. JAR 파일은 실행될 Java 프로그램이고, Main Class나 JAR은 job을 실행할 때 호출되어야하는 함수나 메소드의 이름이다. PySpark를 선택하면, Python 프로그램을 적용한다. SparkR을 적용하면 R 프로그램일 적용한다. Hive나 SparkSQL이 실행할 때, 쿼리 파일을 제출해야 한다. 선택적으로 arguments를 전달할 수 있다. job이 실행 중이면, job 리스트 페이지에서 확인할 수 있다. (그림 12.35)
+job을 실행할 클러스터와 Spark, PySpark, SparkR, Hive, Spark SQL, Pig, Hadoop 중에서 job의 타입을 지정해야 한다. JAR 파일은 실행될 Java 프로그램이고, Main Class나 JAR은 job을 실행할 때 호출되어야하는 함수나 메소드의 이름이다. PySpark를 선택하면, Python 프로그램을 적용한다. SparkR을 적용하면 R 프로그램을 적용한다. Hive나 SparkSQL이 실행할 때, 쿼리 파일을 제출해야 한다. 선택적으로 arguments를 전달할 수 있다. job이 실행 중이면, job 리스트 페이지에서 확인할 수 있다. (그림 12.35)
 
 ![12.35](../img/ch12/12.35.png)
 
@@ -494,7 +494,7 @@ cluster-bc3d 클러스터에서 ace_exam_jar.jar 프로그램을 실행하는 jo
 
 ## Cloud Storage 관리
 
-챕터 11에서, 버킷의 스토리지 클래스를 자동적으로 변경하는 lifecycle 관리 정책을 사용하는 방법에 대해 확인했다. 예를 들어, 90일 후에 retional 스토리지 클래스 버킷에서 nearline 버킷으로 변경하는 정책을 생성할 수 있다. 그러나 버킷의 스토리지 클래스를 수동으로 변경하려는 경우가 있다. 그런 경우에, `gsutil rewrite` 명령을 사용하고, `-s` 플래그를 지정할 수 있다.
+[챕터 11](Chapter_11.md)에서, 버킷의 스토리지 클래스를 자동적으로 변경하는 lifecycle 관리 정책을 사용하는 방법에 대해 확인했다. 예를 들어, 90일 후에 retional 스토리지 클래스 버킷에서 nearline 버킷으로 변경하는 정책을 생성할 수 있다. 그러나 버킷의 스토리지 클래스를 수동으로 변경하려는 경우가 있다. 그런 경우에, `gsutil rewrite` 명령을 사용하고, `-s` 플래그를 지정할 수 있다.
 
 ```bash
 gsutil rewrite -s [STORAGE_CLASS] gs://[PATH_TO_OBJECT]
@@ -506,7 +506,7 @@ gsutil rewrite -s [STORAGE_CLASS] gs://[PATH_TO_OBJECT]
 
 > 콘솔에서 버킷의 스토리지 클래스를 변경할수 없다.
 
-Cloud Storage의 또다른 공통 업무는 버킷같에 object를 이동하는 것이다. `gsutil mv`명령을 사용하여 이를 수행할 수 있다. 명령어의 형태는 다음과 같다.
+Cloud Storage의 또다른 공통 업무는 버킷간에 object를 이동하는 것이다. `gsutil mv`명령을 사용하여 이를 수행할 수 있다. 명령어의 형태는 다음과 같다.
 
 ```bash
 gsutil mv gs://[SOURCE_BUCKET_NAME]/[SOURCE_OBJECT_NAME] \ gs://[DESTINATION_BUCKET_NAME]/[DESTINATION_OBJECT_NAME]
