@@ -37,7 +37,7 @@ Cloud Console의 Cloud Storage 페이지를 연다. 기존 버킷의 리스트�
 
 **그림 13.3** Bucket Details 페이지에서, 파일과 폴더를 업로드할 수 있다.
 
-파일을 업로드할 때, 클이언트 디바이스 파일 시스템을 사용하여 입력한다. 그림 13.4는 파일 업로드를 위한 macOS Finder 창을 보여준다. Windows나 리눅스 OS에서도 유사하다.
+파일을 업로드할 때, 클라이언트 디바이스 파일 시스템을 사용하여 입력한다. 그림 13.4는 파일 업로드를 위한 macOS Finder 창을 보여준다. Windows나 리눅스 OS에서도 유사하다.
 
 ![13.4](../img/ch13/13.4.png)
 
@@ -81,7 +81,7 @@ gsutil mb gs://[BUCKET_NAME]/
 gsutil mb gs://ace-exam-bucket1/
 ```
 
-로컬 디아비스나 GCP VM에서 파일을 업로드하기 위해, `gsutil cp` 명령을 사용하여 파일을 복사할 수 있다. 
+로컬 디바이스나 GCP VM에서 파일을 업로드하기 위해, `gsutil cp` 명령을 사용하여 파일을 복사할 수 있다. 
 
 ```bash
 gsutil cp [LOCAL_OBJECT_LOCATION] gs://[DESTINATION_BUCKET_NAME]
@@ -115,7 +115,7 @@ gsutil mv gs://ace-exam-bucket1/README.txt gs://ace-exam-bucket2/
 
 ## 데이터 입력 및 추출
 
-클라우드 엔지니어로서, 데이터베이스로 데이터를 입력하고, 추출하는 것과 같이 대량 데이터 작업을 수행해야 할 수 있다. 이런 동작은 커맨드라인과 때때로 콘소레서 수행한다. 데이터베이스에 데이터를 프로그래밍으로 입력하는 방법을 살펴보진 않을 것이다. 그 것은 어플리케이션 개발자와 데이터베이스 관리자 업무이다.
+클라우드 엔지니어로서, 데이터베이스로 데이터를 입력하고, 추출하는 것과 같이 대량 데이터 작업을 수행해야 할 수 있다. 이런 동작은 커맨드라인과 때때로 콘솔에서 수행한다. 데이터베이스에 데이터를 프로그래밍으로 입력하는 방법을 살펴보진 않을 것이다. 그 것은 어플리케이션 개발자와 데이터베이스 관리자 업무이다.
 
 ### 데이터 입력 및 추출: Cloud SQL
 
@@ -137,7 +137,7 @@ Export 탭을 선택하면 데이터베이스 추출 화면을 확인할 수 있
 
 **그림 13.10** 데이터베이스를 추출하는 것은 추출 파일을 저장할 버킷과 파일 포맷 지정이 필요하다.
 
-SQL이나 CSV 포맥을 선택해야 한다. SQL은 다른 관계형 데이터베이스에 데이터를 입력할 계획이면 유용하다. CSV는 비관계형 데이터베이스에 데이터를 이동할 경우 좋은 선택이다.
+SQL이나 CSV 포맷을 선택해야 한다. SQL은 다른 관계형 데이터베이스에 데이터를 입력할 계획이면 유용하다. CSV는 비관계형 데이터베이스에 데이터를 이동할 경우 좋은 선택이다.
 
 추출 파일을 생성한 후, 그 파일을 입력할 수 있다.
 
@@ -215,7 +215,7 @@ gcloud sql import sql ace-exam-mysql1 gs://ace-exam-bucket1/ace-exam-mysql-expor
 
 ### 데이터 입력 및 추출: Cloud Datastore
 
-Datastore에서 데이터를 입력하고 추출하는 것은 커맨드라인을 통해 수행한다. Datastore는 추출된 엔티티를 그룹화하는 namespace 데이터 구조를 사욯한다. 추출하는 엔티티가 사용하는 namespace의 이름을 지정해야 한다. 디폴트 namespace는 단순하다. (`dafault`)
+Datastore에서 데이터를 입력하고 추출하는 것은 커맨드라인을 통해 수행한다. Datastore는 추출된 엔티티를 그룹화하는 namespace 데이터 구조를 사용한다. 추출하는 엔티티가 사용하는 namespace의 이름을 지정해야 한다. 디폴트 namespace는 단순하다. (`dafault`)
 
 Cloud Datastore `export` 명령은 다음과 같다.
 
@@ -245,7 +245,7 @@ gcloud datastore import gs://ace-exam-datastore1/2018-12-20T19:13:55_64324/ 2018
 
 BigQuery 사용하는 Cloud Console과 커맨드라인을 사용하여 테이블을 추출하고 입력할 수 있다.
 
-콘솔을 사용하여 추출하기 위해, BigQuery 콘솔 인터페이스를 연다. Resource 아래에, 추출하기 원하는 테이블을 포함한 데이터 셋을 연다. 그림 13.13처럼 테이블 이름을 클릭하여 데이블 dexcription을 조회한다. Export 옵션을 오른쪽 위에 있다.
+콘솔을 사용하여 추출하기 위해, BigQuery 콘솔 인터페이스를 연다. Resource 아래에, 추출하기 원하는 테이블을 포함한 데이터 셋을 연다. 그림 13.13처럼 테이블 이름을 클릭하여 테이블 description을 조회한다. Export 옵션을 오른쪽 위에 있다.
 
 ![13.13](../img/ch13/13.13.png)
 
@@ -296,7 +296,7 @@ Create Table 양식에서 field는 원본 데이터가 있는 위치를 나타�
 
 **그림 13.18** 데이터는 다양한 종류의 위치에서 가져올 수 있다.
 
-또한, 가져올 파일의 포맷을 지정해야 한다. 옵션을 CSV, JSON, Avro, Parquet, PRC, Cloud Store 백업을 포한한다. (그림 13.19)
+또한, 가져올 파일의 포맷을 지정해야 한다. 옵션을 CSV, JSON, Avro, Parquet, PRC, Cloud Datastore 백업을 포함한다. (그림 13.19)
 
 ![13.19](../img/ch13/13.19.png)
 
@@ -334,7 +334,7 @@ Cloud Spanner에서 데이터를 추출하기 위해, 콘솔의 Cloud Spanner �
 
 **그림 13.21** Spanner 인스턴스의 상세정보, Import와 Export 탭이 있다.
 
-그림 13.22에서 보여지는 것처럼, Export를 클릭하면 Export 양식이 보여진다. 타겟 버킷, 추출할 데이터베이스, job을 실행할 region을 입력해야 한다. Cloud Dataflow를 실행하기 위해 요금이 부과되는지 확인하고, region간 젠송된 데이터에 대한 데이터 요금이 부과될 수 있다.
+그림 13.22에서 보여지는 것처럼, Export를 클릭하면 Export 양식이 보여진다. 타겟 버킷, 추출할 데이터베이스, job을 실행할 region을 입력해야 한다. Cloud Dataflow를 실행하기 위해 요금이 부과되는지 확인하고, region간 전송된 데이터에 대한 데이터 요금이 부과될 수 있다.
 
 ![13.22](../img/ch13/13.22.png)
 
@@ -458,9 +458,9 @@ gcloud dataproc clusters import gs://ace-exam-bucket1/mydataproc.yaml
 
 ## Pub/Sub에 데이터 스트리밍
 
-지금까지 이 챕터에서는 데이터베이스의 데이터를 importing하고 exporting과 함께 Cloud Storage 안팍으로 데이터를 이동하는데 시간을 소비했다. 메시지 큐인 Cloud Pub/Sub 작업을 살펴보자.
+지금까지 이 챕터에서는 데이터베이스의 데이터를 importing하고 exporting과 함께 Cloud Storage 안팎으로 데이터를 이동하는데 시간을 소비했다. 메시지 큐인 Cloud Pub/Sub 작업을 살펴보자.
 
-클라우드 엔지니어로서, 어플리케이션 개발자를 위한 메시지 큐를 생성해야 할 수 있다. 개발자가 Pub/Sub을 사용하여 서비스를 작성할 것이지만, 클라우드 엔지니어는 Pub/Sub 토픽과 구독을 테스트할 수 있어야 한다. 챕터 12에서 메시지큐를 생성하는 방법을 설명했다. 여기에서는 토픽으로 메시지를 생성하고, 구독으로 메시지를 수신하는 것에 초점을 둔다.
+클라우드 엔지니어로서, 어플리케이션 개발자를 위한 메시지 큐를 생성해야 할 수 있다. 개발자가 Pub/Sub을 사용하여 서비스를 작성할 것이지만, 클라우드 엔지니어는 Pub/Sub 토픽과 구독을 테스트할 수 있어야 한다. [챕터 12](Chapter_12.md)에서 메시지큐를 생성하는 방법을 설명했다. 여기에서는 토픽으로 메시지를 생성하고, 구독으로 메시지를 수신하는 것에 초점을 둔다.
 
 `gcloud pubsub` 명령은 `create`, `publish`, `pull`을 사용한다. 다음과 같이 명령을 사용한다.
 
