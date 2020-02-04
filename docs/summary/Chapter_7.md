@@ -127,7 +127,7 @@ gcloud container
   * number of nodes
 
 ```bash
-// 기본 명령어
+# 기본 명령어
 gcloud container clusters create [CLUSTER_NAME] --num-nodes=3 --region=[REGION]
 ```
 
@@ -146,10 +146,10 @@ gcloud container clusters create [CLUSTER_NAME] --num-nodes=3 --region=[REGION]
 * CLI로 작업
 
 ```bash
-//Docker 이미지 생성
+# Docker 이미지 생성
 kubectl run [NAME] --image=[IMAGE_NAME] --port=8080
 
-//replicas 수 확장
+# replicas 수 확장
 kubectl scale deployment [DEPLOYMENT_NAME] --replicas=5
 ```
 

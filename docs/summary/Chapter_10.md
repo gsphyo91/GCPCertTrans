@@ -60,16 +60,16 @@
 ### gcloud 명령을 사용하여 Cloud Storage 이벤트를 위한 Cloud Function 배포
 
 ```bash
-//gcloud 명령 업데이트
+# gcloud 명령 업데이트
 gcloud components update
 
-//functions 배포
+# functions 배포
 gcloud functions deploy
 
-//`gcp-ace-exam-test-bucket` 버킷에 새로운 파일이 업로드될 때마다 `cloud_storage_function_test`를 실행하는 명령
+# `gcp-ace-exam-test-bucket` 버킷에 새로운 파일이 업로드될 때마다 `cloud_storage_function_test`를 실행하는 명령
 gcloud functions deploy cloud_storage_function_test --runtime python37 --trigger-resource gcp-ace-exam-test-bucket --trigger-event google.storage.object.finalize
 
-//function 삭제
+# function 삭제
 gcloud functions delete [FUNCTIONS_NAME]
 ```
 

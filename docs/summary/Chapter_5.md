@@ -117,14 +117,14 @@
     * VM을 Preemptible로 지정
 
 ``` bash
-//Compute Engine 인스턴스 생성
-//zone을 설정하지 않으면 default 프로젝트 정보를 사용
+# Compute Engine 인스턴스 생성
+# zone을 설정하지 않으면 default 프로젝트 정보를 사용
 gcloud compute instances create [option] [instance name] [zone]
 
-//생성된 VM 리스트 확인
+# 생성된 VM 리스트 확인
 gcloud comptue instances list
 
-//Example
+# Example
 gcloud compute instances create --machine-type=n1-standard-8 --preemptible intance-n1
 ```
 

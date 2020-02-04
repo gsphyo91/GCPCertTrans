@@ -12,7 +12,7 @@
     * 연결할 인스턴스 이름과 선택적으로 username, password 입력
 
 ```bash
-// 인스턴스 연결 명령
+# 인스턴스 연결 명령
 gcloud sql connect [INSTANCE_NAME]
 ```
 
@@ -67,16 +67,16 @@ gcloud sql connect [INSTANCE_NAME]
   * 데이터가 인입되는 경우, `datastore.databases.import` 필요
 
 ```bash
-// 백업을 위한 버킷 생성
+# 백업을 위한 버킷 생성
 gsutil mb gs://[BUCKET_NAME]/
 
-// Cloud Datastore Import Export Admin role을 갖는 사용자가 백업을 생성
+# Cloud Datastore Import Export Admin role을 갖는 사용자가 백업을 생성
 gcloud -namespace='[NAMESPACE]' gs://[BUCKET_NAME]
 
-// 백업 파일을 추가
+# 백업 파일을 추가
 gcloud datastore export -namespaces='[NAMESPACE]' gs://[BUCKET_NAME]
 
-// 백업 파일을 추가
+# 백업 파일을 추가
 gcloud datastore import gs://[BUCKET]/[PATH]/[FILE].overall_export_metadata
 ```
 
@@ -154,26 +154,26 @@ gcloud pubsub subscriptions create [SUBSCRIPTION_NAME] --topic [TOPIC_NAME]
 | `ls` | Lists tables and columns |
 
 ```bash
-//cbt 명령 설치
+# cbt 명령 설치
 gcloud components update
 gcloud components install cbt
 
-//환경변수를 .cbt 설정 파일에 설정
+# 환경변수를 .cbt 설정 파일에 설정
 echo instance=[INSTANCE_NAME] >> ~/.cbtrc
 
-//테이블 생성
+# 테이블 생성
 cbt createtable [TABLE_NAME]
 
-//테이블 조회
+# 테이블 조회
 cbt ls
 
-//column families 생성
+# column families 생성
 cbt createfamily [TABLE_NAME] [COLUMN_FAMILY_NAME]
 
-//row에 column이 있는 셀 값을 설정
+# row에 column이 있는 셀 값을 설정
 cbt set [TABLE_NAME] [ROW_NAME] [COLUMN_FAMILY_NAME]:[COLUMN_NAME]=[VALUE_NAME]
 
-//테이블의 컨텐츠 확인
+# 테이블의 컨텐츠 확인
 cbt read [TABLE_NAME]
 ```
 
@@ -203,10 +203,10 @@ cbt read [TABLE_NAME]
 * Command Line
 
 ```bash
-//클러스터 생성
+# 클러스터 생성
 gcloud dataproc clusters create [CLUSTER_NAME] --zone [ZONE]
 
-//job 적용
+# job 적용
 gcloud dataproc jobs submit spart --cluster [CLUSTER_NAME] --jar [JAR_FILE]
 ```
 
@@ -215,10 +215,10 @@ gcloud dataproc jobs submit spart --cluster [CLUSTER_NAME] --jar [JAR_FILE]
 * 스토리지 클래스 수동 변경
 
 ```bash
-//스토리지 클래스 수동 변경
+# 스토리지 클래스 수동 변경
 gsutil rewrite -s [STORAGE_CLASS] gs://[PATH_TO_OBJECT]
 
-//버킷 간 Object 이동
+# 버킷 간 Object 이동
 gsutil mv gs://[SOURCE_BUCKET_NAME]/[SOURCE_OBJECT_NAME] \ gs://[DESTINATION_BUCKET_NAME]/[DESTINATION_OBJECT_NAME]
 ```
 

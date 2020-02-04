@@ -36,19 +36,19 @@
 ### Cloud SDK와 Cloud Shell을 사용하여 Kubernetes 클러스터 상태 확인
 
 ```bash
-//클러스터 이름과 기본정보 조회
+# 클러스터 이름과 기본정보 조회
 gcloud container cluster list
 
-//클러스터 상세정보 확인
+# 클러스터 상세정보 확인
 gcloud container cluster describe --zone [ZONE] [CLUSTER_NAME]
 
-//클러스터의 node 리스트 조회
+# 클러스터의 node 리스트 조회
 kubectl get nodes
 
-//클러스터의 pod 리스트 조회
+# 클러스터의 pod 리스트 조회
 kubectl get pods
 
-//node와 pod의 자세한 정보
+# node와 pod의 자세한 정보
 kubectl describe nodes
 kubectl describe pods
 ```
@@ -65,10 +65,10 @@ kubectl describe pods
 * nodes를 추가하거나 수정하는 명령은 `gcloud container cluster resize`
 
 ```bash
-//클러스터의 수를 3에서 5로 증가하는 경우
+# 클러스터의 수를 3에서 5로 증가하는 경우
 gcloud container clusters resize [CLUSTER_NAME] --node-pool [NODE_POOL_NAME] --size 5 --region=[REGION]
 
-//클러스터 수정, 오토 스케일링 적용
+# 클러스터 수정, 오토 스케일링 적용
 gcloud container cluster update [CLUSTER_NAME] --enable-autoscaling --min-nodes 1 --max-nodes 5 --zone [ZONE] --node-pool [NODE_POOL_NAME]
 ```
 
@@ -96,13 +96,13 @@ gcloud container cluster update [CLUSTER_NAME] --enable-autoscaling --min-nodes 
 * deployment 작업을 통해 수행
 
 ```bash
-//deployment 조회
+# deployment 조회
 kubectl get deployments
 
-//repplicas 수 수정 (5개)
+# repplicas 수 수정 (5개)
 kubectl scale deployment [DEPLOYMENT_NAME] --replicas 5
 
-//deployment 삭제
+# deployment 삭제
 kubectl delete deployment [DEPLOYMENT_NAME]
 ```
 
@@ -117,16 +117,16 @@ kubectl delete deployment [DEPLOYMENT_NAME]
 ### Cloud SDK와 Cloud Shell로 Service 추가, 수정, 삭제
 
 ```bash
-//Service 조회
+# Service 조회
 kubectl get services
 
-//service 추가
+# service 추가
 kubectl run [SERVICE_NAME] --image=[CONTAINER_REGISTRY_URL] --port [PORT]
 
-//외부에서 접속하기위한 포트 노출
+# 외부에서 접속하기위한 포트 노출
 kubectl expose deployment [SERVICE_NAME] --type="LoadBalancer"
 
-//Service 삭제
+# Service 삭제
 kubectl delete service [SERVICE_NAME]
 ```
 
@@ -144,13 +144,13 @@ kubectl delete service [SERVICE_NAME]
 ### Cloud SDK와 Cloud Shell로 이미지 Repository와 이미지 상세정보 확인
 
 ```bash
-//이미지 조회
+# 이미지 조회
 gcloud container images list
 
-//container Repository의 리스트 조회
+# container Repository의 리스트 조회
 gcloud container images list --repository [GCR_URL]
 
-//이미지 상세정보 확인
+# 이미지 상세정보 확인
 gcloud containrer images describe [GCR_URL]
 ```
 

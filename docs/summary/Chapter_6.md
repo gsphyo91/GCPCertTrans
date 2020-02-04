@@ -74,7 +74,7 @@
 ```bash
 gcloud compute instances start [INSTANCE_NAMES]
 
-//async, zone
+# async, zone
 gcloud compute instances start instance-1 --zone us-central1-c --async
 ```
 
@@ -83,10 +83,10 @@ gcloud compute instances start instance-1 --zone us-central1-c --async
 ```bash
 gcloud compute instances stop [INSTANCE_NAMES]
 
-//--async
+# --async
 gcloud compute instances stop [INSTANCE_NAMES] --async
 
-//--zone
+# --zone
 gcloud compute instances stop [INSTANCE_NAMES] --async --zone [ZONE]
 ```
 
@@ -117,10 +117,10 @@ gcloud compute instances delete [INSTANCE_NAME] --zone [ZONE] --delete-disks=dat
 ```bash
 gcloud compute instances list
 
-//특정 zone의 VM 리스트
+# 특정 zone의 VM 리스트
 gcloud compute instances list --filter="zone:ZONE"
 
-//실행 중인 VM의 리소스 필드를 확인
+# 실행 중인 VM의 리소스 필드를 확인
 gcloud compute instances describe
 ```
 
@@ -129,13 +129,13 @@ gcloud compute instances describe
 ```bash
 gcloud compute disks snapshot [DISK_NAME] --snapshot-names=[NAME]
 
-//snapshot 리스트 조회
+# snapshot 리스트 조회
 gcloud compute snapshots list
 
-//snapshot에 대한 상세 정보
+# snapshot에 대한 상세 정보
 gcloud compute snapshots describe [SNAPSHOT_NAME]
 
-//디스크의 사이즈와 타입을 지정
+# 디스크의 사이즈와 타입을 지정
 gcloud compute disks create [DISK_NAME] --source-snapshot=[SNAPSHOT_NAME] --size=100 --type=pd-standard
 ```
 
@@ -173,19 +173,19 @@ gcloud compute images create [IMAGE_NAME]
 ```bash
 gcloud compute instance-template create [INSTANCE]
 
-//--source-instance
+# --source-instance
 gcloud compute instance-templates create [INSTANCE] --source-instance=[기존 VM]
 
-//인스턴스 템플릿 삭제
+# 인스턴스 템플릿 삭제
 gcloud compute instance-template delete [INSTANCE_TEMPLATE_NAME]
 
-//인스턴스 그룹 삭제
+# 인스턴스 그룹 삭제
 gcloud compute instance-groups managed delete-instances [INSTANCE_GROUP_NAME]
 
-//인스턴스 템플릿 조회
+# 인스턴스 템플릿 조회
 gcloud compute instances-templates list
 
-//인스턴스 그룹 조회
+# 인스턴스 그룹 조회
 gcloud compute instance-groups managed list-instances
 ```
 
@@ -219,3 +219,7 @@ gcloud compute instance-groups managed list-instances
   * Cloud Storage에 저장되어 백업 역할
 * 장애에도 문제가 없다면 Preemptible VM을 사용
   * 인스턴스의 비용을 80%까지 절약
+
+[맨 위로](#chapter-6-managing-virtual-machine)
+
+[본문 보기](../Chapter_6.md)

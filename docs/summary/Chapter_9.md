@@ -19,13 +19,13 @@
 ### Cloud Shell과 SDK를 사용하여 어플리케이션 배포
 
 ```bash
-//App Engine Python 라이브러리 설치 및 업데이트
+# App Engine Python 라이브러리 설치 및 업데이트
 gcloud components install app-engine-python
 
-//YAML 파일 배포
+# YAML 파일 배포
 gcloud app deploy app.yaml
 
-//v1과 v2 버전의 서비스를 중지
+# v1과 v2 버전의 서비스를 중지
 gcloud app versions stop v1 v2
 ```
 
@@ -79,7 +79,7 @@ gcloud app versions stop v1 v2
     * 워크로드를 고르게 분산하려고할 때 유용
 
 ```bash
-//트래픽 분산 명령
+# 트래픽 분산 명령
 gcloud app services set-traffic [SERVICE_NAME] --splits v1=.4,v2=.6
 ```
 
