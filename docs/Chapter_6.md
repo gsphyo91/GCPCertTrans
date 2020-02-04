@@ -155,7 +155,7 @@ Windows 서버 디스크에 스냅샷을 만드는 경우, 인스턴스를 중�
 * Cloud storage 파일
 * 다른 이미지
 
-이미지를 생성하려면, Cloud Console의 Compute Engine 페이지에서 Iamage 옵션을 선택한다. (그림 6.17) 이용할 수 있는 이미지가 나열된다.
+이미지를 생성하려면, Cloud Console의 Compute Engine 페이지에서 Image 옵션을 선택한다. (그림 6.17) 이용할 수 있는 이미지가 나열된다.
 
 ![6.17](../img/ch06/6.17.png)
 
@@ -165,7 +165,7 @@ Windows 서버 디스크에 스냅샷을 만드는 경우, 인스턴스를 중�
 
 ![6.18](../img/ch06/6.18.png)
 
-**그림 6.18** 이미지를 생성`하기 위한 Cloud Console 양식
+**그림 6.18** 이미지를 생성하기 위한 Cloud Console 양식
 
 양식은 이미지의 source를 위한 옵션으로 드롭다운 리스트를 제공한다.
 
