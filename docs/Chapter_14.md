@@ -12,7 +12,7 @@ VPCs는 프로젝트의 리소스와 연결되는 물리 네트워크의 소프�
 
 VPC는 글로벌 리소스이다. 그래서 region이나 zone에 연결되어있지 않다. Compute Engine VM과 Kubernetes Engine 클러스터와 같은 리소스는 트래픽이 방화벽 규칙에 의해서 제한되지 않는다는 가정하에 서로 통신할 수 있다. 
 
-VPC는 *subnets*이라고 부르는 regional 리소스인 서브네트워크를 포함한다. 서브넷은 연결된 IP 주소 범위가 있다. 서브넷은 개인 사설 주소를 제공한다. 리소스는 이 주소를 사용하여 서로서로 및 구글 API와 서비스와 통신한다.
+VPC는 *subnets*이라고 부르는 regional 리소스인 서브네트워크를 포함한다. 서브넷은 연결된 IP 주소 범위가 있다. 서브넷은 개인 사설 주소를 제공한다. 리소스는 이 주소를 사용하여 서로서로 및 구글 API 및 서비스와 통신한다.
 
 프로젝트와 연관된 VPC 이외에도, organization 내에 공유 VPC를 생성할 수 있다. 공유 VPC는 공통 프로젝트에 호스팅된다. 충분한 권한을 갖는 다른 프로젝트의 사용자는 공유 VPC에 리소스를 생성할 수 있다. 또한, Organization이 정의되지 않은 경우에도 내부 프로젝트간 연결을 위해 VPC Peering을 사용할 수 있다. 
 
@@ -22,7 +22,7 @@ VPC는 *subnets*이라고 부르는 regional 리소스인 서브네트워크를 
 
 Cloud Console에서 VPC를 생성하기 위해 그림 14.1처럼 VPC 페이지를 연다.
 
-Create VPC를 클릭하여 그림 14.2처럼 VPC를 생성하는 양식을 연다. 그림 14.2는 새로운 VPC를 위한 이름과 description을 지정하는 것을 보여준다. 또한, VPC에 성성될 서브넷의 리스트를 보여준다. VPC가 생성되면, 서브넷은 각 region에 생성된다. GCP는 auto mode 네트워크를 생성할 때 각 서브넷을 위한 IP 주소 범위를 선택한다.
+Create VPC를 클릭하여 그림 14.2처럼 VPC를 생성하는 양식을 연다. 그림 14.2는 새로운 VPC를 위한 이름과 description을 지정하는 것을 보여준다. 또한, VPC에 생성될 서브넷의 리스트를 보여준다. VPC가 생성되면, 서브넷은 각 region에 생성된다. GCP는 auto mode 네트워크를 생성할 때 각 서브넷을 위한 IP 주소 범위를 선택한다.
 
 ![14.1](../img/ch14/14.1.png)
 
@@ -32,7 +32,7 @@ Create VPC를 클릭하여 그림 14.2처럼 VPC를 생성하는 양식을 연�
 
 **그림 14.2** Cloud Console에서 VPC를 생성하는 양식의 첫번쨰 부분
 
-대체로, Subnet 섹션에서 Custom 탭을 선택하여 하나 이상의 커스텀 서브넷을 생성할 수 있다.(그림 14.3) 이 것은 region과 IP 주소 범위를 지정할 수 있는 다른 양식이다. IP 범위는 Classless Inter-Domain Routing(CIDR) 표기법으로 지정된다. (표기법을 사용하여 IP주소를 지정하는 방법의 상세 정보를 위해 아래 내용 중의 "CIDR Notation Overview"를 확인한다.) Private Google Access를 중지할 수 있다. 서브넷의 VM은 VM에 외부 IP주소를 할당하지 않아도 구글 서비스레 접근할 수 있다. 또한, Flow Logs 옵션을 설정하여 네트워크 트래픽의 로깅을 실행할 수 있다.
+대체로, Subnet 섹션에서 Custom 탭을 선택하여 하나 이상의 커스텀 서브넷을 생성할 수 있다.(그림 14.3) 이 것은 region과 IP 주소 범위를 지정할 수 있는 다른 양식이다. IP 범위는 Classless Inter-Domain Routing(CIDR) 표기법으로 지정된다. (표기법을 사용하여 IP주소를 지정하는 방법의 상세 정보를 위해 아래 내용 중의 "CIDR Notation Overview"를 확인한다.) Private Google Access를 중지할 수 있다. 서브넷의 VM은 VM에 외부 IP주소를 할당하지 않아도 구글 서비스에 접근할 수 있다. 또한, Flow Logs 옵션을 설정하여 네트워크 트래픽의 로깅을 실행할 수 있다.
 
 ![14.3](../img/ch14/14.3.png)
 
@@ -46,7 +46,7 @@ Create VPC를 클릭하여 그림 14.2처럼 VPC를 생성하는 양식을 연�
 
 동적 라우팅 옵션은 학습할 경로를 결정한다. Regional 라우팅은 구글 Cloud Routers가 해당 지역 내 경로를 학습하게 한다. Global 라우팅은 VPC의 모든 서브네트워크의 경로를 학습하는 구글 Cloud Routers를 활성화한다.
 
-optional DNS 서버 정책은 GCP에 의해서 제공되는 DNS 이름 확인을 활성화하거나 이름 확인 순서를 변경하는 DNS 정책을 선택할 수 있다. (챕터 15에 더 많은 정보가 있다.)
+optional DNS 서버 정책은 GCP에 의해서 제공되는 DNS 이름 확인을 활성화하거나 이름 확인 순서를 변경하는 DNS 정책을 선택할 수 있다. ([챕터 15](Chapter_15.md)에 더 많은 정보가 있다.)
 
 파라미터를 지정하고, VPC를 생성하면, VPC 리스트가 나타나고, VPC와 서브넷에 대한 정보가 그림 14.5처럼 보여진다.
 
@@ -111,7 +111,7 @@ gcloud resource-manager folders add-iam-policy-binding [FOLDER_ID] --member='use
 gcloud resource-manager folders list --organization=[ORG_ID]
 ```
 
-더 많은 role과 권한은 챕터 17을 확인한다.
+더 많은 role과 권한은 [챕터 17](Chapter_17.md)을 확인한다.
 
 조직 수준으로 Shared VPC Admin role이 설정되면, `shared-vpc` 명령을 실행할 수 있다.
 
@@ -147,7 +147,7 @@ gcloud compute networks peerings create peer-ace-exam-1 \
     --auto-create-routes
 ```
 
-그 다음, 다음을 사용하여 다른 네트워크에 피어링을 만든다.
+그 다음, 다음을 사용하여 다른 네트워크에 peering을 만든다.
 
 ```bash
 gcloud compute networks peerings create peer-ace-exam-1 \
@@ -193,7 +193,7 @@ gcloud compute instances create [INSTANCE_NAME] --subnet [SUBNET_NAME] --zone [Z
 
 방화벽 규칙은 네트워크 수준에서 정의되고, VM에 네트워크 트래픽 흐름을 제어하는데 사용된다.
 
-방화벽 규칙은 port의 여러 트래픽을 허용하거나 거부한다. 예를 들어, 정책은 22 포트에 TCP 트래픽을 허용할 수 있다. 또한, incoming(ingress), outgoing(egress) 중 한 방향으로 트래픽에 적용된다. 방화벽은 stateful 이므로, 트래픽이 한 방향으로 허용되고, 연결이 맺어지면, 다른 방향도 허용된다. 방화벽 규칙 셋은 stateful이다. 그래서 22번 포트에 SSH 연결이 맺어진 것 처럼 연결이 허용되면, 규칙과 일치하는 이후 모든 트래픽은 연결이 활성화되어있는 한 허용된다. 활성화된 연결은 10분마다 하나이상의 패킥이 교환되는 연결이다. 
+방화벽 규칙은 port의 여러 트래픽을 허용하거나 거부한다. 예를 들어, 정책은 22 포트에 TCP 트래픽을 허용할 수 있다. 또한, incoming(ingress), outgoing(egress) 중 한 방향으로 트래픽에 적용된다. 방화벽은 stateful 이므로, 트래픽이 한 방향으로 허용되고, 연결이 맺어지면, 다른 방향도 허용된다. 방화벽 규칙 셋은 stateful이다. 그래서 22번 포트에 SSH 연결이 맺어진 것 처럼 연결이 허용되면, 규칙과 일치하는 모든 트래픽은 연결이 활성화되어있는한 허용된다. 활성화된 연결은 10분마다 하나이상의 패킷이 교환되는 연결이다. 
 
 ### 방화벽 규칙의 구조
 
@@ -210,7 +210,7 @@ gcloud compute instances create [INSTANCE_NAME] --subnet [SUBNET_NAME] --zone [Z
 모든 VPC는 2가지 암시적 규칙이 있다: 하나는 모든 destinations(IP 주소 0.0.0.0/0)에 egress 트래픽을 하용한다. 다른 하나는 모든 source(IP주소 0.0.0.0/0)으로부터 들어오는 모든 트래픽을 거부한다. 두가지 암시적 규칙은 모두 우선순위 65535이다. 그래서 더 높은 deny를 갖는 다른 규칙을 생성하거나 필요한 트래픽을 허용할 수 있다. 암시적 규칙을 삭제할 수 없다.
 
 VPC가 자동적으로 생성될 때, 디폴트 네트워크는 4가지 네트워크 규칙을 갖고 생성된다. 
-* 동일한 네트워크의 모든 VM 인스턴에서 트래픽인 인입되는 것
+* 동일한 네트워크의 모든 VM 인스턴스에서 트래픽이 인입되는 것
 * SSH를 허용하기 위해 22번 포트로 TCP 트래픽이 인입되는 것
 * Microsoft Remote Desktop Protocol(RDP)를 허용하기 위해 3389번 포트로 TCP 트래픽이 인입되는 것 
 * 네트워크의 모든 source로부터 Internet Control Message Protocol(ICMP)가 인입되는 것
@@ -227,7 +227,7 @@ VPC가 자동적으로 생성될 때, 디폴트 네트워크는 4가지 네트�
 
 Create Firewall Rule을 클릭하면 신규 방화벽 규칙을 생성할 수 있다. 그림 14.10과 유사한 양식을 확인할 수 있다.
 
-이 양식에서, 방화벽 규칙의 이름과 설명을 지정한다. 로깅을 활성화하거나 비활성화 중 선택할 수 있다. 로깅 정보는 Stackdriver에 캡쳐된다. (Stackdriver 로깅의 더 많은 정보는 챕터 18에서 확인한다.) 또한, 규칙을 적용할 VPC의 네트워크를 지정해야 한다.
+이 양식에서, 방화벽 규칙의 이름과 설명을 지정한다. 로깅을 활성화하거나 비활성화 중 선택할 수 있다. 로깅 정보는 Stackdriver에 캡쳐된다. (Stackdriver 로깅의 더 많은 정보는 [챕터 18](Chapter_18.md)에서 확인한다.) 또한, 규칙을 적용할 VPC의 네트워크를 지정해야 한다.
 
 ![14.10](../img/ch14/14.10.png)
 
@@ -255,7 +255,7 @@ Create Firewall Rule을 클릭하면 신규 방화벽 규칙을 생성할 수 �
 
 ### gcloud를 사용하여 방화벽 규칙 생성
 
-커맨드라이능로 방화벽 규칙을 작업하기위한 명령은 `gcloud compute firewall-rules`이다. 이 명령으로 생성, 삭제, 업데이트, 조회할 수 있다.
+커맨드라인으로 방화벽 규칙을 작업하기위한 명령은 `gcloud compute firewall-rules`이다. 이 명령으로 생성, 삭제, 업데이트, 조회할 수 있다.
 
 `gcloud compute firewall-rules create`와 사용되는 다양한 파라미터가 있다.
 * `--action`
@@ -295,7 +295,7 @@ Create VPN Connection을 클릭하면 그림 14.15와 같은 양식이 표시된
 
 **그림 14.15** VPN 연결 양식 작성
 
-이 양식에서 VPN의 이름과 설명을 지정한다. 구글 Compute Engine VPN Gateway 섹션에서, VPN 연결의 GCP 끝단을 설정한다. 이것은 네트워크, 네트워크를 포함한 region, static IP 주소를 지정한다. IP 주소를 생성하지 않았다면, IP Address 파라미터를 위한 드롭다운 메뉴에서 Create IP Address를 선택하여 생성할 수 있다. (그림 14.16)
+이 양식에서 VPN의 이름과 설명을 지정한다. 구글 Compute Engine VPN Gateway 섹션에서, VPN 연결의 GCP 끝단을 설정한다. 네트워크를 포함하는 region, static IP 주소를 지정한다. IP 주소를 생성하지 않았다면, IP Address 파라미터를 위한 드롭다운 메뉴에서 Create IP Address를 선택하여 생성할 수 있다. (그림 14.16)
 
 ![14.16](../img/ch14/14.16.png)
 
