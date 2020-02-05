@@ -9,7 +9,7 @@
 
 ## Cloud DNS 구성
 
-Cloud DNS는 도메인 이름 확인을 제공하는 Google 서비스이다. 가장 기본적인 수준에서, DNS 서비스는 example.com과 같은 도메인 이름과 35.20.24.107과 같은 IP주소를 매핑한다. 관리되는 zone은 aceesamdns1.com과 같은 DNS 이름 접미사와 관련된 DNS 레코드를 포함한다. DNS 레코드는 zone에 대한 특정 정보를 포함한다. 예를 들어, 레코드는 호스트 이름을 IPv4의 IP 주소에 매핑한다. AAAA 레코드는 이름을 IPv6 주소로 매핑하는 데 IPv6에서 사용된다. CNAME 레코드는 도메인의 alias 이름을 포함하는 정식 이름을 잡는다. 이 섹션에서, zone을 생성하고 레코드를 추가하는 GCP에서 DNS 서비스를 구성하는 방법에 대해 배울 것이다.
+Cloud DNS는 도메인 이름 확인을 제공하는 Google 서비스이다. 가장 기본적인 수준에서, DNS 서비스는 example.com과 같은 도메인 이름과 35.20.24.107과 같은 IP주소를 매핑한다. 관리되는 zone은 aceexamdns1.com과 같은 DNS 이름 접미사와 관련된 DNS 레코드를 포함한다. DNS 레코드는 zone에 대한 특정 정보를 포함한다. 예를 들어, 레코드는 호스트 이름을 IPv4의 IP 주소에 매핑한다. AAAA 레코드는 이름을 IPv6 주소로 매핑하는 데 IPv6에서 사용된다. CNAME 레코드는 도메인의 alias 이름을 포함하는 정식 이름을 잡는다. 이 섹션에서, zone을 생성하고 레코드를 추가하는 GCP에서 DNS 서비스를 구성하는 방법에 대해 배울 것이다.
 
 ### Cloud Console을 사용하여 DNS 관리 zone 생성
 
