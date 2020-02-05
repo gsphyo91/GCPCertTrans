@@ -19,7 +19,7 @@ Create Zone을 클릭하면 그림 15.2과 같은 양식이 표시된다.
 
 첫번째, zone 타입을 선택한다. public이나 private이 될 수 있다.
 
-Public zone은 인터넷을 통해 접근할 수 있다. 이 zone은 모든 source의 쿼리에 응답하는 네임 서버를 제공한다. Private zone은 VM와 로드밸런서 같은 GCP 리소스에 네임 서비스를 제공한다. Private zone은 zone과 동일한 프로젝트의 리소스에서 시작된 쿼리만 응답한다.
+Public zone은 인터넷을 통해 접근할 수 있다. 이 zone은 모든 source의 쿼리에 응답하는 네임 서버를 제공한다. Private zone은 VM과 로드밸런서 같은 GCP 리소스에 네임 서비스를 제공한다. Private zone은 zone과 동일한 프로젝트의 리소스에서 시작된 쿼리만 응답한다.
 
 이 양식에서, zone 이름과 설명을 입력한다. aceexamdns1.com과 같은 DNS의 이름의 접미사가 되어야하는 DNS 이름을 지정한다.
 
@@ -129,7 +129,7 @@ Regional 로드밸런서는 다음과 같다.
 * Internal TCP/UDP, internal VM을 호스팅하는 private 네트워크의 TCP/UDP 트래픽을 밸런스
 * Network TCP/UDP, IP 프로토콜, 주소, 포트를 기반으로 밸런싱. 이 로드밸런서는 SSL Proxy와 TCP Proxy 로드밸런서에서 지원되지 않는 SSL과 TCP 트래픽에 사용된다. 
 
-External 로드밸런서는 인터넷 트래픽을 분산한다. 반면에 internal 로드밸런서는 GCP 내에서 시작되는 트래픽을 분산한다. Internal TCP/UDP 로드밸런서는 유일한 internal 로드밸러서이다. HTTP(S), SSL Proxy, TCP Proxy, Network TCP/UDP 로드밸런서는 모두 external이다. 
+External 로드밸런서는 인터넷 트래픽을 분산한다. 반면에 internal 로드밸런서는 GCP 내에서 시작되는 트래픽을 분산한다. Internal TCP/UDP 로드밸런서는 유일한 internal 로드밸런서이다. HTTP(S), SSL Proxy, TCP Proxy, Network TCP/UDP 로드밸런서는 모두 external이다. 
 
 로드밸런서를 선택할 때 트래픽 타입도 고려해야 한다. HTTP와 HTTPS 트래픽은 external global 로드밸런싱을 사용해야 한다. TCP 트래픽은 external global, external regional, internal regional 로드밸런서를 사용할 수 있다. UDP 트래픽은 external regional이나 internal regional 로드밸런싱을 사용할 수 있다.
 
@@ -203,7 +203,7 @@ gcloud compute forwarding-rules create ace-exam-lb --port=80 --target-pool ace-e
 
 이 명령은 `ace-exam-pool`의 모든 VM의 트래픽을 `ace-exam-lb` 로드밸런서로 라우팅한다.
 
-Target poos은 `gcloud compute target-pools create` 명령을 사용하여 생성된다. 인스턴스는 `gcloud compute target-pools add-instances` 명령을 사용하여 target pool에 추가된다. 예를 들어, `ace-exam-pool` target pool에 VM `ig1`과 `ig2`를 추가하기 위해 다음 명령을 사용한다.
+Target pool은 `gcloud compute target-pools create` 명령을 사용하여 생성된다. 인스턴스는 `gcloud compute target-pools add-instances` 명령을 사용하여 target pool에 추가된다. 예를 들어, `ace-exam-pool` target pool에 VM `ig1`과 `ig2`를 추가하기 위해 다음 명령을 사용한다.
 
 ```bash
 gcloud compute target-pools add-instances ace-exam-pool --instances ig1, ig2
@@ -227,7 +227,7 @@ CIDR 블록은 서브넷에서 사용할 수 있는 IP 주소의 범위를 정�
 gcloud compute networks subnets expand-ip-range ace-exam-subnet1 --prefix-length 16
 ```
 
-이 명령을 실행하기 전에 prefix의 길이가 16보다 크다고 가정한다. `expand-ip-rnage` 명령은 주소의 수를 증가하는데만 사용된다. 감소할 순 없다. 더 적은 주소의 수르 갖는 서브넷을 re-create 해야한다.
+이 명령을 실행하기 전에 prefix의 길이가 16보다 크다고 가정한다. `expand-ip-range` 명령은 주소의 수를 증가하는데만 사용된다. 감소할 순 없다. 더 적은 주소의 수를 갖는 서브넷을 re-create 해야한다.
 
 ### IP 주소 선점
 
