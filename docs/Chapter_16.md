@@ -1,4 +1,4 @@
-# Chapter 16 Cloud Launcherd와 Deployment Manager로 어플리케이션 배포
+# Chapter 16 Cloud Launcher와 Deployment Manager로 어플리케이션 배포
 
 **이 챕터는 구글 Associate Cloud Engineer 인증 시험 과목 중, 아래 내용을 다룬다.**
 * 3.6 Cloud Launcher를 사용하여 솔루션 배포
@@ -169,7 +169,7 @@ resource:
 https://www.googleapis.com/compute/v1/projects/[PROJECT_ID]/zones/us-central1-f/machineTypes/f1-micro
 ```
 
-[PROJECT_ID]에 대한 참조가 있으며, 구성파일에서 실제 프로젝트 ID로 대체된다. Disk는 `deviceNAme`, `type`, 디스크가 부스 디스크인지, autodeleted가 되어야하는지 가리지는 Booleans과 같은 프로퍼티를 갖는다. machine type 사양과 일부 disk 프로퍼티를 추가하여 이전 예시를 살펴보자
+[PROJECT_ID]에 대한 참조가 있으며, 구성파일에서 실제 프로젝트 ID로 대체된다. Disk는 `deviceName`, `type`, 디스크가 부스 디스크인지, autodeleted가 되어야하는지 가리지는 Booleans과 같은 프로퍼티를 갖는다. machine type 사양과 일부 disk 프로퍼티를 추가하여 이전 예시를 살펴보자
 
 ```yaml
 resources:
@@ -229,11 +229,11 @@ resources:
       boot: true
       autoDelete: true
       initializeParams:
-        # Replace [FAMILY_NAME] with the image family name.
-        # See a full list of image families at
-        # https://cloud.google.com/compute/docs/images#os-compute-support
+      # Replace [FAMILY_NAME] with the image family name.
+      # See a full list of image families at
+      # https://cloud.google.com/compute/docs/images#os-compute-support
 
-        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/[FAMILY_NAME]
+      sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/[FAMILY_NAME]
     # Replace [MY_PROJECT] with your project ID
     networkInterfaces:
     - network: https://www.googleapis.com/compute/v1/projects/[MY_PROJECT]/global/networks/default
