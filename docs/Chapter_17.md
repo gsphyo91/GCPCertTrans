@@ -28,7 +28,7 @@ Cloud Console에서 IAM & Admin 섹션을 열어서 IAM 할당 계정을 조회�
 
 **그림 17.1** member로 필터링된 수행관한 리스트
 
-Primitive roles는 IAM전에 사용된다. 3가지 primitive roles이 있다: owner, editor, viewer. Viewer는 read-only 동작을 수행하는 권한이다. Editor는 viewer 권한과 엔티티를 수정하는 권한을 갖는다. Owner는 editor 권한을 갖고, 엔티티의 role과 수행 권한을 관리할 수 있다. Owner는 프로젝트의 billing도 설정할 수 있다.
+Primitive roles는 IAM 이전에 사용된다. 3가지 primitive roles이 있다: owner, editor, viewer. Viewer는 read-only 동작을 수행하는 권한이다. Editor는 viewer 권한과 엔티티를 수정하는 권한을 갖는다. Owner는 editor 권한을 갖고, 엔티티의 role과 수행 권한을 관리할 수 있다. Owner는 프로젝트의 billing도 설정할 수 있다.
 
 IAM roles는 수행 권한의 집합이다. 작업을 수행하는 데 필요한 권한만으로 ID를 제공하도록 맞춰져있다. role이 할당된 사용자의 리스트를 확인하기 위해서, IAM 양식에서 Roles 탭을 클릭한다. (그림 17.2)
 
@@ -104,7 +104,7 @@ IAM role은 사전 정의된 role에 최소한의 권한을 할당하는 최소 
 
 또다른 일반적인 보안 방법은 심층적인 방어이며, 여러 개의 겹치는 보안 제어를 적용한다. 또한 채택되어야하는 관행이다. IAM은 방어의 레이어 중 하나로 적용될 수 있다.
 
-### 커스텀 IAM role 적의
+### 커스텀 IAM role 정의
 
 사전 정의된 IAM role이 요구를 충족하지 않는다면, 커스텀 role을 정의할 수 있다.
 
@@ -114,7 +114,7 @@ Cloud Console에서 커스텀 role을 정의하기 위해, 콘솔의 IAM & Admin
 
 **그림 17.7** Cloud Console에서 role 생성
 
-이 양식에서 커스텀 role, description, identifier, launch stage, set of permissions를 지정할 수 있다. launch stage 옵션은 다음과 같다: Alpha, Beta, General Availability, Disabled.
+이 양식에서 커스텀 role의 이름, description, identifier, launch stage, set of permissions를 지정할 수 있다. launch stage 옵션은 다음과 같다: Alpha, Beta, General Availability, Disabled.
 
 Add Permissions를 클릭하면 permission의 리스트가 표시된다. 그림 17.8은 App Engine Admin role 권한만 포함하도록 필터링되었다.
 
@@ -210,7 +210,7 @@ name, identifier, description을 입력한 후, Create를 클릭한다. 다음, 
 
 **그림 17.13** Service Account 파라미터를 보여주는 Edit Instance 페이지
 
-드롭다운 리스트에서 인스턴스에 할당할 서비그 계정을 선택한다. (그림 17.14)
+드롭다운 리스트에서 인스턴스에 할당할 서비스 계정을 선택한다. (그림 17.14)
 
 ![17.14](../img/ch17/17.14.png)
 
@@ -235,7 +235,7 @@ gcloud compute instances create [INSTANCE_NAME] --service-account [SERVICE_ACCOU
 
 리소스, 표시할 로그 타입, 로그 레벨, 엔티티를 표시할 기간을 선택할 수 있다.
 
-Logging에 대한 추가 정보는 챕터 18을 확인한다.
+Logging에 대한 추가 정보는 [챕터 18](Chapter_18.md)을 확인한다.
 
 ## Summary
 
