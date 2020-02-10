@@ -8,7 +8,7 @@
 
 ## Stackdriver로 모니터링
 
-Stackdriver는 리소스의 성능 지표, 로그, 이벤트 데이터를 수집하기 위한 서비스이다. 지표에는 지난 1분동안 CPU 사용의 평균 퍼센트와 지난 1분동안 스토리지 디바이스에 쓰여진 byte 양과 같은 측청을 포함한다. Stackdriver는 사전 정의된 지표를 많이 포함한다. 리소스의 상태를 평가하고, 필요하면 서비스 수준 목표를 충족하지 않는 리소스나 서비스에 주의를 기울이도록 알람을 트리거하는데 사용될 수 있는 일부 예시가 표 18.1에 있다.
+Stackdriver는 리소스의 성능 지표, 로그, 이벤트 데이터를 수집하기 위한 서비스이다. 지표에는 지난 1분동안 CPU 사용의 평균 퍼센트와 지난 1분동안 스토리지 디바이스에 쓰여진 byte 양과 같은 측정을 포함한다. Stackdriver는 사전 정의된 지표를 많이 포함한다. 리소스의 상태를 평가하고, 필요하면 서비스 수준 목표를 충족하지 않는 리소스나 서비스에 주의를 기울이도록 알람을 트리거하는데 사용될 수 있는 일부 예시가 표 18.1에 있다.
 
 **표 18.1** Stackdriver 지표 예시
 
@@ -22,11 +22,11 @@ Stackdriver는 리소스의 성능 지표, 로그, 이벤트 데이터를 수집
 
 Stackdriver는 GCP, AWS, 온프레미스 리소스를 지원하는 하이브리드 환경에서 작동한다.
 
-### 리소스 지표를 기반으로 알람 생성
+### 리소스 지표를 기반으로 알림 생성
 
 지표는 정기적으로 수집되는 리소스의 측정치이다. 지표는 최대값, 최소값, 측정된 아이템의 평균 값 같은 집계 값을 리턴한다. CPU 사용률, 사용된 메모리 양, 네트워크 인터페이스에 쓰여진 바이트 수일 수 있다.
 
-이 예시에서, Apache Server와 PHP가 설치된 VM에서 작업한다고 가정하자. 지표를 모니터링하고 수집하기 위해, 모니터링을 위한 Stackdriver agent를 설치해야 한다. 모니터링 에이전트를 설치하면, 나중에 필요하기 때문에 동시에 로깅 에이전틀르 설치한다. 리눅스 VM에 Stackdriver 모니터링과 로깅 에이전트를 설치하기 위해, 쉘 스크립트에서 다음 명령을 실행한다.(gcloud 명령이 아니다.)
+이 예시에서, Apache Server와 PHP가 설치된 VM에서 작업한다고 가정하자. 지표를 모니터링하고 수집하기 위해, 모니터링을 위한 Stackdriver agent를 설치해야 한다. 모니터링 에이전트를 설치하면, 나중에 필요하기 때문에 동시에 로깅 에이전트를 설치한다. 리눅스 VM에 Stackdriver 모니터링과 로깅 에이전트를 설치하기 위해, 쉘 스크립트에서 다음 명령을 실행한다.(gcloud 명령이 아니다.)
 
 ```bash
 curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
@@ -71,7 +71,7 @@ Stackdriver는 이메일을 보내도록 이메일을 선택한 경우 매일 �
 
 ![18.6](../img/ch18/18.6.png)
 
-**그림 18.6** 이베일 보고 옵션 리스트
+**그림 18.6** 이메일 보고 옵션 리스트
 
 초기화 절차를 완료하면, 그림 18.7과 유사한 양식이 나타난다. 지표 추가, 릴리즈 노트 조회와 같은 일반적이 작업이 조회된다.
 
@@ -87,7 +87,7 @@ Workspace가 초기화된 후, Stackdriver Monitoring을 열면 Monitoring Overv
 
 이제, Stackdriver 에이전트는 설치되고, 사용할 수 있는 Workspace를 갖는다.
 
-다음으로, 지표를 모니터링하는 정책을 생성한다. 정책은 알람이나 경고가 발생할 시기를 결정하는 조건(예를 들어, CPU 사용률이 5분이상 80%를 초과하는 경우)으로 구성된다. 또한 정책은 알람 채털과 선택적으로 문서를 포함한다. (그림 18.9) 이 양식은 Monitoring Overview 페이지에서 Create Policy를 클릭할 때 표시된다.
+다음으로, 지표를 모니터링하는 정책을 생성한다. 정책은 알람이나 경고가 발생할 시기를 결정하는 조건(예를 들어, CPU 사용률이 5분이상 80%를 초과하는 경우)으로 구성된다. 또한 정책은 알람 채널과 선택적으로 문서를 포함한다. (그림 18.9) 이 양식은 Monitoring Overview 페이지에서 Create Policy를 클릭할 때 표시된다.
 
 ![18.9](../img/ch18/18.9.png)
 
@@ -201,7 +201,7 @@ Cloud Storage를 선택하면, 기존 버킷에 로그를 추출할 수 있거�
 
 **그림 18.20** Cloud Stoarge log sink 생성
 
-Cloud Pub/Sub을 선택하면, 토픽을 생성하거나 기존 토픽을 사용하여 선택할 수 있다. (그림 18.21) 로그 데이터가 Cloud Pub/Sub에 추출될 때, 데이터는 LogEctry로 알려진 오브젝트 구조에 base64로 인코딩된다. Log Entriy는 `type`, `instance_id`, `zone`, `project_id`와 같은 로그이름, 타임스탬프, 텍스트페이로드, 리소스 프로퍼티를 포함한다.
+Cloud Pub/Sub을 선택하면, 토픽을 생성하거나 기존 토픽을 사용하여 선택할 수 있다. (그림 18.21) 로그 데이터가 Cloud Pub/Sub에 추출될 때, 데이터는 LogEntry로 알려진 오브젝트 구조에 base64로 인코딩된다. Log Entriy는 `type`, `instance_id`, `zone`, `project_id`와 같은 로그이름, 타임스탬프, 텍스트페이로드, 리소스 프로퍼티를 포함한다.
 
 ![18.21](../img/ch18/18.21.png)
 
@@ -228,7 +228,7 @@ sink가 생성된 후, 그림 18.23처럼 새롭게 생성된 sink의 상세정�
 **그림 18.24** Cloud Console의 로그 항목 리스트
 
 해당 양식 위쪽에 로그 메시지 필터링을 위한 아래와 같은 몇몇 옵션이 있다. 
-* Label or test 검색
+* Label or text 검색
 * Resource type
 * Log type
 * Log level
@@ -242,7 +242,7 @@ sink가 생성된 후, 그림 18.23처럼 새롭게 생성된 sink의 상세정�
 
 **그림 18.25** Monitoring 문자열을 포함한 로그 항목
 
-resource type 메뉴(그립 18.26)은 감시중인 resource, VM instance, subnetworks, project, databases를 포함한 GCP 리소스 타입의 리스트를 제공한다.
+resource type 메뉴(그림 18.26)은 감시중인 resource, VM instance, subnetworks, project, databases를 포함한 GCP 리소스 타입의 리스트를 제공한다.
 
 ![18.26](../img/ch18/18.26.png)
 
@@ -266,7 +266,7 @@ All Logs라고 표시된 메뉴는 로그 유형별로 필터링할 수 있다. 
 
 **그림 18.29** 로그 항목을 필터링하기 위한 사전 정의된 시간 간격 옵션
 
-Custome을 선택하면 시작과 끝 날짜를 선택할 수 있다. (그림 18.30)
+Custom을 선택하면 시작과 끝 날짜를 선택할 수 있다. (그림 18.30)
 
 ![18.30](../img/ch18/18.30.png)
 
@@ -358,9 +358,9 @@ Associate Cloud Engineer 시험의 목적으로, Cloud Debug는 프로그램이 
 
 ### GCP 상태 조회
 
-어플리케이션과 서비스의 상태를 이해하는 것 이외에, 클라우드 엔지니어는 GCP 서비스의 상태를 인지하는 것이 필요하다. Google Cloud Status 대쉬보드에서 이 상태를 확인할 수 이따.
+어플리케이션과 서비스의 상태를 이해하는 것 이외에, 클라우드 엔지니어는 GCP 서비스의 상태를 인지하는 것이 필요하다. Google Cloud Status 대쉬보드에서 이 상태를 확인할 수 있다.
 
-Google Cloud 서비스의 상태를 조회하기 위해, Cloud Console의 홈페이지를 열고, Google Cloud Platrogm Status 카드를 확인한다. (그림 18.42) 또한, [https://status.cloud.google.com/](https://status.cloud.google.com/)의 대쉬보드에서 확인할 수 있다.
+Google Cloud 서비스의 상태를 조회하기 위해, Cloud Console의 홈페이지를 열고, Google Cloud Platform Status 카드를 확인한다. (그림 18.42) 또한, [https://status.cloud.google.com/](https://status.cloud.google.com/)의 대쉬보드에서 확인할 수 있다.
 
 ![18.42](../img/ch18/18.42.png)
 
